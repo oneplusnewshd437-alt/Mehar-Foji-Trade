@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mehar Foji Trade</title>
+<title>F JIND Trade</title>
 
 <style>
 *{
@@ -13,64 +13,61 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+background:linear-gradient(135deg,#000000,#111111,#1c1c1c);
 color:white;
 min-height:100vh;
 }
 
 /* HEADER */
 .header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
-}
-
-.logo{
-font-size:22px;
+text-align:center;
+padding:20px;
+background:black;
+font-size:26px;
 font-weight:bold;
-background:linear-gradient(90deg,gold,orange);
--webkit-background-clip:text;
-color:transparent;
+color:gold;
+letter-spacing:3px;
+box-shadow:0 5px 20px rgba(0,0,0,0.6);
 }
 
+/* BALANCE */
 .balance-box{
-background:rgba(255,255,255,0.1);
-padding:10px 20px;
-border-radius:30px;
-font-size:14px;
+text-align:center;
+padding:12px;
+background:#111;
+font-size:15px;
+border-bottom:1px solid #222;
 }
 
 .balance-box span{
 color:#00ff88;
 font-weight:bold;
+font-size:16px;
 }
 
-/* MAIN CONTAINER */
+/* CONTAINER */
 .container{
 max-width:1100px;
 margin:auto;
-padding:40px 20px;
+padding:30px 15px 100px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
+gap:20px;
 }
 
 /* CARD */
 .card{
-background:rgba(255,255,255,0.08);
+background:#161616;
 border-radius:15px;
-padding:25px;
-backdrop-filter:blur(15px);
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
+padding:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.7);
 transition:0.3s;
+border:1px solid #222;
 }
 
 .card:hover{
 transform:translateY(-5px);
+border:1px solid gold;
 }
 
 .card h2{
@@ -78,23 +75,18 @@ margin-bottom:15px;
 color:gold;
 }
 
-/* INPUTS */
+/* INPUT */
 input,select{
 width:100%;
 padding:12px;
 margin:10px 0;
 border:none;
 border-radius:8px;
-background:rgba(255,255,255,0.15);
+background:#222;
 color:white;
 font-size:14px;
 }
 
-input::placeholder{
-color:#ccc;
-}
-
-/* BUTTON */
 button{
 width:100%;
 padding:12px;
@@ -103,22 +95,21 @@ border:none;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-background:linear-gradient(90deg,gold,orange);
+background:gold;
 color:black;
 transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.05);
+background:orange;
 }
 
-/* HISTORY */
 .history{
-margin-top:15px;
-max-height:150px;
+margin-top:10px;
+max-height:120px;
 overflow:auto;
-background:rgba(0,0,0,0.4);
-padding:10px;
+background:#111;
+padding:8px;
 border-radius:8px;
 font-size:13px;
 }
@@ -126,29 +117,68 @@ font-size:13px;
 .green{color:#00ff88;}
 .red{color:#ff4d4d;}
 
-/* ADMIN BUTTON */
-.admin-btn{
-background:#ff4d4d;
-color:white;
-margin-bottom:15px;
+/* CONTACT */
+.contact{
+text-align:center;
+padding:15px;
+background:#111;
+color:#00ff88;
+font-size:15px;
 }
 
+/* FOOTER */
 footer{
 text-align:center;
-padding:20px;
-color:#bbb;
-font-size:13px;
+padding:15px;
+font-size:12px;
+color:#888;
+background:black;
+}
+
+/* BOTTOM MENU */
+.bottom-menu{
+position:fixed;
+bottom:0;
+width:100%;
+background:black;
+display:flex;
+justify-content:space-around;
+padding:15px 0;
+border-top:2px solid gold;
+}
+
+.bottom-menu div{
+color:white;
+font-size:14px;
+cursor:pointer;
+}
+
+.bottom-menu div:hover{
+color:gold;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp{
+position:fixed;
+right:15px;
+bottom:80px;
+background:#25D366;
+color:white;
+padding:12px 15px;
+border-radius:50px;
+font-size:14px;
+text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<div class="logo">🔥 Mehar Foji Trade</div>
+<div class="header">F JIND Trade</div>
+
 <div class="balance-box">
 Balance: <span id="balance">0</span> Coins
-</div>
 </div>
 
 <div class="container">
@@ -156,22 +186,32 @@ Balance: <span id="balance">0</span> Coins
 <!-- RECHARGE -->
 <div class="card">
 <h2>Recharge Coins</h2>
+
+<p style="color:#00ff88;">
+EasyPaisa Wallet: <b>03220751486</b>
+</p>
+
 <select id="rechargeCoins" onchange="calculatePrice()"></select>
 <p>Price: Rs <span id="price">0</span></p>
+
 <input type="file" id="paymentShot" accept="image/*">
 <button onclick="recharge()">Submit Payment</button>
+
 <div class="history" id="rechargeHistory"></div>
 </div>
 
 <!-- INVEST -->
 <div class="card">
 <h2>Investment</h2>
+
 <select id="investAmount"></select>
+
 <select id="investPlan">
 <option value="10">10% Return</option>
 <option value="25">25% Return</option>
 <option value="50">50% Return</option>
 </select>
+
 <button onclick="invest()">Invest Now</button>
 <div class="history" id="investHistory"></div>
 </div>
@@ -179,15 +219,32 @@ Balance: <span id="balance">0</span> Coins
 <!-- WITHDRAW -->
 <div class="card">
 <h2>Withdraw</h2>
+
 <input type="number" id="withdrawAmount" placeholder="Enter coins">
-<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash">
+<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
+
 <button onclick="withdraw()">Request Withdraw</button>
 <div class="history" id="withdrawHistory"></div>
 </div>
 
 </div>
 
-<footer>© 2026 Mehar Foji Trade | Professional Investment System</footer>
+<div class="contact">
+Contact Us: <b>03491441853</b>
+</div>
+
+<footer>© 2026 F JIND Trade | Professional Investment System</footer>
+
+<!-- Bottom Menu -->
+<div class="bottom-menu">
+<div>🏠 Home</div>
+<div>📊 Menu</div>
+</div>
+
+<!-- WhatsApp Button -->
+<a class="whatsapp" href="https://wa.me/923491441853" target="_blank">
+WhatsApp
+</a>
 
 <script>
 let balance=0;
@@ -218,17 +275,21 @@ document.getElementById("price").innerText=Math.floor(coins*rate);
 function recharge(){
 let file=document.getElementById("paymentShot").files[0];
 if(!file){alert("Upload Screenshot");return;}
-alert("Request Submitted (Admin Approval Required)");
+alert("Recharge Request Submitted - Admin Approval Required");
 }
 
 function invest(){
 let amount=parseInt(investSelect.value);
 let percent=parseInt(document.getElementById("investPlan").value);
+
 if(amount>balance){alert("Not enough coins");return;}
+
 balance-=amount;
 let profit=Math.floor(amount*percent/100);
 balance+=amount+profit;
+
 document.getElementById("balance").innerText=balance;
+
 document.getElementById("investHistory").innerHTML+=
 `<p class="green">Invested ${amount} → Profit ${profit}</p>`;
 }
@@ -236,10 +297,13 @@ document.getElementById("investHistory").innerHTML+=
 function withdraw(){
 let amount=parseInt(document.getElementById("withdrawAmount").value);
 let account=document.getElementById("withdrawAccount").value;
+
 if(amount>balance){alert("Not enough coins");return;}
 if(account===""){alert("Enter account number");return;}
+
 balance-=amount;
 document.getElementById("balance").innerText=balance;
+
 document.getElementById("withdrawHistory").innerHTML+=
 `<p class="red">Withdraw ${amount} → ${account}</p>`;
 }
