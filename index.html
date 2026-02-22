@@ -1,1 +1,213 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehar Foji Trade</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body { background-color:#0e0e0e; color:#fff; }
+.banner { width:100%; max-height:256px; overflow:hidden; }
+.banner img { width:100%; display:block; }
+nav { background-color:#111; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+nav .logo { font-size:1.5em; font-weight:bold; color:gold; }
+nav ul { list-style:none; display:flex; gap:20px; }
+nav ul li a { text-decoration:none; color:#fff; transition:0.3s; }
+nav ul li a:hover { color:gold; }
+section { padding:60px 20px; text-align:center; }
+section h2 { font-size:2em; margin-bottom:20px; color:gold; }
+section p { font-size:1.1em; line-height:1.6; max-width:800px; margin:auto; }
+.features { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:40px; }
+.feature-box { background:#1a1a1a; padding:20px; border-radius:10px; width:250px; transition:0.3s; }
+.feature-box:hover { background:#222; }
+.login-btn, .buy-coins-btn, .bet-btn, .upload-btn, .invest-btn { background:gold; color:#111; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; transition:0.3s; }
+.login-btn:hover, .buy-coins-btn:hover, .bet-btn:hover, .upload-btn:hover, .invest-btn:hover { background:#ffaa00; }
+.wallet { margin-top:20px; font-size:1.2em; color:#0f0; }
+.admin-panel { background:#111; padding:20px; border-radius:10px; margin-top:20px; }
+.admin-panel h3 { color:gold; margin-bottom:10px; }
+.payment-item { background:#1a1a1a; margin:10px 0; padding:10px; border-radius:5px; }
+footer { background:#111; padding:20px; text-align:center; font-size:0.9em; color:#888; margin-top:40px; }
+.invest-box { background:#1a1a1a; padding:20px; margin:20px auto; width:300px; border-radius:10px; }
+.invest-box h4 { color:gold; margin-bottom:10px; }
+</style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="banner">
+    <img src="assets/A_banner_designed_for_a_financial_trading_website_.png" alt="Mehar Foji Trade Banner">
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">Mehar Foji Trade</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#coins">Coins</a></li>
+        <li><a href="#invest">Investments</a></li>
+        <li><a href="#admin">Admin</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Home Section -->
+<section id="home">
+    <h2>Welcome to Mehar Foji Trade</h2>
+    <p>Trade like a soldier! Buy virtual stocks, invest coins, and place bets in a game-style live trading simulation. Login only via Gmail to start your journey.</p>
+    <button class="login-btn" onclick="loginGmail()">Login with Gmail</button>
+    <div id="user-email" class="wallet"></div>
+</section>
+
+<!-- Features Section -->
+<section id="features">
+    <h2>Game Features</h2>
+    <div class="features">
+        <div class="feature-box"><h3>Live Price Simulation</h3><p>Prices move like real stock market trends. Experience real-time fluctuations!</p></div>
+        <div class="feature-box"><h3>Coin Wallet</h3><p>Buy coins, store them securely, and use them for bets or investments.</p></div>
+        <div class="feature-box"><h3>Bets & Trades</h3><p>Place bets or trade coins strategically to increase your virtual wealth.</p></div>
+        <div class="feature-box"><h3>Admin Verified Payments</h3><p>Upload EazyPaisa payment screenshots and get coins added after admin approval.</p></div>
+        <div class="feature-box"><h3>Investments</h3><p>Choose investment options to earn virtual profit over time.</p></div>
+    </div>
+</section>
+
+<!-- Coins / Bet Section -->
+<section id="coins">
+    <h2>Coins & Bets</h2>
+    <p>Your Coin Balance: <span id="coin-balance">0</span> Coins</p>
+    <button class="buy-coins-btn" onclick="buyCoins()">Buy Coins (EazyPaisa)</button>
+    <input type="file" id="payment-screenshot" />
+    <button class="upload-btn" onclick="uploadScreenshot()">Upload Payment Screenshot</button>
+
+    <h3>Place Your Bet</h3>
+    <input type="number" id="bet-amount" placeholder="Enter coins to bet" />
+    <button class="bet-btn" onclick="placeBet()">Place Bet</button>
+    <div id="bet-status" class="wallet"></div>
+</section>
+
+<!-- Investment Section -->
+<section id="invest">
+    <h2>Investment Options</h2>
+    <div class="invest-box">
+        <h4>Short Term Plan (10% profit)</h4>
+        <input type="number" id="invest-amount-short" placeholder="Enter coins" />
+        <button class="invest-btn" onclick="investShort()">Invest</button>
+    </div>
+    <div class="invest-box">
+        <h4>Medium Term Plan (25% profit)</h4>
+        <input type="number" id="invest-amount-medium" placeholder="Enter coins" />
+        <button class="invest-btn" onclick="investMedium()">Invest</button>
+    </div>
+    <div class="invest-box">
+        <h4>Long Term Plan (50% profit)</h4>
+        <input type="number" id="invest-amount-long" placeholder="Enter coins" />
+        <button class="invest-btn" onclick="investLong()">Invest</button>
+    </div>
+    <div id="investment-status" class="wallet"></div>
+</section>
+
+<!-- Admin Panel -->
+<section id="admin">
+    <h2>Admin Panel</h2>
+    <div class="admin-panel">
+        <h3>Pending Payments</h3>
+        <div id="pending-payments">
+            <p class="payment-item">User: user@gmail.com | Amount: 100 Coins | Screenshot: pending</p>
+        </div>
+        <button onclick="approvePayment()">Approve First Payment</button>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>Phone / WhatsApp: <strong>0322 0751456</strong></p>
+    <p>Email: <strong>support@meharfojitrade.com</strong></p>
+</section>
+
+<!-- Footer -->
+<footer>&copy; 2026 Mehar Foji Trade. All rights reserved.</footer>
+
+<script>
+let userEmail = '';
+let coinBalance = 0;
+
+// Gmail Login Simulation
+function loginGmail() {
+    userEmail = prompt("Enter your Gmail ID (simulation only):");
+    if(userEmail && userEmail.includes('@gmail.com')) {
+        document.getElementById('user-email').innerText = "Logged in as: " + userEmail;
+        alert("Login Successful!");
+    } else { alert("Login failed! Only Gmail allowed."); }
+}
+
+// Buy Coins Simulation
+function buyCoins() {
+    if(userEmail === '') { alert("Login first!"); return; }
+    alert("Send EazyPaisa to 03220751456 and upload screenshot to get coins.");
+}
+
+// Upload Screenshot Simulation
+function uploadScreenshot() {
+    if(userEmail === '') { alert("Login first!"); return; }
+    let file = document.getElementById('payment-screenshot').files[0];
+    if(file) {
+        alert("Screenshot submitted for admin approval.");
+        const pending = document.getElementById('pending-payments');
+        const p = document.createElement('p');
+        p.classList.add('payment-item');
+        p.innerText = `User: ${userEmail} | Amount: 100 Coins | Screenshot: pending`;
+        pending.appendChild(p);
+    } else { alert("Please select a screenshot file."); }
+}
+
+// Place Bet Simulation
+function placeBet() {
+    if(userEmail === '') { alert("Login first!"); return; }
+    let bet = parseInt(document.getElementById('bet-amount').value);
+    if(bet > coinBalance) { alert("Not enough coins!"); return; }
+    coinBalance -= bet;
+    document.getElementById('coin-balance').innerText = coinBalance;
+    document.getElementById('bet-status').innerText = `Bet of ${bet} coins placed!`;
+}
+
+// Admin Approve Payment Simulation
+function approvePayment() {
+    const pending = document.getElementById('pending-payments');
+    const first = pending.querySelector('.payment-item');
+    if(first) {
+        coinBalance += 100; 
+        document.getElementById('coin-balance').innerText = coinBalance;
+        first.innerText += " | Approved";
+        alert("Payment Approved: 100 Coins added!");
+    } else { alert("No pending payments."); }
+}
+
+// Investment Simulation
+function investShort() { investCoins('short'); }
+function investMedium() { investCoins('medium'); }
+function investLong() { investCoins('long'); }
+
+function investCoins(plan) {
+    let amountInput = document.getElementById('invest-amount-' + plan);
+    let amount = parseInt(amountInput.value);
+    if(userEmail === '') { alert("Login first!"); return; }
+    if(amount > coinBalance) { alert("Not enough coins!"); return; }
+
+    let profit = 0;
+    if(plan==='short') profit = Math.floor(amount * 0.10);
+    if(plan==='medium') profit = Math.floor(amount * 0.25);
+    if(plan==='long') profit = Math.floor(amount * 0.50);
+
+    coinBalance -= amount;
+    coinBalance += (amount + profit);
+    document.getElementById('coin-balance').innerText = coinBalance;
+    document.getElementById('investment-status').innerText = `Invested ${amount} coins in ${plan} plan. Profit: ${profit} coins added!`;
+    amountInput.value = '';
+}
+</script>
+
+</body>
+      </html>
