@@ -3,148 +3,36 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mehar Foji Trade</title>
-
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
-
-body{
-  background:#0f0f0f;
-  color:white;
-}
-
-/* TOP BAR */
-.topbar{
-  background:black;
-  padding:12px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.topbar-left a{
-  color:white;
-  margin-right:20px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.topbar-left a:hover{
-  color:gold;
-}
-
-.wallet{
-  background:#1a1a1a;
-  padding:8px 15px;
-  border-radius:20px;
-  font-size:14px;
-}
-
-.wallet span{
-  color:#00ff00;
-  font-weight:bold;
-}
-
-/* MAIN */
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:30px;
-}
-
-.card{
-  background:#1a1a1a;
-  padding:25px;
-  border-radius:10px;
-  margin-bottom:25px;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
-}
-
-h2,h3{
-  color:gold;
-  margin-bottom:15px;
-}
-
-input,select{
-  width:100%;
-  padding:10px;
-  margin:10px 0;
-  border:none;
-  border-radius:5px;
-}
-
-button{
-  background:gold;
-  border:none;
-  padding:10px 20px;
-  border-radius:5px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-button:hover{
-  background:#ffb300;
-}
-
-.history{
-  background:#111;
-  padding:10px;
-  border-radius:5px;
-  margin-top:10px;
-  max-height:150px;
-  overflow:auto;
-}
-
-.green{color:#00ff00}
-.red{color:red}
-
-footer{
-  text-align:center;
-  padding:20px;
-  color:#777;
-  margin-top:30px;
-}
-
-/* Thumbnail preview */
-.pending-request img{
-  max-width:80px;
-  max-height:80px;
-  border-radius:5px;
-  margin-right:10px;
-  vertical-align:middle;
-}
-.pending-request span{
-  vertical-align:middle;
-}
-
-.admin-toggle{
-  background:#444;
-  color:white;
-  padding:5px 10px;
-  border-radius:5px;
-  cursor:pointer;
-  float:right;
-  margin-bottom:10px;
-}
-.admin-toggle.active{
-  background:#0f0;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#0f0f0f;color:white;}
+.topbar{background:black;padding:12px 25px;display:flex;justify-content:space-between;align-items:center;}
+.topbar-left a{color:white;margin-right:20px;text-decoration:none;font-weight:bold;}
+.topbar-left a:hover{color:gold;}
+.wallet{background:#1a1a1a;padding:8px 15px;border-radius:20px;font-size:14px;}
+.wallet span{color:#00ff00;font-weight:bold;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.card{background:#1a1a1a;padding:25px;border-radius:10px;margin-bottom:25px;box-shadow:0 0 10px rgba(0,0,0,0.5);}
+h2,h3{color:gold;margin-bottom:15px;}
+input,select{width:100%;padding:10px;margin:10px 0;border:none;border-radius:5px;}
+button{background:gold;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:bold;}
+button:hover{background:#ffb300;}
+.history{background:#111;padding:10px;border-radius:5px;margin-top:10px;max-height:200px;overflow:auto;}
+.green{color:#00ff00}.red{color:red}
+footer{text-align:center;padding:20px;color:#777;margin-top:30px;}
+.pending-request img{max-width:80px;max-height:80px;border-radius:5px;margin-right:10px;vertical-align:middle;}
+.pending-request span{vertical-align:middle;}
+.admin-toggle{background:#444;color:white;padding:5px 10px;border-radius:5px;cursor:pointer;float:right;margin-bottom:10px;}
+.admin-toggle.active{background:#0f0;}
 </style>
 </head>
-
 <body>
 
-<!-- TOP BLACK BAR -->
 <div class="topbar">
   <div class="topbar-left">
     <a href="#">Home</a>
     <a href="#">Settings</a>
   </div>
-
   <div class="wallet">
     Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
   </div>
@@ -152,26 +40,16 @@ footer{
 
 <div class="container">
 
-<!-- ADMIN TOGGLE -->
+<!-- Admin toggle -->
 <button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">Admin Mode: OFF</button>
 
 <!-- RECHARGE -->
 <div class="card">
   <h2>Recharge Coins</h2>
-
-  <select id="rechargeCoins" onchange="calculatePrice()">
-    <option value="10000">10000 Coins</option>
-    <option value="20000">20000 Coins</option>
-    <option value="30000">30000 Coins</option>
-    <option value="40000">40000 Coins</option>
-    <option value="50000">50000 Coins</option>
-  </select>
-
-  <p>Price: Rs <span id="price">3260</span></p>
-
+  <select id="rechargeCoins" onchange="calculatePrice()"></select>
+  <p>Price: Rs <span id="price">0</span></p>
   <input type="file" id="paymentShot" accept="image/*">
   <button onclick="recharge()">Submit Payment</button>
-
   <div class="history" id="rechargeHistory"></div>
 </div>
 
@@ -184,34 +62,22 @@ footer{
 <!-- INVESTMENT -->
 <div class="card">
   <h2>Investment Plans</h2>
-
-  <select id="investAmount">
-    <option value="1000">1000 Coins</option>
-    <option value="5000">5000 Coins</option>
-    <option value="10000">10000 Coins</option>
-    <option value="20000">20000 Coins</option>
-  </select>
-
+  <select id="investAmount"></select>
   <select id="investPlan">
     <option value="10">Short Term (10%)</option>
     <option value="25">Medium Term (25%)</option>
     <option value="50">Long Term (50%)</option>
   </select>
-
   <button onclick="invest()">Invest Now</button>
-
   <div class="history" id="investHistory"></div>
 </div>
 
 <!-- WITHDRAW -->
 <div class="card">
   <h2>Withdraw Coins</h2>
-
   <input type="number" id="withdrawAmount" placeholder="Enter coins to withdraw">
   <input type="text" id="withdrawAccount" placeholder="Enter Easypaisa / JazzCash Number">
-
   <button onclick="withdraw()">Request Withdraw</button>
-
   <div class="history" id="withdrawHistory"></div>
 </div>
 
@@ -224,15 +90,34 @@ let balance = 0;
 let pendingRequests = [];
 let isAdmin = false;
 
-/* PRICE CALCULATION */
-function calculatePrice(){
-  let coins = document.getElementById("rechargeCoins").value;
-  let rate = 3260/10000;
-  document.getElementById("price").innerText =
-    Math.floor(coins*rate);
+/* DYNAMIC COIN OPTIONS */
+const rechargeSelect = document.getElementById("rechargeCoins");
+const investSelect = document.getElementById("investAmount");
+
+// Recharge coins: 10k to 50k step 10k
+for(let i=10000;i<=50000;i+=10000){
+  let opt = document.createElement("option");
+  opt.value = i;
+  opt.text = i.toLocaleString() + " Coins";
+  rechargeSelect.appendChild(opt);
 }
 
-/* TOGGLE ADMIN MODE */
+// Investment coins: 1k to 200k step 1k or 5k
+for(let i=1000;i<=200000;i+=5000){
+  let opt = document.createElement("option");
+  opt.value = i;
+  opt.text = i.toLocaleString() + " Coins";
+  investSelect.appendChild(opt);
+}
+
+// PRICE CALCULATION
+function calculatePrice(){
+  let coins = parseInt(rechargeSelect.value);
+  let rate = 3260/10000; // 10k coins = Rs 3260
+  document.getElementById("price").innerText = Math.floor(coins*rate);
+}
+
+/* Admin toggle */
 function toggleAdmin(){
   isAdmin = !isAdmin;
   const btn = document.getElementById("adminToggle");
@@ -240,110 +125,76 @@ function toggleAdmin(){
   btn.classList.toggle("active", isAdmin);
 }
 
-/* RECHARGE */
+/* Recharge */
 function recharge(){
   let file = document.getElementById("paymentShot").files[0];
   if(!file){alert("Upload Screenshot");return;}
-
-  let coins = parseInt(document.getElementById("rechargeCoins").value);
-
-  // Add request to pendingRequests array
+  let coins = parseInt(rechargeSelect.value);
   let requestId = pendingRequests.length;
-  pendingRequests.push({id: requestId, coins: coins, file: file, status: 'Pending'});
+  pendingRequests.push({id: requestId, coins: coins, file: file, status:'Pending'});
 
-  // Display in pending requests
   let pendingDiv = document.getElementById("pendingRequests");
-
   let reader = new FileReader();
   reader.onload = function(e){
     pendingDiv.innerHTML += `
       <p class="pending-request" id="request-${requestId}">
         <img src="${e.target.result}" alt="screenshot">
         <span>Recharge ${coins} Coins - Status: Pending</span>
-        <button onclick="approve(${requestId})" ${isAdmin ? '' : 'disabled'}>Approve</button>
-        <button onclick="reject(${requestId})" ${isAdmin ? '' : 'disabled'}>Reject</button>
+        <button onclick="approve(${requestId})" ${isAdmin?'':'disabled'}>Approve</button>
+        <button onclick="reject(${requestId})" ${isAdmin?'':'disabled'}>Reject</button>
       </p>
     `;
   }
   reader.readAsDataURL(file);
-
   alert("Request submitted! Waiting for admin approval.");
 }
 
-/* ADMIN APPROVE */
+/* Approve */
 function approve(id){
   if(!isAdmin){alert("Only admin can approve!"); return;}
   let req = pendingRequests[id];
   if(req.status !== 'Pending') return;
-  
   balance += req.coins;
   document.getElementById("balance").innerText = balance;
-
   req.status = 'Approved';
-  document.getElementById(`request-${id}`).innerHTML =
-    `<span class="green">Recharge ${req.coins} Coins Approved</span>`;
-
-  // Add to recharge history
-  document.getElementById("rechargeHistory").innerHTML +=
-    `<p class="green">Recharge ${req.coins} Coins Successful</p>`;
+  document.getElementById(`request-${id}`).innerHTML = `<span class="green">Recharge ${req.coins} Coins Approved</span>`;
+  document.getElementById("rechargeHistory").innerHTML += `<p class="green">Recharge ${req.coins} Coins Successful</p>`;
 }
 
-/* ADMIN REJECT */
+/* Reject */
 function reject(id){
   if(!isAdmin){alert("Only admin can reject!"); return;}
   let req = pendingRequests[id];
   if(req.status !== 'Pending') return;
-
   req.status = 'Rejected';
-  document.getElementById(`request-${id}`).innerHTML =
-    `<span class="red">Recharge ${req.coins} Coins Rejected</span>`;
+  document.getElementById(`request-${id}`).innerHTML = `<span class="red">Recharge ${req.coins} Coins Rejected</span>`;
 }
 
-/* INVEST */
+/* Invest */
 function invest(){
-  let amount = parseInt(document.getElementById("investAmount").value);
+  let amount = parseInt(investSelect.value);
   let percent = parseInt(document.getElementById("investPlan").value);
-
-  if(amount>balance){
-    alert("Not enough coins");
-    return;
-  }
-
+  if(amount>balance){alert("Not enough coins"); return;}
   balance -= amount;
-
   let profit = Math.floor(amount*percent/100);
-
   balance += amount + profit;
-
   document.getElementById("balance").innerText = balance;
-
-  document.getElementById("investHistory").innerHTML +=
-    `<p class="green">Invested ${amount} → Profit ${profit}</p>`;
+  document.getElementById("investHistory").innerHTML += `<p class="green">Invested ${amount} → Profit ${profit}</p>`;
 }
 
-/* WITHDRAW */
+/* Withdraw */
 function withdraw(){
   let amount = parseInt(document.getElementById("withdrawAmount").value);
   let account = document.getElementById("withdrawAccount").value;
-
-  if(amount>balance){
-    alert("Not enough coins");
-    return;
-  }
-
-  if(account===""){
-    alert("Enter account number");
-    return;
-  }
-
+  if(amount>balance){alert("Not enough coins"); return;}
+  if(account===""){alert("Enter account number"); return;}
   balance -= amount;
   document.getElementById("balance").innerText = balance;
-
-  document.getElementById("withdrawHistory").innerHTML +=
-    `<p class="red">Withdraw Request ${amount} Coins → ${account}</p>`;
+  document.getElementById("withdrawHistory").innerHTML += `<p class="red">Withdraw Request ${amount} Coins → ${account}</p>`;
 }
 
+// Initialize price
+calculatePrice();
 </script>
-
 </body>
-      </html>
+  </html>
