@@ -21,13 +21,14 @@ min-height:100vh;
 /* HEADER */
 .header{
 text-align:center;
-padding:20px;
+padding:10px;
 background:black;
-font-size:26px;
-font-weight:bold;
-color:gold;
-letter-spacing:3px;
 box-shadow:0 5px 20px rgba(0,0,0,0.6);
+}
+
+.header img{
+max-width:200px;
+height:auto;
 }
 
 /* BALANCE */
@@ -170,12 +171,61 @@ font-size:14px;
 text-decoration:none;
 box-shadow:0 5px 15px rgba(0,0,0,0.5);
 }
+
+/* GAME */
+.game-area{
+text-align:center;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:20px 0;
+}
+
+.card3d{
+width:80px;
+height:120px;
+background:linear-gradient(145deg,#222,#000);
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+color:white;
+box-shadow:0 10px 20px rgba(0,0,0,0.8);
+transform-style:preserve-3d;
+transition:0.5s;
+}
+
+.card3d.show{
+background:linear-gradient(145deg,gold,orange);
+color:black;
+transform:rotateY(360deg);
+}
+
+.timer{
+font-size:18px;
+color:#00ff88;
+margin-top:10px;
+}
+
+.result{
+margin-top:15px;
+font-size:16px;
+font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">F JIND Trade</div>
+<!-- HEADER WITH IMAGE -->
+<div class="header">
+<img src="logo.png" alt="F JIND Trade Logo">
+</div>
 
 <div class="balance-box">
 Balance: <span id="balance">0</span> Coins
@@ -186,32 +236,23 @@ Balance: <span id="balance">0</span> Coins
 <!-- RECHARGE -->
 <div class="card">
 <h2>Recharge Coins</h2>
-
-<p style="color:#00ff88;">
-EasyPaisa Wallet: <b>03220751486</b>
-</p>
-
+<p style="color:#00ff88;">EasyPaisa Wallet: <b>03220751486</b></p>
 <select id="rechargeCoins" onchange="calculatePrice()"></select>
 <p>Price: Rs <span id="price">0</span></p>
-
 <input type="file" id="paymentShot" accept="image/*">
 <button onclick="recharge()">Submit Payment</button>
-
 <div class="history" id="rechargeHistory"></div>
 </div>
 
 <!-- INVEST -->
 <div class="card">
 <h2>Investment</h2>
-
 <select id="investAmount"></select>
-
 <select id="investPlan">
 <option value="10">10% Return</option>
 <option value="25">25% Return</option>
 <option value="50">50% Return</option>
 </select>
-
 <button onclick="invest()">Invest Now</button>
 <div class="history" id="investHistory"></div>
 </div>
@@ -219,12 +260,37 @@ EasyPaisa Wallet: <b>03220751486</b>
 <!-- WITHDRAW -->
 <div class="card">
 <h2>Withdraw</h2>
-
 <input type="number" id="withdrawAmount" placeholder="Enter coins">
 <input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
-
 <button onclick="withdraw()">Request Withdraw</button>
 <div class="history" id="withdrawHistory"></div>
+</div>
+
+<!-- GAME -->
+<div class="card">
+<h2>Teen Patti Game</h2>
+
+<div class="game-area">
+<select id="betAmount">
+<option value="100">100 Coins</option>
+<option value="500">500 Coins</option>
+<option value="1000">1000 Coins</option>
+<option value="2000">2000 Coins</option>
+<option value="5000">5000 Coins</option>
+</select>
+
+<button onclick="startGame()">Start Game</button>
+
+<div class="timer" id="timer">Timer: 15</div>
+
+<div class="cards">
+<div class="card3d" id="card1">?</div>
+<div class="card3d" id="card2">?</div>
+<div class="card3d" id="card3">?</div>
+</div>
+
+<div class="result" id="gameResult"></div>
+</div>
 </div>
 
 </div>
@@ -309,6 +375,83 @@ document.getElementById("withdrawHistory").innerHTML+=
 }
 
 calculatePrice();
+
+/* GAME LOGIC */
+let gameTimer;
+let timeLeft=15;
+
+function startGame(){
+
+let bet=parseInt(document.getElementById("betAmount").value);
+
+if(bet>balance){
+alert("Not enough coins");
+return;
+}
+
+balance-=bet;
+document.getElementById("balance").innerText=balance;
+
+timeLeft=15;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+document.getElementById("gameResult").innerText="";
+
+document.getElementById("card1").innerText="?";
+document.getElementById("card2").innerText="?";
+document.getElementById("card3").innerText="?";
+
+document.getElementById("card1").classList.remove("show");
+document.getElementById("card2").classList.remove("show");
+document.getElementById("card3").classList.remove("show");
+
+clearInterval(gameTimer);
+
+gameTimer=setInterval(function(){
+
+timeLeft--;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+
+if(timeLeft<=0){
+clearInterval(gameTimer);
+revealCards(bet);
+}
+
+},1000);
+
+}
+
+function revealCards(bet){
+
+let cards=["A","K","Q","J","10","9","8","7","6","5"];
+let c1=cards[Math.floor(Math.random()*cards.length)];
+let c2=cards[Math.floor(Math.random()*cards.length)];
+let c3=cards[Math.floor(Math.random()*cards.length)];
+
+document.getElementById("card1").innerText=c1;
+document.getElementById("card2").innerText=c2;
+document.getElementById("card3").innerText=c3;
+
+document.getElementById("card1").classList.add("show");
+document.getElementById("card2").classList.add("show");
+document.getElementById("card3").classList.add("show");
+
+if(c1===c2 || c2===c3 || c1===c3){
+
+let win=bet*2;
+balance+=win;
+
+document.getElementById("balance").innerText=balance;
+document.getElementById("gameResult").innerHTML=
+`<span class="green">You Won ${win} Coins!</span>`;
+
+}else{
+
+document.getElementById("gameResult").innerHTML=
+`<span class="red">You Lost ${bet} Coins</span>`;
+
+}
+
+}
 </script>
 
 </body>
