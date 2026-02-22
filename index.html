@@ -2,48 +2,77 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mehar Foji Trade - Professional</title>
+<title>Mehar Foji Trade</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0f0f0f;color:white}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
 
-/* NAV */
-nav{
-background:#111;
-padding:15px 25px;
+body{
+background:#0f0f0f;
+color:white;
+}
+
+/* TOP BAR */
+.topbar{
+background:black;
+padding:12px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
-.logo{color:gold;font-weight:bold;font-size:20px}
+
+.topbar-left a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.topbar-left a:hover{
+color:gold;
+}
 
 .wallet{
 background:#1a1a1a;
 padding:8px 15px;
 border-radius:20px;
-cursor:pointer;
+font-size:14px;
 }
 
+.wallet span{
+color:#00ff00;
+font-weight:bold;
+}
+
+/* MAIN */
 .container{
-max-width:1100px;
+max-width:1000px;
 margin:auto;
 padding:30px;
 }
 
 .card{
 background:#1a1a1a;
-padding:20px;
+padding:25px;
 border-radius:10px;
-margin-bottom:20px;
+margin-bottom:25px;
+box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
-h3{color:gold;margin-bottom:15px}
+h2,h3{
+color:gold;
+margin-bottom:15px;
+}
 
 input,select{
 width:100%;
 padding:10px;
-margin:8px 0;
+margin:10px 0;
 border:none;
 border-radius:5px;
 }
@@ -57,7 +86,9 @@ cursor:pointer;
 font-weight:bold;
 }
 
-button:hover{background:#ffb300}
+button:hover{
+background:#ffb300;
+}
 
 .history{
 background:#111;
@@ -82,18 +113,23 @@ margin-top:30px;
 
 <body>
 
-<nav>
-<div class="logo">Mehar Foji Trade</div>
-<div class="wallet">
-Balance: <span id="balance">0</span> Coins
+<!-- TOP BLACK BAR -->
+<div class="topbar">
+<div class="topbar-left">
+<a href="#">Home</a>
+<a href="#">Settings</a>
 </div>
-</nav>
+
+<div class="wallet">
+Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
+</div>
+</div>
 
 <div class="container">
 
 <!-- RECHARGE -->
 <div class="card">
-<h3>Recharge Coins</h3>
+<h2>Recharge Coins</h2>
 
 <select id="rechargeCoins" onchange="calculatePrice()">
 <option value="10000">10000 Coins</option>
@@ -111,25 +147,9 @@ Balance: <span id="balance">0</span> Coins
 <div class="history" id="rechargeHistory"></div>
 </div>
 
-<!-- BET -->
+<!-- INVESTMENT -->
 <div class="card">
-<h3>Place Bet</h3>
-
-<select id="betAmount">
-<option value="100">100 Coins</option>
-<option value="500">500 Coins</option>
-<option value="1000">1000 Coins</option>
-<option value="5000">5000 Coins</option>
-</select>
-
-<button onclick="placeBet()">Place Bet</button>
-
-<div class="history" id="betHistory"></div>
-</div>
-
-<!-- INVEST -->
-<div class="card">
-<h3>Investment</h3>
+<h2>Investment Plans</h2>
 
 <select id="investAmount">
 <option value="1000">1000 Coins</option>
@@ -151,7 +171,7 @@ Balance: <span id="balance">0</span> Coins
 
 <!-- WITHDRAW -->
 <div class="card">
-<h3>Withdraw Coins</h3>
+<h2>Withdraw Coins</h2>
 
 <input type="number" id="withdrawAmount" placeholder="Enter coins to withdraw">
 <input type="text" id="withdrawAccount" placeholder="Enter Easypaisa / JazzCash Number">
@@ -163,7 +183,7 @@ Balance: <span id="balance">0</span> Coins
 
 </div>
 
-<footer>© 2026 Mehar Foji Trade - Professional System</footer>
+<footer>© 2026 Mehar Foji Trade - Professional Investment System</footer>
 
 <script>
 
@@ -189,32 +209,6 @@ document.getElementById("balance").innerText = balance;
 
 document.getElementById("rechargeHistory").innerHTML +=
 `<p class="green">Recharge ${coins} Coins Successful</p>`;
-}
-
-/* BET */
-function placeBet(){
-let bet = parseInt(document.getElementById("betAmount").value);
-
-if(bet>balance){
-alert("Not enough coins");
-return;
-}
-
-balance -= bet;
-
-let win = Math.random() > 0.5;
-
-if(win){
-let profit = bet;
-balance += bet*2;
-document.getElementById("betHistory").innerHTML +=
-`<p class="green">Won ${profit} Coins</p>`;
-}else{
-document.getElementById("betHistory").innerHTML +=
-`<p class="red">Lost ${bet} Coins</p>`;
-}
-
-document.getElementById("balance").innerText = balance;
 }
 
 /* INVEST */
