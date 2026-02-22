@@ -3,198 +3,249 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mehar Foji Trade</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:#0f0f0f;color:white;}
-.topbar{background:black;padding:12px 25px;display:flex;justify-content:space-between;align-items:center;}
-.topbar-left a{color:white;margin-right:20px;text-decoration:none;font-weight:bold;}
-.topbar-left a:hover{color:gold;}
-.wallet{background:#1a1a1a;padding:8px 15px;border-radius:20px;font-size:14px;}
-.wallet span{color:#00ff00;font-weight:bold;}
-.container{max-width:1000px;margin:auto;padding:30px;}
-.card{background:#1a1a1a;padding:25px;border-radius:10px;margin-bottom:25px;box-shadow:0 0 10px rgba(0,0,0,0.5);}
-h2,h3{color:gold;margin-bottom:15px;}
-input,select{width:100%;padding:10px;margin:10px 0;border:none;border-radius:5px;}
-button{background:gold;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:bold;}
-button:hover{background:#ffb300;}
-.history{background:#111;padding:10px;border-radius:5px;margin-top:10px;max-height:200px;overflow:auto;}
-.green{color:#00ff00}.red{color:red}
-footer{text-align:center;padding:20px;color:#777;margin-top:30px;}
-.pending-request img{max-width:80px;max-height:80px;border-radius:5px;margin-right:10px;vertical-align:middle;}
-.pending-request span{vertical-align:middle;}
-.admin-toggle{background:#444;color:white;padding:5px 10px;border-radius:5px;cursor:pointer;float:right;margin-bottom:10px;}
-.admin-toggle.active{background:#0f0;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+min-height:100vh;
+}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+background:linear-gradient(90deg,gold,orange);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.balance-box{
+background:rgba(255,255,255,0.1);
+padding:10px 20px;
+border-radius:30px;
+font-size:14px;
+}
+
+.balance-box span{
+color:#00ff88;
+font-weight:bold;
+}
+
+/* MAIN CONTAINER */
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.08);
+border-radius:15px;
+padding:25px;
+backdrop-filter:blur(15px);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+margin-bottom:15px;
+color:gold;
+}
+
+/* INPUTS */
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+background:rgba(255,255,255,0.15);
+color:white;
+font-size:14px;
+}
+
+input::placeholder{
+color:#ccc;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+background:linear-gradient(90deg,gold,orange);
+color:black;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* HISTORY */
+.history{
+margin-top:15px;
+max-height:150px;
+overflow:auto;
+background:rgba(0,0,0,0.4);
+padding:10px;
+border-radius:8px;
+font-size:13px;
+}
+
+.green{color:#00ff88;}
+.red{color:#ff4d4d;}
+
+/* ADMIN BUTTON */
+.admin-btn{
+background:#ff4d4d;
+color:white;
+margin-bottom:15px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#bbb;
+font-size:13px;
+}
 </style>
 </head>
+
 <body>
 
-<div class="topbar">
-  <div class="topbar-left">
-    <a href="#">Home</a>
-    <a href="#">Settings</a>
-  </div>
-  <div class="wallet">
-    Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
-  </div>
+<div class="header">
+<div class="logo">🔥 Mehar Foji Trade</div>
+<div class="balance-box">
+Balance: <span id="balance">0</span> Coins
+</div>
 </div>
 
 <div class="container">
 
-<!-- Admin toggle -->
-<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">Admin Mode: OFF</button>
-
 <!-- RECHARGE -->
 <div class="card">
-  <h2>Recharge Coins</h2>
-  <select id="rechargeCoins" onchange="calculatePrice()"></select>
-  <p>Price: Rs <span id="price">0</span></p>
-  <input type="file" id="paymentShot" accept="image/*">
-  <button onclick="recharge()">Submit Payment</button>
-  <div class="history" id="rechargeHistory"></div>
+<h2>Recharge Coins</h2>
+<select id="rechargeCoins" onchange="calculatePrice()"></select>
+<p>Price: Rs <span id="price">0</span></p>
+<input type="file" id="paymentShot" accept="image/*">
+<button onclick="recharge()">Submit Payment</button>
+<div class="history" id="rechargeHistory"></div>
 </div>
 
-<!-- PENDING REQUESTS -->
+<!-- INVEST -->
 <div class="card">
-  <h2>Pending Recharge Requests</h2>
-  <div class="history" id="pendingRequests"></div>
-</div>
-
-<!-- INVESTMENT -->
-<div class="card">
-  <h2>Investment Plans</h2>
-  <select id="investAmount"></select>
-  <select id="investPlan">
-    <option value="10">Short Term (10%)</option>
-    <option value="25">Medium Term (25%)</option>
-    <option value="50">Long Term (50%)</option>
-  </select>
-  <button onclick="invest()">Invest Now</button>
-  <div class="history" id="investHistory"></div>
+<h2>Investment</h2>
+<select id="investAmount"></select>
+<select id="investPlan">
+<option value="10">10% Return</option>
+<option value="25">25% Return</option>
+<option value="50">50% Return</option>
+</select>
+<button onclick="invest()">Invest Now</button>
+<div class="history" id="investHistory"></div>
 </div>
 
 <!-- WITHDRAW -->
 <div class="card">
-  <h2>Withdraw Coins</h2>
-  <input type="number" id="withdrawAmount" placeholder="Enter coins to withdraw">
-  <input type="text" id="withdrawAccount" placeholder="Enter Easypaisa / JazzCash Number">
-  <button onclick="withdraw()">Request Withdraw</button>
-  <div class="history" id="withdrawHistory"></div>
+<h2>Withdraw</h2>
+<input type="number" id="withdrawAmount" placeholder="Enter coins">
+<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash">
+<button onclick="withdraw()">Request Withdraw</button>
+<div class="history" id="withdrawHistory"></div>
 </div>
 
 </div>
 
-<footer>© 2026 Mehar Foji Trade - Professional Investment System</footer>
+<footer>© 2026 Mehar Foji Trade | Professional Investment System</footer>
 
 <script>
-let balance = 0;
-let pendingRequests = [];
-let isAdmin = false;
+let balance=0;
 
-/* DYNAMIC COIN OPTIONS */
-const rechargeSelect = document.getElementById("rechargeCoins");
-const investSelect = document.getElementById("investAmount");
+const rechargeSelect=document.getElementById("rechargeCoins");
+const investSelect=document.getElementById("investAmount");
 
-// Recharge coins: 10k to 50k step 10k
 for(let i=10000;i<=50000;i+=10000){
-  let opt = document.createElement("option");
-  opt.value = i;
-  opt.text = i.toLocaleString() + " Coins";
-  rechargeSelect.appendChild(opt);
+let opt=document.createElement("option");
+opt.value=i;
+opt.text=i.toLocaleString()+" Coins";
+rechargeSelect.appendChild(opt);
 }
 
-// Investment coins: 1k to 200k step 1k or 5k
 for(let i=1000;i<=200000;i+=5000){
-  let opt = document.createElement("option");
-  opt.value = i;
-  opt.text = i.toLocaleString() + " Coins";
-  investSelect.appendChild(opt);
+let opt=document.createElement("option");
+opt.value=i;
+opt.text=i.toLocaleString()+" Coins";
+investSelect.appendChild(opt);
 }
 
-// PRICE CALCULATION
 function calculatePrice(){
-  let coins = parseInt(rechargeSelect.value);
-  let rate = 3260/10000; // 10k coins = Rs 3260
-  document.getElementById("price").innerText = Math.floor(coins*rate);
+let coins=parseInt(rechargeSelect.value);
+let rate=3260/10000;
+document.getElementById("price").innerText=Math.floor(coins*rate);
 }
 
-/* Admin toggle */
-function toggleAdmin(){
-  isAdmin = !isAdmin;
-  const btn = document.getElementById("adminToggle");
-  btn.innerText = isAdmin ? "Admin Mode: ON" : "Admin Mode: OFF";
-  btn.classList.toggle("active", isAdmin);
-}
-
-/* Recharge */
 function recharge(){
-  let file = document.getElementById("paymentShot").files[0];
-  if(!file){alert("Upload Screenshot");return;}
-  let coins = parseInt(rechargeSelect.value);
-  let requestId = pendingRequests.length;
-  pendingRequests.push({id: requestId, coins: coins, file: file, status:'Pending'});
-
-  let pendingDiv = document.getElementById("pendingRequests");
-  let reader = new FileReader();
-  reader.onload = function(e){
-    pendingDiv.innerHTML += `
-      <p class="pending-request" id="request-${requestId}">
-        <img src="${e.target.result}" alt="screenshot">
-        <span>Recharge ${coins} Coins - Status: Pending</span>
-        <button onclick="approve(${requestId})" ${isAdmin?'':'disabled'}>Approve</button>
-        <button onclick="reject(${requestId})" ${isAdmin?'':'disabled'}>Reject</button>
-      </p>
-    `;
-  }
-  reader.readAsDataURL(file);
-  alert("Request submitted! Waiting for admin approval.");
+let file=document.getElementById("paymentShot").files[0];
+if(!file){alert("Upload Screenshot");return;}
+alert("Request Submitted (Admin Approval Required)");
 }
 
-/* Approve */
-function approve(id){
-  if(!isAdmin){alert("Only admin can approve!"); return;}
-  let req = pendingRequests[id];
-  if(req.status !== 'Pending') return;
-  balance += req.coins;
-  document.getElementById("balance").innerText = balance;
-  req.status = 'Approved';
-  document.getElementById(`request-${id}`).innerHTML = `<span class="green">Recharge ${req.coins} Coins Approved</span>`;
-  document.getElementById("rechargeHistory").innerHTML += `<p class="green">Recharge ${req.coins} Coins Successful</p>`;
-}
-
-/* Reject */
-function reject(id){
-  if(!isAdmin){alert("Only admin can reject!"); return;}
-  let req = pendingRequests[id];
-  if(req.status !== 'Pending') return;
-  req.status = 'Rejected';
-  document.getElementById(`request-${id}`).innerHTML = `<span class="red">Recharge ${req.coins} Coins Rejected</span>`;
-}
-
-/* Invest */
 function invest(){
-  let amount = parseInt(investSelect.value);
-  let percent = parseInt(document.getElementById("investPlan").value);
-  if(amount>balance){alert("Not enough coins"); return;}
-  balance -= amount;
-  let profit = Math.floor(amount*percent/100);
-  balance += amount + profit;
-  document.getElementById("balance").innerText = balance;
-  document.getElementById("investHistory").innerHTML += `<p class="green">Invested ${amount} → Profit ${profit}</p>`;
+let amount=parseInt(investSelect.value);
+let percent=parseInt(document.getElementById("investPlan").value);
+if(amount>balance){alert("Not enough coins");return;}
+balance-=amount;
+let profit=Math.floor(amount*percent/100);
+balance+=amount+profit;
+document.getElementById("balance").innerText=balance;
+document.getElementById("investHistory").innerHTML+=
+`<p class="green">Invested ${amount} → Profit ${profit}</p>`;
 }
 
-/* Withdraw */
 function withdraw(){
-  let amount = parseInt(document.getElementById("withdrawAmount").value);
-  let account = document.getElementById("withdrawAccount").value;
-  if(amount>balance){alert("Not enough coins"); return;}
-  if(account===""){alert("Enter account number"); return;}
-  balance -= amount;
-  document.getElementById("balance").innerText = balance;
-  document.getElementById("withdrawHistory").innerHTML += `<p class="red">Withdraw Request ${amount} Coins → ${account}</p>`;
+let amount=parseInt(document.getElementById("withdrawAmount").value);
+let account=document.getElementById("withdrawAccount").value;
+if(amount>balance){alert("Not enough coins");return;}
+if(account===""){alert("Enter account number");return;}
+balance-=amount;
+document.getElementById("balance").innerText=balance;
+document.getElementById("withdrawHistory").innerHTML+=
+`<p class="red">Withdraw ${amount} → ${account}</p>`;
 }
 
-// Initialize price
 calculatePrice();
 </script>
+
 </body>
   </html>
