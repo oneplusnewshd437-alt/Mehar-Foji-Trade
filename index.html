@@ -6,107 +6,119 @@
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
 body{
-background:#0f0f0f;
-color:white;
+  background:#0f0f0f;
+  color:white;
 }
 
 /* TOP BAR */
 .topbar{
-background:black;
-padding:12px 25px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+  background:black;
+  padding:12px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .topbar-left a{
-color:white;
-margin-right:20px;
-text-decoration:none;
-font-weight:bold;
+  color:white;
+  margin-right:20px;
+  text-decoration:none;
+  font-weight:bold;
 }
 
 .topbar-left a:hover{
-color:gold;
+  color:gold;
 }
 
 .wallet{
-background:#1a1a1a;
-padding:8px 15px;
-border-radius:20px;
-font-size:14px;
+  background:#1a1a1a;
+  padding:8px 15px;
+  border-radius:20px;
+  font-size:14px;
 }
 
 .wallet span{
-color:#00ff00;
-font-weight:bold;
+  color:#00ff00;
+  font-weight:bold;
 }
 
 /* MAIN */
 .container{
-max-width:1000px;
-margin:auto;
-padding:30px;
+  max-width:1000px;
+  margin:auto;
+  padding:30px;
 }
 
 .card{
-background:#1a1a1a;
-padding:25px;
-border-radius:10px;
-margin-bottom:25px;
-box-shadow:0 0 10px rgba(0,0,0,0.5);
+  background:#1a1a1a;
+  padding:25px;
+  border-radius:10px;
+  margin-bottom:25px;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
 h2,h3{
-color:gold;
-margin-bottom:15px;
+  color:gold;
+  margin-bottom:15px;
 }
 
 input,select{
-width:100%;
-padding:10px;
-margin:10px 0;
-border:none;
-border-radius:5px;
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:5px;
 }
 
 button{
-background:gold;
-border:none;
-padding:10px 20px;
-border-radius:5px;
-cursor:pointer;
-font-weight:bold;
+  background:gold;
+  border:none;
+  padding:10px 20px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 button:hover{
-background:#ffb300;
+  background:#ffb300;
 }
 
 .history{
-background:#111;
-padding:10px;
-border-radius:5px;
-margin-top:10px;
-max-height:150px;
-overflow:auto;
+  background:#111;
+  padding:10px;
+  border-radius:5px;
+  margin-top:10px;
+  max-height:150px;
+  overflow:auto;
 }
 
 .green{color:#00ff00}
 .red{color:red}
 
 footer{
-text-align:center;
-padding:20px;
-color:#777;
-margin-top:30px;
+  text-align:center;
+  padding:20px;
+  color:#777;
+  margin-top:30px;
+}
+
+/* Thumbnail preview */
+.pending-request img{
+  max-width:80px;
+  max-height:80px;
+  border-radius:5px;
+  margin-right:10px;
+  vertical-align:middle;
+}
+.pending-request span{
+  vertical-align:middle;
 }
 </style>
 </head>
@@ -115,70 +127,76 @@ margin-top:30px;
 
 <!-- TOP BLACK BAR -->
 <div class="topbar">
-<div class="topbar-left">
-<a href="#">Home</a>
-<a href="#">Settings</a>
-</div>
+  <div class="topbar-left">
+    <a href="#">Home</a>
+    <a href="#">Settings</a>
+  </div>
 
-<div class="wallet">
-Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
-</div>
+  <div class="wallet">
+    Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
+  </div>
 </div>
 
 <div class="container">
 
 <!-- RECHARGE -->
 <div class="card">
-<h2>Recharge Coins</h2>
+  <h2>Recharge Coins</h2>
 
-<select id="rechargeCoins" onchange="calculatePrice()">
-<option value="10000">10000 Coins</option>
-<option value="20000">20000 Coins</option>
-<option value="30000">30000 Coins</option>
-<option value="40000">40000 Coins</option>
-<option value="50000">50000 Coins</option>
-</select>
+  <select id="rechargeCoins" onchange="calculatePrice()">
+    <option value="10000">10000 Coins</option>
+    <option value="20000">20000 Coins</option>
+    <option value="30000">30000 Coins</option>
+    <option value="40000">40000 Coins</option>
+    <option value="50000">50000 Coins</option>
+  </select>
 
-<p>Price: Rs <span id="price">3260</span></p>
+  <p>Price: Rs <span id="price">3260</span></p>
 
-<input type="file" id="paymentShot" accept="image/*">
-<button onclick="recharge()">Submit Payment</button>
+  <input type="file" id="paymentShot" accept="image/*">
+  <button onclick="recharge()">Submit Payment</button>
 
-<div class="history" id="rechargeHistory"></div>
+  <div class="history" id="rechargeHistory"></div>
+</div>
+
+<!-- PENDING REQUESTS -->
+<div class="card">
+  <h2>Pending Recharge Requests (Admin Panel)</h2>
+  <div class="history" id="pendingRequests"></div>
 </div>
 
 <!-- INVESTMENT -->
 <div class="card">
-<h2>Investment Plans</h2>
+  <h2>Investment Plans</h2>
 
-<select id="investAmount">
-<option value="1000">1000 Coins</option>
-<option value="5000">5000 Coins</option>
-<option value="10000">10000 Coins</option>
-<option value="20000">20000 Coins</option>
-</select>
+  <select id="investAmount">
+    <option value="1000">1000 Coins</option>
+    <option value="5000">5000 Coins</option>
+    <option value="10000">10000 Coins</option>
+    <option value="20000">20000 Coins</option>
+  </select>
 
-<select id="investPlan">
-<option value="10">Short Term (10%)</option>
-<option value="25">Medium Term (25%)</option>
-<option value="50">Long Term (50%)</option>
-</select>
+  <select id="investPlan">
+    <option value="10">Short Term (10%)</option>
+    <option value="25">Medium Term (25%)</option>
+    <option value="50">Long Term (50%)</option>
+  </select>
 
-<button onclick="invest()">Invest Now</button>
+  <button onclick="invest()">Invest Now</button>
 
-<div class="history" id="investHistory"></div>
+  <div class="history" id="investHistory"></div>
 </div>
 
 <!-- WITHDRAW -->
 <div class="card">
-<h2>Withdraw Coins</h2>
+  <h2>Withdraw Coins</h2>
 
-<input type="number" id="withdrawAmount" placeholder="Enter coins to withdraw">
-<input type="text" id="withdrawAccount" placeholder="Enter Easypaisa / JazzCash Number">
+  <input type="number" id="withdrawAmount" placeholder="Enter coins to withdraw">
+  <input type="text" id="withdrawAccount" placeholder="Enter Easypaisa / JazzCash Number">
 
-<button onclick="withdraw()">Request Withdraw</button>
+  <button onclick="withdraw()">Request Withdraw</button>
 
-<div class="history" id="withdrawHistory"></div>
+  <div class="history" id="withdrawHistory"></div>
 </div>
 
 </div>
@@ -188,71 +206,115 @@ Balance: <span id="balance">0</span> Coins | Easypaisa: 03220751456
 <script>
 
 let balance = 0;
+let pendingRequests = [];
 
 /* PRICE CALCULATION */
 function calculatePrice(){
-let coins = document.getElementById("rechargeCoins").value;
-let rate = 3260/10000;
-document.getElementById("price").innerText =
-Math.floor(coins*rate);
+  let coins = document.getElementById("rechargeCoins").value;
+  let rate = 3260/10000;
+  document.getElementById("price").innerText =
+    Math.floor(coins*rate);
 }
 
 /* RECHARGE */
 function recharge(){
-let file = document.getElementById("paymentShot").files[0];
-if(!file){alert("Upload Screenshot");return;}
+  let file = document.getElementById("paymentShot").files[0];
+  if(!file){alert("Upload Screenshot");return;}
 
-let coins = parseInt(document.getElementById("rechargeCoins").value);
-balance += coins;
+  let coins = parseInt(document.getElementById("rechargeCoins").value);
 
-document.getElementById("balance").innerText = balance;
+  // Add request to pendingRequests array
+  let requestId = pendingRequests.length;
+  pendingRequests.push({id: requestId, coins: coins, file: file, status: 'Pending'});
 
-document.getElementById("rechargeHistory").innerHTML +=
-`<p class="green">Recharge ${coins} Coins Successful</p>`;
+  // Display in pending requests
+  let pendingDiv = document.getElementById("pendingRequests");
+
+  let reader = new FileReader();
+  reader.onload = function(e){
+    pendingDiv.innerHTML += `
+      <p class="pending-request" id="request-${requestId}">
+        <img src="${e.target.result}" alt="screenshot">
+        <span>Recharge ${coins} Coins</span>
+        <button onclick="approve(${requestId})">Approve</button>
+        <button onclick="reject(${requestId})">Reject</button>
+      </p>
+    `;
+  }
+  reader.readAsDataURL(file);
+
+  alert("Request submitted! Waiting for admin approval.");
+}
+
+/* ADMIN APPROVE */
+function approve(id){
+  let req = pendingRequests[id];
+  if(req.status !== 'Pending') return;
+  
+  balance += req.coins;
+  document.getElementById("balance").innerText = balance;
+
+  req.status = 'Approved';
+  document.getElementById(`request-${id}`).innerHTML =
+    `<span class="green">Recharge ${req.coins} Coins Approved</span>`;
+
+  // Add to recharge history
+  document.getElementById("rechargeHistory").innerHTML +=
+    `<p class="green">Recharge ${req.coins} Coins Successful</p>`;
+}
+
+/* ADMIN REJECT */
+function reject(id){
+  let req = pendingRequests[id];
+  if(req.status !== 'Pending') return;
+
+  req.status = 'Rejected';
+  document.getElementById(`request-${id}`).innerHTML =
+    `<span class="red">Recharge ${req.coins} Coins Rejected</span>`;
 }
 
 /* INVEST */
 function invest(){
-let amount = parseInt(document.getElementById("investAmount").value);
-let percent = parseInt(document.getElementById("investPlan").value);
+  let amount = parseInt(document.getElementById("investAmount").value);
+  let percent = parseInt(document.getElementById("investPlan").value);
 
-if(amount>balance){
-alert("Not enough coins");
-return;
-}
+  if(amount>balance){
+    alert("Not enough coins");
+    return;
+  }
 
-balance -= amount;
+  balance -= amount;
 
-let profit = Math.floor(amount*percent/100);
+  let profit = Math.floor(amount*percent/100);
 
-balance += amount + profit;
+  balance += amount + profit;
 
-document.getElementById("balance").innerText = balance;
+  document.getElementById("balance").innerText = balance;
 
-document.getElementById("investHistory").innerHTML +=
-`<p class="green">Invested ${amount} → Profit ${profit}</p>`;
+  document.getElementById("investHistory").innerHTML +=
+    `<p class="green">Invested ${amount} → Profit ${profit}</p>`;
 }
 
 /* WITHDRAW */
 function withdraw(){
-let amount = parseInt(document.getElementById("withdrawAmount").value);
-let account = document.getElementById("withdrawAccount").value;
+  let amount = parseInt(document.getElementById("withdrawAmount").value);
+  let account = document.getElementById("withdrawAccount").value;
 
-if(amount>balance){
-alert("Not enough coins");
-return;
-}
+  if(amount>balance){
+    alert("Not enough coins");
+    return;
+  }
 
-if(account===""){
-alert("Enter account number");
-return;
-}
+  if(account===""){
+    alert("Enter account number");
+    return;
+  }
 
-balance -= amount;
-document.getElementById("balance").innerText = balance;
+  balance -= amount;
+  document.getElementById("balance").innerText = balance;
 
-document.getElementById("withdrawHistory").innerHTML +=
-`<p class="red">Withdraw Request ${amount} Coins → ${account}</p>`;
+  document.getElementById("withdrawHistory").innerHTML +=
+    `<p class="red">Withdraw Request ${amount} Coins → ${account}</p>`;
 }
 
 </script>
