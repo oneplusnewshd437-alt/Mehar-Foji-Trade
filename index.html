@@ -30,11 +30,15 @@ footer{text-align:center;padding:15px;background:black;color:#888;}
 .timer{text-align:center;font-size:18px;color:#00ff88;margin-top:5px;}
 .result{text-align:center;margin-top:10px;font-weight:bold;font-size:16px;}
 .simulation{font-size:12px;color:#aaa;margin-top:10px;height:50px;overflow:hidden;}
-.pending-coins{color:orange;font-size:14px;margin-top:5px;}
+.wingo-area{position:relative;background:url('Wingo.jpg') no-repeat center/cover;height:auto;border-radius:15px;margin-top:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;}
+.wingo-board{display:grid;grid-template-columns:repeat(6,50px);grid-gap:8px;margin-top:15px;}
+.wingo-cell{width:50px;height:50px;background:#222;color:white;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:bold;cursor:pointer;transition:0.3s;}
+.wingo-cell.selected{background:#00ff88;color:black;}
+.wingo-cell.matched{background:gold;color:black;animation:blink 0.5s infinite alternate;}
+@keyframes blink{0%{background:gold;}100%{background:#ff0;}}
 </style>
 </head>
 <body>
-
 <div class="header">
 <img src="./Alig.jpg" alt="Header Banner">
 </div>
@@ -46,6 +50,36 @@ Balance: <span id="balance">0</span> Coins
 
 <div class="container">
 
+<!-- TEEN PATTI GAME -->
+<div class="card">
+<h2>Teen Patti Game</h2>
+<input type="number" id="betAmount" placeholder="Bet 100 - 5000">
+<div class="game-area" id="gameArea">
+<div class="bet-amount" id="betDisplay"></div>
+<div class="cards">
+<div class="card3d" id="card1">?</div>
+<div class="card3d" id="card2">?</div>
+<div class="card3d" id="card3">?</div>
+</div>
+<div class="timer" id="timer">Timer: 15</div>
+<div class="result" id="gameResult"></div>
+<div class="simulation" id="simDisplay"></div>
+</div>
+<button onclick="startGame()">Start Game</button>
+</div>
+
+<!-- WINGO GAME -->
+<div class="card">
+<h2>Wingo Game</h2>
+<input type="number" id="wingoBet" placeholder="Bet 100 - 5000">
+<div class="wingo-area" id="wingoArea">
+<div class="bet-amount" id="wingoBetDisplay"></div>
+<div class="result" id="wingoResult"></div>
+<div class="wingo-board" id="wingoBoard"></div>
+</div>
+<button onclick="playWingo()">Play Wingo</button>
+</div>
+
 <!-- RECHARGE -->
 <div class="card">
 <h2>Recharge</h2>
@@ -54,6 +88,15 @@ Balance: <span id="balance">0</span> Coins
 <input type="number" id="rechargeAmount" placeholder="Enter Coins (Min 1000)">
 <button onclick="recharge()">Submit Recharge</button>
 <div class="history" id="rechargeHistory"></div>
+</div>
+
+<!-- WITHDRAW -->
+<div class="card">
+<h2>Withdraw</h2>
+<input type="number" id="withdrawAmount" placeholder="Enter Coins">
+<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
+<button onclick="withdraw()">Withdraw Now</button>
+<div class="history" id="withdrawHistory"></div>
 </div>
 
 <!-- INVESTMENT -->
@@ -75,46 +118,18 @@ Balance: <span id="balance">0</span> Coins
 <div class="history" id="investHistory"></div>
 </div>
 
-<!-- GAME -->
-<div class="card">
-<h2>Teen Patti Game</h2>
-<input type="number" id="betAmount" placeholder="Bet 100 - 5000">
-<div class="game-area" id="gameArea">
-<div class="bet-amount" id="betDisplay"></div>
-<div class="cards">
-<div class="card3d" id="card1">?</div>
-<div class="card3d" id="card2">?</div>
-<div class="card3d" id="card3">?</div>
-</div>
-<div class="timer" id="timer">Timer: 15</div>
-<div class="result" id="gameResult"></div>
-<div class="simulation" id="simDisplay"></div>
-</div>
-<button onclick="startGame()">Start Game</button>
-</div>
-
-<!-- WITHDRAW -->
-<div class="card">
-<h2>Withdraw</h2>
-<input type="number" id="withdrawAmount" placeholder="Enter Coins">
-<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
-<button onclick="withdraw()">Withdraw Now</button>
-<div class="history" id="withdrawHistory"></div>
-</div>
-
 </div>
 
 <div class="contact">
 Contact Us: <b>03491441853</b>
 </div>
-
 <footer>
 © 2026 F JIND Trade | Professional Investment & Gaming Platform
 </footer>
-
 <a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
 
 <script>
+// GLOBAL
 let balance=0;
 let timer;
 let timeLeft=15;
@@ -130,14 +145,9 @@ function recharge(){
 let coins=parseInt(document.getElementById("rechargeAmount").value);
 if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
 let price=(coins/1000)*coinRate;
-
-// Open WhatsApp for admin only
-let message="Recharge Request%0ACoins: "+coins+"%0AAmount: "+price+" Rs%0APlease approve.";
-window.open("https://wa.me/923491441853?text="+message,"_blank");
-
-// Show pending for user
 document.getElementById("rechargeHistory").innerHTML +=
-"<p class='pending-coins'>Pending Approval: "+coins+" Coins (Admin approval required)</p>";
+"<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
+window.open("https://wa.me/923491441853?text=Recharge%20Request%0ACoins:%20"+coins+"%0AAmount:%20"+price+"%20Rs","_blank");
 }
 
 // Investment
@@ -153,7 +163,7 @@ document.getElementById("investHistory").innerHTML+=
 "<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
 }
 
-// Game
+// Teen Patti Game
 function startGame(){
 let bet=parseInt(document.getElementById("betAmount").value);
 if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
@@ -185,15 +195,75 @@ let winAmount=win?bet*2:0;
 if(win){balance+=winAmount; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
 else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
 
-// Winning ticker
+// Add winning to ticker if ≥ 100 coins
 if(winAmount>=100){
-let userId="YS";
+let userId="YS"; // Real user
 winningList.unshift(userId+" won "+winAmount+" Coins");
 if(winningList.length>10) winningList.pop();
 document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
 }
 
 updateBalance();
+}
+
+// Wingo Game
+const wingoBoard=document.getElementById("wingoBoard");
+let userSelection=[];
+
+function createWingoBoard(){
+wingoBoard.innerHTML="";
+for(let i=1;i<=36;i++){
+let cell=document.createElement("div");
+cell.className="wingo-cell";
+cell.innerText=i;
+cell.onclick=function(){
+if(userSelection.includes(i)){userSelection=userSelection.filter(x=>x!==i);cell.classList.remove("selected");}
+else{
+if(userSelection.length<6){userSelection.push(i);cell.classList.add("selected");}
+}
+}
+wingoBoard.appendChild(cell);
+}
+}
+createWingoBoard();
+
+function playWingo(){
+let bet=parseInt(document.getElementById("wingoBet").value);
+if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
+if(bet>balance){alert("Not enough coins");return;}
+if(userSelection.length!==6){alert("Select 6 numbers");return;}
+balance-=bet;
+document.getElementById("wingoBetDisplay").innerText="Your Bet: "+bet+" Coins";
+
+// Draw 6 random numbers
+let drawNumbers=[];
+while(drawNumbers.length<6){
+let num=Math.floor(Math.random()*36)+1;
+if(!drawNumbers.includes(num)) drawNumbers.push(num);
+}
+
+// Highlight matching numbers
+let matches=userSelection.filter(x=>drawNumbers.includes(x));
+document.querySelectorAll(".wingo-cell").forEach(cell=>{
+cell.classList.remove("matched");
+let val=parseInt(cell.innerText);
+if(matches.includes(val)) cell.classList.add("matched");
+});
+
+let winAmount=matches.length*bet; // each match gives bet coins
+if(winAmount>0){balance+=winAmount; document.getElementById("wingoResult").innerHTML="<span class='green'>Matched "+matches.length+" → Won "+winAmount+" Coins</span>";}
+else{document.getElementById("wingoResult").innerHTML="<span class='red'>No Matches → Lost "+bet+" Coins</span>";}
+
+// Update ticker
+if(winAmount>=100){
+winningList.unshift("YS-Wingo won "+winAmount+" Coins");
+if(winningList.length>10) winningList.pop();
+document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
+}
+
+updateBalance();
+userSelection=[];
+createWingoBoard();
 }
 
 // Withdraw
@@ -216,6 +286,7 @@ let result=Math.random()>0.5?"won":"lost";
 let coins=Math.floor(Math.random()*500+100);
 let user=simNames[Math.floor(Math.random()*simNames.length)];
 simText+=user+" "+result+" "+coins+" Coins<br>";
+// Add to winning ticker if win >=100
 if(result==="won" && coins>=100){
 winningList.unshift(user+" won "+coins+" Coins");
 if(winningList.length>10) winningList.pop();
@@ -228,4 +299,4 @@ setTimeout(simulateGame,3000);
 simulateGame();
 </script>
 </body>
-                           </html>
+  </html>
