@@ -6,198 +6,327 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-body{background:linear-gradient(135deg,#000,#111,#1c1c1c);color:white;min-height:100vh;}
+body{background:linear-gradient(135deg,#000,#111,#1c1c1c);color:white;}
 
 /* HEADER */
-.header{text-align:center;padding:10px;background:black;box-shadow:0 5px 20px rgba(0,0,0,0.6);}
-.header img{max-width:100%;height:auto;border-radius:12px;}
+.header img{
+width:100%;
+height:170px;
+object-fit:cover;
+border-bottom:3px solid gold;
+}
 
 /* BALANCE */
-.balance-box{text-align:center;padding:12px;background:#111;font-size:15px;border-bottom:1px solid #222;}
+.balance-box{
+text-align:center;
+padding:12px;
+background:#111;
+font-size:15px;
+}
 .balance-box span{color:#00ff88;font-weight:bold;font-size:16px;}
 
-/* CONTAINER */
-.container{max-width:1100px;margin:auto;padding:30px 15px 100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
+.container{
+max-width:1000px;
+margin:auto;
+padding:25px 15px 100px;
+}
 
-/* CARD */
-.card{background:#161616;border-radius:15px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.7);transition:0.3s;border:1px solid #222;}
-.card:hover{transform:translateY(-5px);border:1px solid gold;}
-.card h2{margin-bottom:15px;color:gold;}
-input,select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:8px;background:#222;color:white;font-size:14px;}
-button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;background:gold;color:black;transition:0.3s;}
+.card{
+background:#161616;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.7);
+margin-bottom:20px;
+border:1px solid #222;
+}
+
+.card h2{color:gold;margin-bottom:15px;text-align:center;}
+
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+background:#222;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:gold;
+color:black;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
 button:hover{background:orange;}
-.history{margin-top:10px;max-height:120px;overflow:auto;background:#111;padding:8px;border-radius:8px;font-size:13px;}
+
+.history{
+background:#111;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+max-height:120px;
+overflow:auto;
+margin-top:10px;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:20px 0;
+}
+
+.card3d{
+width:90px;
+height:130px;
+background:white;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:bold;
+box-shadow:0 10px 20px rgba(0,0,0,0.8);
+}
+
+.red-card{color:red;}
+.black-card{color:black;}
+
+.timer{text-align:center;font-size:18px;color:#00ff88;}
+.result{text-align:center;margin-top:15px;font-weight:bold;}
 .green{color:#00ff88;}
 .red{color:#ff4d4d;}
 
-/* CONTACT */
-.contact{text-align:center;padding:15px;background:#111;color:#00ff88;font-size:15px;}
-footer{text-align:center;padding:15px;font-size:12px;color:#888;background:black;}
+.contact{
+text-align:center;
+padding:15px;
+background:#111;
+color:#00ff88;
+font-size:15px;
+}
 
-/* BOTTOM MENU */
-.bottom-menu{position:fixed;bottom:0;width:100%;background:black;display:flex;justify-content:space-around;padding:15px 0;border-top:2px solid gold;}
-.bottom-menu div{color:white;font-size:14px;cursor:pointer;}
-.bottom-menu div:hover{color:gold;}
-
-/* WHATSAPP BUTTON */
-.whatsapp{position:fixed;right:15px;bottom:80px;background:#25D366;color:white;padding:12px 15px;border-radius:50px;font-size:14px;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.5);}
-
-/* GAME */
-.game-area{text-align:center;}
-.cards{display:flex;justify-content:center;gap:15px;margin:20px 0;}
-.card3d{width:80px;height:120px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;box-shadow:0 10px 20px rgba(0,0,0,0.8);transform-style:preserve-3d;transition:0.5s;background:#222;color:white;font-size:24px;}
-.card3d.show{transform:rotateY(360deg);}
-.timer{font-size:18px;color:#00ff88;margin-top:10px;}
-.result{margin-top:15px;font-size:16px;font-weight:bold;}
+footer{
+text-align:center;
+padding:15px;
+background:black;
+color:#888;
+}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER IMAGE -->
+<!-- HEADER -->
 <div class="header">
-<img src=".file_000000006a1c7209aad997e59e16ade7~2.jpg" alt="F JIND Trade Logo">
+<img src="hider/file_000000006a1c7209aad997e59e16ade7~2.jpg">
 </div>
 
 <div class="balance-box">
-Balance: <span id="balance">0</span> Coins
+Balance: <span id="balance">5000</span> Coins
 </div>
 
 <div class="container">
 
 <!-- RECHARGE -->
 <div class="card">
-<h2>Recharge Coins</h2>
-<p style="color:#00ff88;">EasyPaisa Wallet: <b>03220751486</b></p>
-<select id="rechargeCoins" onchange="calculatePrice()"></select>
-<p>Price: Rs <span id="price">0</span></p>
-<input type="file" id="paymentShot" accept="image/*">
-<button onclick="recharge()">Submit Payment</button>
+<h2>Recharge</h2>
+<p style="color:#00ff88;">EasyPaisa: 03220751486</p>
+<input type="number" id="rechargeAmount" placeholder="Enter Coins">
+<button onclick="recharge()">Submit Recharge</button>
 <div class="history" id="rechargeHistory"></div>
 </div>
 
-<!-- INVEST -->
+<!-- INVESTMENT -->
 <div class="card">
-<h2>Investment</h2>
-<select id="investAmount"></select>
+<h2>Investment Plans</h2>
+
+<select id="investAmount">
+<option value="1000">1000</option>
+<option value="5000">5000</option>
+<option value="10000">10000</option>
+<option value="20000">20000</option>
+<option value="50000">50000</option>
+</select>
+
 <select id="investPlan">
 <option value="10">10% Return</option>
 <option value="25">25% Return</option>
 <option value="50">50% Return</option>
 </select>
+
 <button onclick="invest()">Invest Now</button>
 <div class="history" id="investHistory"></div>
-</div>
-
-<!-- WITHDRAW -->
-<div class="card">
-<h2>Withdraw</h2>
-<input type="number" id="withdrawAmount" placeholder="Enter coins">
-<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
-<button onclick="withdraw()">Request Withdraw</button>
-<div class="history" id="withdrawHistory"></div>
 </div>
 
 <!-- GAME -->
 <div class="card">
 <h2>Teen Patti Game</h2>
-<div class="game-area">
-<select id="betAmount">
-<option value="100">100 Coins</option>
-<option value="500">500 Coins</option>
-<option value="1000">1000 Coins</option>
-<option value="2000">2000 Coins</option>
-<option value="5000">5000 Coins</option>
-</select>
+
+<input type="number" id="betAmount" placeholder="Bet 100 - 5000">
+
 <button onclick="startGame()">Start Game</button>
+
 <div class="timer" id="timer">Timer: 15</div>
+
 <div class="cards">
 <div class="card3d" id="card1">?</div>
 <div class="card3d" id="card2">?</div>
 <div class="card3d" id="card3">?</div>
 </div>
+
 <div class="result" id="gameResult"></div>
 </div>
+
+<!-- WITHDRAW -->
+<div class="card">
+<h2>Withdraw</h2>
+<input type="number" id="withdrawAmount" placeholder="Enter Coins">
+<input type="text" id="withdrawAccount" placeholder="Easypaisa / JazzCash Number">
+<button onclick="withdraw()">Withdraw Now</button>
+<div class="history" id="withdrawHistory"></div>
 </div>
 
 </div>
 
+<!-- CONTACT -->
 <div class="contact">
 Contact Us: <b>03491441853</b>
 </div>
 
-<footer>© 2026 F JIND Trade | Professional Investment System</footer>
-
-<div class="bottom-menu">
-<div>🏠 Home</div>
-<div>📊 Menu</div>
-</div>
-
-<a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
+<footer>
+© 2026 F JIND Trade | Professional Investment & Gaming Platform
+</footer>
 
 <script>
-let balance=0;
-const rechargeSelect=document.getElementById("rechargeCoins");
-const investSelect=document.getElementById("investAmount");
+let balance=5000;
+let timer;
+let timeLeft=15;
 
-for(let i=10000;i<=50000;i+=10000){
-let opt=document.createElement("option");
-opt.value=i;
-opt.text=i.toLocaleString()+" Coins";
-rechargeSelect.appendChild(opt);
-}
-for(let i=1000;i<=200000;i+=5000){
-let opt=document.createElement("option");
-opt.value=i;
-opt.text=i.toLocaleString()+" Coins";
-investSelect.appendChild(opt);
+function updateBalance(){
+document.getElementById("balance").innerText=balance;
 }
 
-function calculatePrice(){
-let coins=parseInt(rechargeSelect.value);
-let rate=3260/10000;
-document.getElementById("price").innerText=Math.floor(coins*rate);
+/* Recharge */
+function recharge(){
+let amount=parseInt(document.getElementById("rechargeAmount").value);
+if(!amount || amount<=0){alert("Enter amount");return;}
+balance+=amount;
+updateBalance();
+document.getElementById("rechargeHistory").innerHTML+=
+"<p class='green'>Recharge "+amount+" Coins</p>";
 }
-function recharge(){let file=document.getElementById("paymentShot").files[0];if(!file){alert("Upload Screenshot");return;}alert("Recharge Request Submitted - Admin Approval Required");}
-function invest(){let amount=parseInt(investSelect.value);let percent=parseInt(document.getElementById("investPlan").value);if(amount>balance){alert("Not enough coins");return;}balance-=amount;let profit=Math.floor(amount*percent/100);balance+=amount+profit;document.getElementById("balance").innerText=balance;document.getElementById("investHistory").innerHTML+=`<p class="green">Invested ${amount} → Profit ${profit}</p>`;}
-function withdraw(){let amount=parseInt(document.getElementById("withdrawAmount").value);let account=document.getElementById("withdrawAccount").value;if(amount>balance){alert("Not enough coins");return;}if(account===""){alert("Enter account number");return;}balance-=amount;document.getElementById("balance").innerText=balance;document.getElementById("withdrawHistory").innerHTML+=`<p class="red">Withdraw ${amount} → ${account}</p>`;}
-calculatePrice();
 
-/* GAME LOGIC */
-let gameTimer;let timeLeft=15;
-const cardValues=["A","K","Q","J","10"]; // self-generated
+/* Investment */
+function invest(){
+let amount=parseInt(document.getElementById("investAmount").value);
+let percent=parseInt(document.getElementById("investPlan").value);
 
+if(amount>balance){alert("Not enough coins");return;}
+
+balance-=amount;
+let profit=Math.floor(amount*percent/100);
+balance+=amount+profit;
+updateBalance();
+
+document.getElementById("investHistory").innerHTML+=
+"<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
+}
+
+/* Game */
 function startGame(){
 let bet=parseInt(document.getElementById("betAmount").value);
+if(!bet || bet<100 || bet>5000){alert("Bet 100-5000");return;}
 if(bet>balance){alert("Not enough coins");return;}
+
 balance-=bet;
-document.getElementById("balance").innerText=balance;
-timeLeft=15;document.getElementById("timer").innerText="Timer: "+timeLeft;
+updateBalance();
+
+timeLeft=15;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
 document.getElementById("gameResult").innerText="";
-document.getElementById("card1").innerText="?";document.getElementById("card2").innerText="?";document.getElementById("card3").innerText="?";
-document.getElementById("card1").classList.remove("show");document.getElementById("card2").classList.remove("show");document.getElementById("card3").classList.remove("show");
-clearInterval(gameTimer);
-gameTimer=setInterval(()=>{
-timeLeft--;document.getElementById("timer").innerText="Timer: "+timeLeft;
-if(timeLeft<=0){clearInterval(gameTimer);revealCards(bet);}
+resetCards();
+
+clearInterval(timer);
+
+timer=setInterval(function(){
+timeLeft--;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+if(timeLeft<=0){
+clearInterval(timer);
+revealCards(bet);
+}
 },1000);
 }
 
-function revealCards(bet){
-let c1=cardValues[Math.floor(Math.random()*cardValues.length)];
-let c2=cardValues[Math.floor(Math.random()*cardValues.length)];
-let c3=cardValues[Math.floor(Math.random()*cardValues.length)];
-document.getElementById("card1").innerText=c1;
-document.getElementById("card2").innerText=c2;
-document.getElementById("card3").innerText=c3;
-document.getElementById("card1").classList.add("show");document.getElementById("card2").classList.add("show");document.getElementById("card3").classList.add("show");
-
-if(c1===c2 || c2===c3 || c1===c3){
-let win=bet*2;balance+=win;document.getElementById("balance").innerText=balance;
-document.getElementById("gameResult").innerHTML=`<span class="green">You Won ${win} Coins!</span>`;
-}else{
-document.getElementById("gameResult").innerHTML=`<span class="red">You Lost ${bet} Coins</span>`;
+function resetCards(){
+for(let i=1;i<=3;i++){
+let c=document.getElementById("card"+i);
+c.innerText="?";
+c.className="card3d";
 }
+}
+
+function revealCards(bet){
+let suits=["♥","♦","♠","♣"];
+let nums=["A","K","Q","J","10","9","8"];
+let cards=[];
+
+for(let i=0;i<3;i++){
+cards.push(nums[Math.floor(Math.random()*nums.length)]
++suits[Math.floor(Math.random()*suits.length)]);
+}
+
+for(let i=1;i<=3;i++){
+let c=document.getElementById("card"+i);
+c.innerText=cards[i-1];
+if(cards[i-1].includes("♥")||cards[i-1].includes("♦")){
+c.classList.add("red-card");
+}else{
+c.classList.add("black-card");
+}
+}
+
+let n1=cards[0][0],n2=cards[1][0],n3=cards[2][0];
+
+if(n1===n2&&n2===n3){
+let win=bet*5;
+balance+=win;
+document.getElementById("gameResult").innerHTML=
+"<span class='green'>JACKPOT! Won "+win+"</span>";
+}
+else if(n1===n2||n2===n3||n1===n3){
+let win=bet*2;
+balance+=win;
+document.getElementById("gameResult").innerHTML=
+"<span class='green'>You Won "+win+"</span>";
+}
+else{
+document.getElementById("gameResult").innerHTML=
+"<span class='red'>You Lost "+bet+"</span>";
+}
+
+updateBalance();
+}
+
+/* Withdraw */
+function withdraw(){
+let amount=parseInt(document.getElementById("withdrawAmount").value);
+let acc=document.getElementById("withdrawAccount").value;
+
+if(amount>balance){alert("Not enough coins");return;}
+if(acc==""){alert("Enter account");return;}
+
+balance-=amount;
+updateBalance();
+
+document.getElementById("withdrawHistory").innerHTML+=
+"<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 </script>
 
