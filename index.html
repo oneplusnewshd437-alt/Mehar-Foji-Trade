@@ -33,12 +33,11 @@ footer{text-align:center;padding:15px;background:black;color:#888;}
 
 /* Wingo */
 .wingo-area{position:relative;background:url('Wingo.jpg') no-repeat center/cover;min-height:300px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;}
-.wingo-board{display:grid;grid-template-columns:repeat(6,50px);grid-gap:12px;margin-top:15px;justify-content:center;}
-.wingo-cell{width:50px;height:50px;background:#222;color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:bold;cursor:pointer;font-size:16px;box-shadow:0 3px 8px rgba(0,0,0,0.7);transition:0.3s;}
-.wingo-cell.selected{background:#00ff88;color:black;}
-.wingo-cell.matched{background:gold;color:black;animation:blink 0.5s infinite alternate;}
-.wingo-cell.random-color{color:#FF3D00;font-weight:bold;}
-@keyframes blink{0%{background:gold;}100%{background:#ff0;}}
+.wingo-board{display:grid;grid-template-columns:repeat(5,40px);grid-gap:10px;margin-top:15px;justify-content:center;}
+.wingo-cell{width:40px;height:40px;background:#222;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:bold;cursor:pointer;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,0.7);transition:0.3s;}
+.wingo-cell.selected{border:2px solid #00ff88;}
+.wingo-cell.matched{border:2px solid gold;animation:blink 0.5s infinite alternate;}
+@keyframes blink{0%{border-color:gold;}100%{border-color:#ff0;}}
 </style>
 </head>
 <body>
@@ -77,6 +76,7 @@ Balance: <span id="balance">0</span> Coins
 <div class="bet-amount" id="wingoBetDisplay"></div>
 <div class="result" id="wingoResult"></div>
 <div class="wingo-board" id="wingoBoard"></div>
+<div class="timer" id="wingoTimerDisplay">Timer: 15</div>
 </div>
 <button onclick="playWingo()">Play Wingo</button>
 </div>
@@ -126,49 +126,19 @@ Balance: <span id="balance">0</span> Coins
 <a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
 
 <script>
-// GLOBAL
-let balance=0;
-let teenTimer;
-let wingoTimer;
-let coinRate=3200;
+let balance=0, teenTimer, wingoTimer;
 let cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
 let winningList=[];
-
-// BALANCE UPDATE
 function updateBalance(){document.getElementById("balance").innerText=balance;}
+function recharge(){let coins=parseInt(document.getElementById("rechargeAmount").value);if(!coins||coins<1000){alert("Minimum 1000 Coins");return;}let price=(coins/1000)*3200;document.getElementById("rechargeHistory").innerHTML+="<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";window.open("https://wa.me/923491441853?text=Recharge%20Request%0ACoins:"+coins+"%0AAmount:"+price+"Rs","_blank");}
+function invest(){let amount=parseInt(document.getElementById("investAmount").value);let percent=parseInt(document.getElementById("investPlan").value);if(amount>balance){alert("Not enough coins");return;}balance-=amount;let profit=Math.floor(amount*percent/100);balance+=amount+profit;updateBalance();document.getElementById("investHistory").innerHTML+="<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";}
 
-// RECHARGE
-function recharge(){
-let coins=parseInt(document.getElementById("rechargeAmount").value);
-if(!coins||coins<1000){alert("Minimum 1000 Coins");return;}
-let price=(coins/1000)*coinRate;
-document.getElementById("rechargeHistory").innerHTML+="<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
-window.open("https://wa.me/923491441853?text=Recharge%20Request%0ACoins:%20"+coins+"%0AAmount:%20"+price+"%20Rs","_blank");
-}
-
-// INVEST
-function invest(){
-let amount=parseInt(document.getElementById("investAmount").value);
-let percent=parseInt(document.getElementById("investPlan").value);
-if(amount>balance){alert("Not enough coins");return;}
-balance-=amount;
-let profit=Math.floor(amount*percent/100);
-balance+=amount+profit;
-updateBalance();
-document.getElementById("investHistory").innerHTML+="<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
-}
-
-// TEEN PATTI AUTO
+// TEEN PATTI
 function startGame(){
-let bet=parseInt(document.getElementById("betAmount").value);
-if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
-if(bet>balance){alert("Not enough coins");return;}
-balance-=bet; updateBalance();
-document.getElementById("betDisplay").innerText="Your Bet: "+bet+" Coins";
-document.getElementById("gameResult").innerText="";
+let bet=parseInt(document.getElementById("betAmount").value);if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}if(bet>balance){alert("Not enough coins");return;}
+balance-=bet;updateBalance();document.getElementById("betDisplay").innerText="Your Bet: "+bet+" Coins";document.getElementById("gameResult").innerText="";
 resetCards();
-let timeLeft=15;
-document.getElementById("timer").innerText="Timer: "+timeLeft;
+let timeLeft=15;document.getElementById("timer").innerText="Timer: "+timeLeft;
 clearInterval(teenTimer);
 teenTimer=setInterval(()=>{
 timeLeft--;
@@ -178,89 +148,54 @@ if(timeLeft<=0){clearInterval(teenTimer);revealCards(bet);}
 }
 function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.style.backgroundImage="";}}
 function revealCards(bet){
-for(let i=1;i<=3;i++){
-document.getElementById("card"+i).style.backgroundImage="url('"+cardImages[i-1]+"')";
-document.getElementById("card"+i).innerText="";
-}
-// COMPUTER CARD (simulated)
-let compCards=[cardImages[Math.floor(Math.random()*3)],cardImages[Math.floor(Math.random()*3)],cardImages[Math.floor(Math.random()*3)]];
-let win=Math.random()>0.5;
-let winAmount=win?bet*2:0;
+for(let i=1;i<=3;i++){document.getElementById("card"+i).style.backgroundImage="url('"+cardImages[i-1]+"')";document.getElementById("card"+i).innerText="";}
+let win=Math.random()>0.5;let winAmount=win?bet*2:0;
 if(win){balance+=winAmount;document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
 else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
-if(winAmount>=100){winningList.unshift("YS won "+winAmount+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
+if(winAmount>=100){winningList.unshift("YS won "+winAmount+" Coins");if(winningList.length>10)winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
 updateBalance();
 }
 
 // WINGO
-const wingoBoard=document.getElementById("wingoBoard");
-let userSelection=[];
+const wingoBoard=document.getElementById("wingoBoard");let userSelection=[];
 function createWingoBoard(){
 wingoBoard.innerHTML="";
-for(let i=1;i<=36;i++){
-let cell=document.createElement("div");
-cell.className="wingo-cell random-color";
-cell.innerText=i;
-cell.onclick=function(){
-if(userSelection.includes(i)){userSelection=userSelection.filter(x=>x!==i);cell.classList.remove("selected");}
-else{if(userSelection.length<6){userSelection.push(i);cell.classList.add("selected");}}
+for(let i=1;i<=25;i++){
+let cell=document.createElement("div");cell.className="wingo-cell";cell.innerText=i;
+cell.style.color="hsl("+(i*30%360)+",100%,70%)";
+cell.onclick=function(){if(userSelection.includes(i)){userSelection=userSelection.filter(x=>x!==i);cell.classList.remove("selected");}else{if(userSelection.length<6){userSelection.push(i);cell.classList.add("selected");}}}
+wingoBoard.appendChild(cell);}
 }
-wingoBoard.appendChild(cell);
-}}
 createWingoBoard();
 
 function playWingo(){
-let bet=parseInt(document.getElementById("wingoBet").value);
-if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
-if(bet>balance){alert("Not enough coins");return;}
-if(userSelection.length!==6){alert("Select 6 numbers");return;}
-balance-=bet;
-document.getElementById("wingoBetDisplay").innerText="Your Bet: "+bet+" Coins";
-document.getElementById("wingoResult").innerText="";
-let timeLeft=15;
+let bet=parseInt(document.getElementById("wingoBet").value);if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}if(bet>balance){alert("Not enough coins");return;}if(userSelection.length!==6){alert("Select 6 numbers");return;}
+balance-=bet;updateBalance();
+document.getElementById("wingoBetDisplay").innerText="Your Bet: "+bet+" Coins";document.getElementById("wingoResult").innerText="";
+let timeLeft=15;document.getElementById("wingoTimerDisplay").innerText="Timer: "+timeLeft;
 clearInterval(wingoTimer);
 wingoTimer=setInterval(()=>{
-timeLeft--;
+timeLeft--;document.getElementById("wingoTimerDisplay").innerText="Timer: "+timeLeft;
 if(timeLeft<=0){clearInterval(wingoTimer);revealWingo(bet);}
 },1000);
 }
-
 function revealWingo(bet){
-let drawNumbers=[];
-while(drawNumbers.length<6){let num=Math.floor(Math.random()*36)+1;if(!drawNumbers.includes(num)) drawNumbers.push(num);}
+let drawNumbers=[]; while(drawNumbers.length<6){let num=Math.floor(Math.random()*25)+1;if(!drawNumbers.includes(num)) drawNumbers.push(num);}
 let matches=userSelection.filter(x=>drawNumbers.includes(x));
 document.querySelectorAll(".wingo-cell").forEach(cell=>{cell.classList.remove("matched");let val=parseInt(cell.innerText);if(matches.includes(val)) cell.classList.add("matched");});
 let winAmount=matches.length*bet;
 if(winAmount>0){balance+=winAmount;document.getElementById("wingoResult").innerHTML="<span class='green'>Matched "+matches.length+" → Won "+winAmount+" Coins</span>";}
 else{document.getElementById("wingoResult").innerHTML="<span class='red'>No Matches → Lost "+bet+" Coins</span>";}
-if(winAmount>=100){winningList.unshift("YS-Wingo won "+winAmount+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
-updateBalance();
-userSelection=[];createWingoBoard();
+if(winAmount>=100){winningList.unshift("YS-Wingo won "+winAmount+" Coins");if(winningList.length>10)winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
+updateBalance();userSelection=[];createWingoBoard();
 }
 
 // WITHDRAW
-function withdraw(){
-let amount=parseInt(document.getElementById("withdrawAmount").value);
-let acc=document.getElementById("withdrawAccount").value;
-if(amount>balance){alert("Not enough coins");return;}
-if(acc==""){alert("Enter account");return;}
-balance-=amount; updateBalance();
-document.getElementById("withdrawHistory").innerHTML+="<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
-}
+function withdraw(){let amount=parseInt(document.getElementById("withdrawAmount").value);let acc=document.getElementById("withdrawAccount").value;if(amount>balance){alert("Not enough coins");return;}if(acc==""){alert("Enter account");return;}balance-=amount;updateBalance();document.getElementById("withdrawHistory").innerHTML+="<p class='red'>Withdraw "+amount+" → "+acc+"</p>";}
 
-// SIMULATED USERS
+// SIMULATE
 const simNames=["User123","PlayerX","AceGamer","CardKing","Lucky77"];
-function simulateGame(){
-let simText="";
-for(let i=0;i<5;i++){
-let result=Math.random()>0.5?"won":"lost";
-let coins=Math.floor(Math.random()*500+100);
-let user=simNames[Math.floor(Math.random()*simNames.length)];
-simText+=user+" "+result+" "+coins+" Coins<br>";
-if(result==="won" && coins>=100){winningList.unshift(user+" won "+coins+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
-}
-document.getElementById("simDisplay").innerHTML=simText;
-setTimeout(simulateGame,3000);}
+function simulateGame(){let simText="";for(let i=0;i<5;i++){let result=Math.random()>0.5?"won":"lost";let coins=Math.floor(Math.random()*500+100);let user=simNames[Math.floor(Math.random()*simNames.length)];simText+=user+" "+result+" "+coins+" Coins<br>";if(result==="won" && coins>=100){winningList.unshift(user+" won "+coins+" Coins");if(winningList.length>10)winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}}document.getElementById("simDisplay").innerHTML=simText;setTimeout(simulateGame,3000);}
 simulateGame();
 </script>
 </body>
