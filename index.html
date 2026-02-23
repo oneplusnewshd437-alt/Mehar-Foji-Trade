@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F JIND Trade</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-body{background:#111;color:white;min-height:100vh;}
+body{background:linear-gradient(135deg,#000,#111,#1c1c1c);color:white;min-height:100vh;}
 .header{width:100%;border-bottom:3px solid gold;background:black;text-align:center;}
 .header img{max-width:100%;height:auto;display:block;margin:0 auto;}
-.balance-box{text-align:center;padding:12px;background:#111;font-size:15px;border-bottom:1px solid #222;}
+.balance-box{text-align:center;padding:12px;background:#111;font-size:15px;border-bottom:1px solid #222;position:relative;}
 .balance-box span{color:#00ff88;font-weight:bold;font-size:16px;}
-.container{max-width:1000px;margin:auto;padding:25px 15px 150px;}
+.winning-ticker{position:absolute;bottom:-25px;width:100%;text-align:center;color:red;font-size:14px;font-weight:bold;overflow:hidden;height:20px;white-space:nowrap;animation:scroll 10s linear infinite;}
+@keyframes scroll{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+.container{max-width:1000px;margin:auto;padding:25px 15px 100px;}
 .card{background:#161616;padding:20px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.7);margin-bottom:20px;border:1px solid #222;}
 .card h2{color:gold;margin-bottom:15px;text-align:center;}
 input,select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:8px;background:#222;color:white;}
@@ -22,16 +23,14 @@ button:hover{background:orange;}
 .contact{text-align:center;padding:15px;background:#111;color:#00ff88;font-size:15px;}
 footer{text-align:center;padding:15px;background:black;color:#888;}
 .whatsapp{position:fixed;right:15px;bottom:80px;background:#25D366;color:white;padding:12px 15px;border-radius:50px;font-size:14px;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.5);}
-
-/* GAME */
 .game-area{position:relative;background:url('F jind.jpg') no-repeat center/cover;height:400px;border-radius:15px;margin-top:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .cards{display:flex;justify-content:center;gap:15px;position:relative;margin-top:10px;}
-.card3d{width:90px;height:130px;background:#222;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;box-shadow:0 10px 20px rgba(0,0,0,0.8);background-size:cover;background-position:center;cursor:pointer;}
+.card3d{width:90px;height:130px;background:#222;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;box-shadow:0 10px 20px rgba(0,0,0,0.8);background-size:cover;background-position:center;}
 .bet-amount{position:absolute;top:10px;left:50%;transform:translateX(-50%);color:#00ff88;font-weight:bold;font-size:18px;}
 .timer{text-align:center;font-size:18px;color:#00ff88;margin-top:5px;}
 .result{text-align:center;margin-top:10px;font-weight:bold;font-size:16px;}
 .simulation{font-size:12px;color:#aaa;margin-top:10px;height:50px;overflow:hidden;}
-.winning-slider{position:absolute;bottom:0;left:0;width:100%;height:25px;background:red;color:white;font-size:12px;display:flex;flex-direction:column;justify-content:flex-end;padding:2px;overflow:hidden;}
+.pending-coins{color:orange;font-size:14px;margin-top:5px;}
 </style>
 </head>
 <body>
@@ -42,6 +41,7 @@ footer{text-align:center;padding:15px;background:black;color:#888;}
 
 <div class="balance-box">
 Balance: <span id="balance">0</span> Coins
+<div class="winning-ticker" id="winningTicker"></div>
 </div>
 
 <div class="container">
@@ -80,15 +80,14 @@ Balance: <span id="balance">0</span> Coins
 <h2>Teen Patti Game</h2>
 <input type="number" id="betAmount" placeholder="Bet 100 - 5000">
 <div class="game-area" id="gameArea">
-<div class="bet-amount" id="betDisplay">Your Total Bet: 0 Coins</div>
+<div class="bet-amount" id="betDisplay"></div>
 <div class="cards">
-<div class="card3d" id="card1" onclick="placeBet(1)">?</div>
-<div class="card3d" id="card2" onclick="placeBet(2)">?</div>
-<div class="card3d" id="card3" onclick="placeBet(3)">?</div>
+<div class="card3d" id="card1">?</div>
+<div class="card3d" id="card2">?</div>
+<div class="card3d" id="card3">?</div>
 </div>
 <div class="timer" id="timer">Timer: 15</div>
 <div class="result" id="gameResult"></div>
-<div class="winning-slider" id="winningSlider"></div>
 <div class="simulation" id="simDisplay"></div>
 </div>
 <button onclick="startGame()">Start Game</button>
@@ -117,130 +116,116 @@ Contact Us: <b>03491441853</b>
 
 <script>
 let balance=0;
-let cardBets=[0,0,0];
+let timer;
+let timeLeft=15;
+const coinRate=3200;
 const cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
-const coinRate=3200; // 1000 Coins = 3200 Rs
+let winningList=[];
 
+// Update balance
 function updateBalance(){document.getElementById("balance").innerText=balance;}
 
-// Recharge with admin WhatsApp approval
+// Recharge
 function recharge(){
-  let coins=parseInt(document.getElementById("rechargeAmount").value);
-  if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
-  let price=(coins/1000)*coinRate;
-  document.getElementById("rechargeHistory").innerHTML +=
-  "<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
-  let message="Recharge Request%0ACoins: "+coins+"%0AAmount: "+price+" Rs%0APlease approve.";
-  window.open("https://wa.me/923491441853?text="+message,"_blank");
+let coins=parseInt(document.getElementById("rechargeAmount").value);
+if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
+let price=(coins/1000)*coinRate;
+
+// Open WhatsApp for admin only
+let message="Recharge Request%0ACoins: "+coins+"%0AAmount: "+price+" Rs%0APlease approve.";
+window.open("https://wa.me/923491441853?text="+message,"_blank");
+
+// Show pending for user
+document.getElementById("rechargeHistory").innerHTML +=
+"<p class='pending-coins'>Pending Approval: "+coins+" Coins (Admin approval required)</p>";
 }
 
 // Investment
 function invest(){
-  let amount=parseInt(document.getElementById("investAmount").value);
-  let percent=parseInt(document.getElementById("investPlan").value);
-  if(amount>balance){alert("Not enough coins");return;}
-  balance-=amount;
-  let profit=Math.floor(amount*percent/100);
-  balance+=amount+profit;
-  updateBalance();
-  document.getElementById("investHistory").innerHTML+=
-  "<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
+let amount=parseInt(document.getElementById("investAmount").value);
+let percent=parseInt(document.getElementById("investPlan").value);
+if(amount>balance){alert("Not enough coins");return;}
+balance-=amount;
+let profit=Math.floor(amount*percent/100);
+balance+=amount+profit;
+updateBalance();
+document.getElementById("investHistory").innerHTML+=
+"<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
 }
 
-// Game functions
-function updateTotalBet(){
-  let totalBet=cardBets.reduce((a,b)=>a+b,0);
-  document.getElementById("betDisplay").innerText="Your Total Bet: "+totalBet+" Coins";
-}
-
-function placeBet(cardNum){
-  let maxBet=balance-cardBets.reduce((a,b)=>a+b,0);
-  if(maxBet<=0){alert("No more coins available"); return;}
-  let bet=parseInt(prompt("Enter coins to bet on this card (max "+maxBet+")"));
-  if(!bet || bet<1 || bet>maxBet){alert("Invalid bet"); return;}
-  cardBets[cardNum-1]+=bet;
-  updateTotalBet();
-}
-
-function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+(i+1));c.innerText="?";c.style.backgroundImage="";}
-
-document.getElementById("winningSlider").innerHTML="";
-}
-
+// Game
 function startGame(){
-  let totalBet=cardBets.reduce((a,b)=>a+b,0);
-  if(totalBet==0){alert("Place at least one bet"); return;}
-  balance-=totalBet;
-  updateBalance();
-  resetCards();
-  document.getElementById("timer").innerText="Timer: 15";
-  document.getElementById("gameResult").innerText="";
-  let timeLeft=15;
-  let timer=setInterval(()=>{
-    timeLeft--;
-    document.getElementById("timer").innerText="Timer: "+timeLeft;
-    if(timeLeft<=0){
-      clearInterval(timer);
-      revealCards();
-    }
-  },1000);
+let bet=parseInt(document.getElementById("betAmount").value);
+if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
+if(bet>balance){alert("Not enough coins");return;}
+balance-=bet; updateBalance();
+document.getElementById("betDisplay").innerText="Your Bet: "+bet+" Coins";
+timeLeft=15;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+document.getElementById("gameResult").innerText="";
+resetCards();
+clearInterval(timer);
+timer=setInterval(function(){
+timeLeft--;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+if(timeLeft<=0){clearInterval(timer);revealCards(bet);}
+},1000);
 }
 
-function revealCards(){
-  let totalWin=0;
-  const slider=document.getElementById("winningSlider");
-  for(let i=0;i<3;i++){
-    let c=document.getElementById("card"+(i+1));
-    c.style.backgroundImage="url('"+cardImages[i]+"')";
-    c.innerText="";
-    if(cardBets[i]>0){
-      let win=Math.random()>0.5 ? cardBets[i]*2 : 0;
-      totalWin+=win;
-      if(win>0){
-        let div=document.createElement("div");
-        div.innerText="YS won "+win+" Coins";
-        slider.appendChild(div);
-      }
-    }
-  }
+function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.style.backgroundImage="";}}
 
-  if(totalWin>0){
-    balance+=totalWin;
-    document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+totalWin+" Coins</span>";
-  }else{
-    document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+cardBets.reduce((a,b)=>a+b,0)+" Coins</span>";
-  }
-  cardBets=[0,0,0];
-  updateTotalBet();
-  updateBalance();
+function revealCards(bet){
+for(let i=1;i<=3;i++){
+let c=document.getElementById("card"+i);
+c.style.backgroundImage="url('"+cardImages[i-1]+"')";
+c.innerText="";
+}
+let win=Math.random()>0.5;
+let winAmount=win?bet*2:0;
+if(win){balance+=winAmount; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
+else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
+
+// Winning ticker
+if(winAmount>=100){
+let userId="YS";
+winningList.unshift(userId+" won "+winAmount+" Coins");
+if(winningList.length>10) winningList.pop();
+document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
+}
+
+updateBalance();
 }
 
 // Withdraw
 function withdraw(){
-  let amount=parseInt(document.getElementById("withdrawAmount").value);
-  let acc=document.getElementById("withdrawAccount").value;
-  if(amount>balance){alert("Not enough coins");return;}
-  if(acc==""){alert("Enter account");return;}
-  balance-=amount; updateBalance();
-  document.getElementById("withdrawHistory").innerHTML+=
-  "<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
+let amount=parseInt(document.getElementById("withdrawAmount").value);
+let acc=document.getElementById("withdrawAccount").value;
+if(amount>balance){alert("Not enough coins");return;}
+if(acc==""){alert("Enter account");return;}
+balance-=amount; updateBalance();
+document.getElementById("withdrawHistory").innerHTML+=
+"<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 
-// Simulated game
+// Simulated users
 const simNames=["User123","PlayerX","AceGamer","CardKing","Lucky77"];
 function simulateGame(){
-  let simText="";
-  for(let i=0;i<5;i++){
-    let result=Math.random()>0.5?"won":"lost";
-    let coins=Math.floor(Math.random()*500+100);
-    let user=simNames[Math.floor(Math.random()*simNames.length)];
-    simText+=user+" "+result+" "+coins+" Coins<br>";
-  }
-  document.getElementById("simDisplay").innerHTML=simText;
-  setTimeout(simulateGame,3000);
+let simText="";
+for(let i=0;i<5;i++){
+let result=Math.random()>0.5?"won":"lost";
+let coins=Math.floor(Math.random()*500+100);
+let user=simNames[Math.floor(Math.random()*simNames.length)];
+simText+=user+" "+result+" "+coins+" Coins<br>";
+if(result==="won" && coins>=100){
+winningList.unshift(user+" won "+coins+" Coins");
+if(winningList.length>10) winningList.pop();
+document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
+}
+}
+document.getElementById("simDisplay").innerHTML=simText;
+setTimeout(simulateGame,3000);
 }
 simulateGame();
-
 </script>
 </body>
-  </html>
+                           </html>
