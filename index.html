@@ -22,14 +22,15 @@ button:hover{background:orange;}
 .contact{text-align:center;padding:15px;background:#111;color:#00ff88;font-size:15px;}
 footer{text-align:center;padding:15px;background:black;color:#888;}
 .whatsapp{position:fixed;right:15px;bottom:80px;background:#25D366;color:white;padding:12px 15px;border-radius:50px;font-size:14px;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.5);}
-.cards{display:flex;justify-content:center;gap:15px;margin:20px 0;}
-.card3d{width:90px;height:130px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;box-shadow:0 10px 20px rgba(0,0,0,0.8);}
-.red-card{color:red;} .black-card{color:black;}
+
+/* GAME CARDS */
+.cards{display:flex;justify-content:center;gap:15px;margin:20px 0;position:relative;}
+.card3d{width:90px;height:130px;background:#222;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;box-shadow:0 10px 20px rgba(0,0,0,0.8);background-size:cover;background-position:center;}
+.bet-amount{position:absolute;top:-25px;left:50%;transform:translateX(-50%);color:#00ff88;font-weight:bold;font-size:16px;}
 .timer{text-align:center;font-size:18px;color:#00ff88;}
 .result{text-align:center;margin-top:15px;font-weight:bold;}
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -75,6 +76,7 @@ Balance: <span id="balance">0</span> Coins
 <div class="card">
 <h2>Teen Patti Game</h2>
 <input type="number" id="betAmount" placeholder="Bet 100 - 5000">
+<div class="bet-amount" id="betDisplay"></div>
 <button onclick="startGame()">Start Game</button>
 <div class="timer" id="timer">Timer: 15</div>
 <div class="cards">
@@ -114,14 +116,13 @@ const coinRate=3200; // 1000 Coins = 3200 Rs
 
 function updateBalance(){document.getElementById("balance").innerText=balance;}
 
-/* Recharge (Approval Pending) */
+/* Recharge */
 function recharge(){
 let coins=parseInt(document.getElementById("rechargeAmount").value);
 if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
 let price=(coins/1000)*coinRate;
 document.getElementById("rechargeHistory").innerHTML +=
 "<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
-
 let message="Recharge Request%0ACoins: "+coins+"%0AAmount: "+price+" Rs%0APlease approve.";
 window.open("https://wa.me/923491441853?text="+message,"_blank");
 }
@@ -140,11 +141,14 @@ document.getElementById("investHistory").innerHTML+=
 }
 
 /* Game */
+const cardImages = ["Aaa.jpg","Alll.jpg","Ammm.jpg"];
+
 function startGame(){
 let bet=parseInt(document.getElementById("betAmount").value);
 if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
 if(bet>balance){alert("Not enough coins");return;}
 balance-=bet; updateBalance();
+document.getElementById("betDisplay").innerText="Bet: "+bet+" Coins";
 timeLeft=15;
 document.getElementById("timer").innerText="Timer: "+timeLeft;
 document.getElementById("gameResult").innerText="";
@@ -157,22 +161,17 @@ if(timeLeft<=0){clearInterval(timer);revealCards(bet);}
 },1000);
 }
 
-function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.className="card3d";}}
+function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.style.backgroundImage="";}}
 
 function revealCards(bet){
-let suits=["♥","♦","♠","♣"];
-let nums=["A","K","Q","J","10","9","8"];
-let cards=[];
-for(let i=0;i<3;i++){cards.push(nums[Math.floor(Math.random()*nums.length)]+suits[Math.floor(Math.random()*suits.length)]);}
 for(let i=1;i<=3;i++){
 let c=document.getElementById("card"+i);
-c.innerText=cards[i-1];
-c.classList.add(cards[i-1].includes("♥")||cards[i-1].includes("♦")?"red-card":"black-card");
+c.style.backgroundImage="url('"+cardImages[i-1]+"')";
+c.innerText="";
 }
-let n1=cards[0][0],n2=cards[1][0],n3=cards[2][0];
-if(n1===n2&&n2===n3){let win=bet*5; balance+=win; document.getElementById("gameResult").innerHTML="<span class='green'>JACKPOT! Won "+win+"</span>";}
-else if(n1===n2||n2===n3||n1===n3){let win=bet*2; balance+=win; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+win+"</span>";}
-else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+"</span>";}
+let win=Math.random()>0.5; // simple win/lose demo
+if(win){balance+=bet*2; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+(bet*2)+" Coins</span>";}
+else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
 updateBalance();
 }
 
