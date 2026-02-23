@@ -32,6 +32,15 @@ footer{text-align:center;padding:15px;background:black;color:#888;}
 .result{text-align:center;margin-top:10px;font-weight:bold;font-size:16px;}
 .simulation{font-size:12px;color:#aaa;margin-top:10px;height:50px;overflow:hidden;}
 .winning-slider{position:absolute;bottom:0;left:0;width:100%;height:25px;background:red;color:white;font-size:12px;display:flex;flex-direction:column;justify-content:flex-end;padding:2px;overflow:hidden;}
+
+/* ADMIN PANEL */
+#adminPanel{display:none;background:#222;padding:20px;border-radius:12px;margin-top:20px;}
+#adminPanel h2{color:gold;text-align:center;margin-bottom:10px;}
+.request{background:#111;padding:8px;margin:5px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center;}
+.request span{font-size:14px;color:#00ff88;}
+.request button{padding:4px 8px;margin-left:5px;border:none;border-radius:5px;cursor:pointer;}
+.request button.approve{background:green;color:white;}
+.request button.reject{background:red;color:white;}
 </style>
 </head>
 <body>
@@ -103,6 +112,12 @@ Balance: <span id="balance">0</span> Coins
 <div class="history" id="withdrawHistory"></div>
 </div>
 
+<!-- ADMIN PANEL -->
+<div class="card" id="adminPanel">
+<h2>Admin Panel</h2>
+<div id="rechargeRequests"></div>
+</div>
+
 </div>
 
 <div class="contact">
@@ -113,25 +128,61 @@ Contact Us: <b>03491441853</b>
 © 2026 F JIND Trade | Professional Investment & Gaming Platform
 </footer>
 
-<a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
-
 <script>
-let balance=0;
+let balance = parseInt(localStorage.getItem('balance')) || 0;
+updateBalance();
 let cardBets=[0,0,0];
 const cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
-const coinRate=3200; // 1000 Coins = 3200 Rs
+let rechargeRequests = JSON.parse(localStorage.getItem('rechargeRequests')) || [];
 
-function updateBalance(){document.getElementById("balance").innerText=balance;}
+// Update balance
+function updateBalance(){
+  document.getElementById("balance").innerText = balance;
+  localStorage.setItem('balance', balance);
+}
 
-// Recharge with admin WhatsApp approval
+// Recharge
 function recharge(){
-  let coins=parseInt(document.getElementById("rechargeAmount").value);
+  let coins = parseInt(document.getElementById("rechargeAmount").value);
   if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
-  let price=(coins/1000)*coinRate;
-  document.getElementById("rechargeHistory").innerHTML +=
-  "<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
-  let message="Recharge Request%0ACoins: "+coins+"%0AAmount: "+price+" Rs%0APlease approve.";
-  window.open("https://wa.me/923491441853?text="+message,"_blank");
+  rechargeRequests.push({id:Date.now(), coins});
+  localStorage.setItem('rechargeRequests', JSON.stringify(rechargeRequests));
+  displayRequests();
+  alert("Recharge request sent to admin panel for approval!");
+}
+
+// Display requests in admin panel
+function displayRequests(){
+  let container = document.getElementById('rechargeRequests');
+  container.innerHTML="";
+  rechargeRequests.forEach(req=>{
+    let div = document.createElement('div');
+    div.className="request";
+    div.innerHTML=`<span>${req.coins} Coins</span>
+      <div>
+        <button class="approve" onclick="approveRequest(${req.id})">Approve</button>
+        <button class="reject" onclick="rejectRequest(${req.id})">Reject</button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+displayRequests();
+
+function approveRequest(id){
+  let idx = rechargeRequests.findIndex(r=>r.id===id);
+  if(idx>-1){
+    balance += rechargeRequests[idx].coins;
+    rechargeRequests.splice(idx,1);
+    localStorage.setItem('balance', balance);
+    localStorage.setItem('rechargeRequests', JSON.stringify(rechargeRequests));
+    updateBalance();
+    displayRequests();
+  }
+}
+function rejectRequest(id){
+  rechargeRequests = rechargeRequests.filter(r=>r.id!==id);
+  localStorage.setItem('rechargeRequests', JSON.stringify(rechargeRequests));
+  displayRequests();
 }
 
 // Investment
@@ -144,15 +195,14 @@ function invest(){
   balance+=amount+profit;
   updateBalance();
   document.getElementById("investHistory").innerHTML+=
-  "<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
+    "<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
 }
 
-// Game functions
+// Game
 function updateTotalBet(){
   let totalBet=cardBets.reduce((a,b)=>a+b,0);
   document.getElementById("betDisplay").innerText="Your Total Bet: "+totalBet+" Coins";
 }
-
 function placeBet(cardNum){
   let maxBet=balance-cardBets.reduce((a,b)=>a+b,0);
   if(maxBet<=0){alert("No more coins available"); return;}
@@ -161,12 +211,7 @@ function placeBet(cardNum){
   cardBets[cardNum-1]+=bet;
   updateTotalBet();
 }
-
-function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+(i+1));c.innerText="?";c.style.backgroundImage="";}
-
-document.getElementById("winningSlider").innerHTML="";
-}
-
+function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+(i+1));c.innerText="?";c.style.backgroundImage="";} document.getElementById("winningSlider").innerHTML="";}
 function startGame(){
   let totalBet=cardBets.reduce((a,b)=>a+b,0);
   if(totalBet==0){alert("Place at least one bet"); return;}
@@ -185,7 +230,6 @@ function startGame(){
     }
   },1000);
 }
-
 function revealCards(){
   let totalWin=0;
   const slider=document.getElementById("winningSlider");
@@ -203,7 +247,6 @@ function revealCards(){
       }
     }
   }
-
   if(totalWin>0){
     balance+=totalWin;
     document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+totalWin+" Coins</span>";
@@ -223,7 +266,7 @@ function withdraw(){
   if(acc==""){alert("Enter account");return;}
   balance-=amount; updateBalance();
   document.getElementById("withdrawHistory").innerHTML+=
-  "<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
+    "<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 
 // Simulated game
@@ -241,6 +284,10 @@ function simulateGame(){
 }
 simulateGame();
 
+// Admin panel password prompt
+let adminPass = "1234";
+let isAdmin = prompt("Enter Admin Password (1234) or cancel:")===adminPass;
+if(isAdmin){document.getElementById("adminPanel").style.display="block";}
 </script>
 </body>
   </html>
