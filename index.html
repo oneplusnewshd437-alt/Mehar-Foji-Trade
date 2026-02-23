@@ -30,18 +30,19 @@ footer{text-align:center;padding:15px;background:black;color:#888;}
 .timer{text-align:center;font-size:18px;color:#00ff88;margin-top:5px;}
 .result{text-align:center;margin-top:10px;font-weight:bold;font-size:16px;}
 .simulation{font-size:12px;color:#aaa;margin-top:10px;height:50px;overflow:hidden;}
-.wingo-area{position:relative;background:url('Wingo.jpg') no-repeat center/cover;height:auto;border-radius:15px;margin-top:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;}
-.wingo-board{display:grid;grid-template-columns:repeat(6,50px);grid-gap:8px;margin-top:15px;}
-.wingo-cell{width:50px;height:50px;background:#222;color:white;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:bold;cursor:pointer;transition:0.3s;}
+
+/* Wingo */
+.wingo-area{position:relative;background:url('Wingo.jpg') no-repeat center/cover;min-height:300px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;}
+.wingo-board{display:grid;grid-template-columns:repeat(6,50px);grid-gap:12px;margin-top:15px;justify-content:center;}
+.wingo-cell{width:50px;height:50px;background:#222;color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:bold;cursor:pointer;font-size:16px;box-shadow:0 3px 8px rgba(0,0,0,0.7);transition:0.3s;}
 .wingo-cell.selected{background:#00ff88;color:black;}
 .wingo-cell.matched{background:gold;color:black;animation:blink 0.5s infinite alternate;}
+.wingo-cell.random-color{color:#FF3D00;font-weight:bold;}
 @keyframes blink{0%{background:gold;}100%{background:#ff0;}}
 </style>
 </head>
 <body>
-<div class="header">
-<img src="./Alig.jpg" alt="Header Banner">
-</div>
+<div class="header"><img src="./Alig.jpg" alt="Header Banner"></div>
 
 <div class="balance-box">
 Balance: <span id="balance">0</span> Coins
@@ -50,7 +51,7 @@ Balance: <span id="balance">0</span> Coins
 
 <div class="container">
 
-<!-- TEEN PATTI GAME -->
+<!-- TEEN PATTI -->
 <div class="card">
 <h2>Teen Patti Game</h2>
 <input type="number" id="betAmount" placeholder="Bet 100 - 5000">
@@ -68,7 +69,7 @@ Balance: <span id="balance">0</span> Coins
 <button onclick="startGame()">Start Game</button>
 </div>
 
-<!-- WINGO GAME -->
+<!-- WINGO -->
 <div class="card">
 <h2>Wingo Game</h2>
 <input type="number" id="wingoBet" placeholder="Bet 100 - 5000">
@@ -120,37 +121,32 @@ Balance: <span id="balance">0</span> Coins
 
 </div>
 
-<div class="contact">
-Contact Us: <b>03491441853</b>
-</div>
-<footer>
-© 2026 F JIND Trade | Professional Investment & Gaming Platform
-</footer>
+<div class="contact">Contact Us: <b>03491441853</b></div>
+<footer>© 2026 F JIND Trade | Professional Investment & Gaming Platform</footer>
 <a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
 
 <script>
 // GLOBAL
 let balance=0;
-let timer;
-let timeLeft=15;
-const coinRate=3200;
-const cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
+let teenTimer;
+let wingoTimer;
+let coinRate=3200;
+let cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
 let winningList=[];
 
-// Update balance
+// BALANCE UPDATE
 function updateBalance(){document.getElementById("balance").innerText=balance;}
 
-// Recharge
+// RECHARGE
 function recharge(){
 let coins=parseInt(document.getElementById("rechargeAmount").value);
-if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
+if(!coins||coins<1000){alert("Minimum 1000 Coins");return;}
 let price=(coins/1000)*coinRate;
-document.getElementById("rechargeHistory").innerHTML +=
-"<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
+document.getElementById("rechargeHistory").innerHTML+="<p class='orange'>Pending Approval: "+coins+" Coins ("+price+" Rs)</p>";
 window.open("https://wa.me/923491441853?text=Recharge%20Request%0ACoins:%20"+coins+"%0AAmount:%20"+price+"%20Rs","_blank");
 }
 
-// Investment
+// INVEST
 function invest(){
 let amount=parseInt(document.getElementById("investAmount").value);
 let percent=parseInt(document.getElementById("investPlan").value);
@@ -159,72 +155,58 @@ balance-=amount;
 let profit=Math.floor(amount*percent/100);
 balance+=amount+profit;
 updateBalance();
-document.getElementById("investHistory").innerHTML+=
-"<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
+document.getElementById("investHistory").innerHTML+="<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
 }
 
-// Teen Patti Game
+// TEEN PATTI AUTO
 function startGame(){
 let bet=parseInt(document.getElementById("betAmount").value);
 if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
 if(bet>balance){alert("Not enough coins");return;}
 balance-=bet; updateBalance();
 document.getElementById("betDisplay").innerText="Your Bet: "+bet+" Coins";
-timeLeft=15;
-document.getElementById("timer").innerText="Timer: "+timeLeft;
 document.getElementById("gameResult").innerText="";
 resetCards();
-clearInterval(timer);
-timer=setInterval(function(){
+let timeLeft=15;
+document.getElementById("timer").innerText="Timer: "+timeLeft;
+clearInterval(teenTimer);
+teenTimer=setInterval(()=>{
 timeLeft--;
 document.getElementById("timer").innerText="Timer: "+timeLeft;
-if(timeLeft<=0){clearInterval(timer);revealCards(bet);}
+if(timeLeft<=0){clearInterval(teenTimer);revealCards(bet);}
 },1000);
 }
-
 function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.style.backgroundImage="";}}
-
 function revealCards(bet){
 for(let i=1;i<=3;i++){
-let c=document.getElementById("card"+i);
-c.style.backgroundImage="url('"+cardImages[i-1]+"')";
-c.innerText="";
+document.getElementById("card"+i).style.backgroundImage="url('"+cardImages[i-1]+"')";
+document.getElementById("card"+i).innerText="";
 }
+// COMPUTER CARD (simulated)
+let compCards=[cardImages[Math.floor(Math.random()*3)],cardImages[Math.floor(Math.random()*3)],cardImages[Math.floor(Math.random()*3)]];
 let win=Math.random()>0.5;
 let winAmount=win?bet*2:0;
-if(win){balance+=winAmount; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
+if(win){balance+=winAmount;document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
 else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
-
-// Add winning to ticker if ≥ 100 coins
-if(winAmount>=100){
-let userId="YS"; // Real user
-winningList.unshift(userId+" won "+winAmount+" Coins");
-if(winningList.length>10) winningList.pop();
-document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
-}
-
+if(winAmount>=100){winningList.unshift("YS won "+winAmount+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
 updateBalance();
 }
 
-// Wingo Game
+// WINGO
 const wingoBoard=document.getElementById("wingoBoard");
 let userSelection=[];
-
 function createWingoBoard(){
 wingoBoard.innerHTML="";
 for(let i=1;i<=36;i++){
 let cell=document.createElement("div");
-cell.className="wingo-cell";
+cell.className="wingo-cell random-color";
 cell.innerText=i;
 cell.onclick=function(){
 if(userSelection.includes(i)){userSelection=userSelection.filter(x=>x!==i);cell.classList.remove("selected");}
-else{
-if(userSelection.length<6){userSelection.push(i);cell.classList.add("selected");}
-}
+else{if(userSelection.length<6){userSelection.push(i);cell.classList.add("selected");}}
 }
 wingoBoard.appendChild(cell);
-}
-}
+}}
 createWingoBoard();
 
 function playWingo(){
@@ -234,50 +216,39 @@ if(bet>balance){alert("Not enough coins");return;}
 if(userSelection.length!==6){alert("Select 6 numbers");return;}
 balance-=bet;
 document.getElementById("wingoBetDisplay").innerText="Your Bet: "+bet+" Coins";
+document.getElementById("wingoResult").innerText="";
+let timeLeft=15;
+clearInterval(wingoTimer);
+wingoTimer=setInterval(()=>{
+timeLeft--;
+if(timeLeft<=0){clearInterval(wingoTimer);revealWingo(bet);}
+},1000);
+}
 
-// Draw 6 random numbers
+function revealWingo(bet){
 let drawNumbers=[];
-while(drawNumbers.length<6){
-let num=Math.floor(Math.random()*36)+1;
-if(!drawNumbers.includes(num)) drawNumbers.push(num);
-}
-
-// Highlight matching numbers
+while(drawNumbers.length<6){let num=Math.floor(Math.random()*36)+1;if(!drawNumbers.includes(num)) drawNumbers.push(num);}
 let matches=userSelection.filter(x=>drawNumbers.includes(x));
-document.querySelectorAll(".wingo-cell").forEach(cell=>{
-cell.classList.remove("matched");
-let val=parseInt(cell.innerText);
-if(matches.includes(val)) cell.classList.add("matched");
-});
-
-let winAmount=matches.length*bet; // each match gives bet coins
-if(winAmount>0){balance+=winAmount; document.getElementById("wingoResult").innerHTML="<span class='green'>Matched "+matches.length+" → Won "+winAmount+" Coins</span>";}
+document.querySelectorAll(".wingo-cell").forEach(cell=>{cell.classList.remove("matched");let val=parseInt(cell.innerText);if(matches.includes(val)) cell.classList.add("matched");});
+let winAmount=matches.length*bet;
+if(winAmount>0){balance+=winAmount;document.getElementById("wingoResult").innerHTML="<span class='green'>Matched "+matches.length+" → Won "+winAmount+" Coins</span>";}
 else{document.getElementById("wingoResult").innerHTML="<span class='red'>No Matches → Lost "+bet+" Coins</span>";}
-
-// Update ticker
-if(winAmount>=100){
-winningList.unshift("YS-Wingo won "+winAmount+" Coins");
-if(winningList.length>10) winningList.pop();
-document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
-}
-
+if(winAmount>=100){winningList.unshift("YS-Wingo won "+winAmount+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
 updateBalance();
-userSelection=[];
-createWingoBoard();
+userSelection=[];createWingoBoard();
 }
 
-// Withdraw
+// WITHDRAW
 function withdraw(){
 let amount=parseInt(document.getElementById("withdrawAmount").value);
 let acc=document.getElementById("withdrawAccount").value;
 if(amount>balance){alert("Not enough coins");return;}
 if(acc==""){alert("Enter account");return;}
 balance-=amount; updateBalance();
-document.getElementById("withdrawHistory").innerHTML+=
-"<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
+document.getElementById("withdrawHistory").innerHTML+="<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 
-// Simulated users
+// SIMULATED USERS
 const simNames=["User123","PlayerX","AceGamer","CardKing","Lucky77"];
 function simulateGame(){
 let simText="";
@@ -286,16 +257,10 @@ let result=Math.random()>0.5?"won":"lost";
 let coins=Math.floor(Math.random()*500+100);
 let user=simNames[Math.floor(Math.random()*simNames.length)];
 simText+=user+" "+result+" "+coins+" Coins<br>";
-// Add to winning ticker if win >=100
-if(result==="won" && coins>=100){
-winningList.unshift(user+" won "+coins+" Coins");
-if(winningList.length>10) winningList.pop();
-document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
-}
+if(result==="won" && coins>=100){winningList.unshift(user+" won "+coins+" Coins");if(winningList.length>10) winningList.pop();document.getElementById("winningTicker").innerHTML=winningList.join(" | ");}
 }
 document.getElementById("simDisplay").innerHTML=simText;
-setTimeout(simulateGame,3000);
-}
+setTimeout(simulateGame,3000);}
 simulateGame();
 </script>
 </body>
