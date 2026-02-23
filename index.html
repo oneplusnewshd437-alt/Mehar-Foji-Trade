@@ -121,8 +121,10 @@ const coinRate=3200;
 const cardImages=["Aaa.jpg","Alll.jpg","Ammm.jpg"];
 let winningList=[];
 
+// Update balance
 function updateBalance(){document.getElementById("balance").innerText=balance;}
 
+// Recharge
 function recharge(){
 let coins=parseInt(document.getElementById("rechargeAmount").value);
 if(!coins || coins < 1000){alert("Minimum 1000 Coins"); return;}
@@ -132,6 +134,7 @@ document.getElementById("rechargeHistory").innerHTML +=
 window.open("https://wa.me/923491441853?text=Recharge%20Request%0ACoins:%20"+coins+"%0AAmount:%20"+price+"%20Rs","_blank");
 }
 
+// Investment
 function invest(){
 let amount=parseInt(document.getElementById("investAmount").value);
 let percent=parseInt(document.getElementById("investPlan").value);
@@ -144,6 +147,7 @@ document.getElementById("investHistory").innerHTML+=
 "<p class='green'>Invest "+amount+" → Profit "+profit+"</p>";
 }
 
+// Game
 function startGame(){
 let bet=parseInt(document.getElementById("betAmount").value);
 if(!bet||bet<100||bet>5000){alert("Bet 100-5000");return;}
@@ -175,17 +179,18 @@ let winAmount=win?bet*2:0;
 if(win){balance+=winAmount; document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+winAmount+" Coins</span>";}
 else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+" Coins</span>";}
 
-// Update winning ticker if coins>100
+// Add winning to ticker if ≥ 100 coins
 if(winAmount>=100){
-let userId="YS"; // replace with real user name if needed
+let userId="YS"; // Real user
 winningList.unshift(userId+" won "+winAmount+" Coins");
-if(winningList.length>5) winningList.pop();
+if(winningList.length>10) winningList.pop();
 document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
 }
 
 updateBalance();
 }
 
+// Withdraw
 function withdraw(){
 let amount=parseInt(document.getElementById("withdrawAmount").value);
 let acc=document.getElementById("withdrawAccount").value;
@@ -196,7 +201,7 @@ document.getElementById("withdrawHistory").innerHTML+=
 "<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 
-// Simulation of multiple users
+// Simulated users
 const simNames=["User123","PlayerX","AceGamer","CardKing","Lucky77"];
 function simulateGame(){
 let simText="";
@@ -205,6 +210,12 @@ let result=Math.random()>0.5?"won":"lost";
 let coins=Math.floor(Math.random()*500+100);
 let user=simNames[Math.floor(Math.random()*simNames.length)];
 simText+=user+" "+result+" "+coins+" Coins<br>";
+// Add to winning ticker if win >=100
+if(result==="won" && coins>=100){
+winningList.unshift(user+" won "+coins+" Coins");
+if(winningList.length>10) winningList.pop();
+document.getElementById("winningTicker").innerHTML=winningList.join(" | ");
+}
 }
 document.getElementById("simDisplay").innerHTML=simText;
 setTimeout(simulateGame,3000);
