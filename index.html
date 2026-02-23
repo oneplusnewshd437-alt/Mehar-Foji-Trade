@@ -8,10 +8,10 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 body{background:linear-gradient(135deg,#000,#111,#1c1c1c);color:white;min-height:100vh;}
 
-/* HEADER IMAGE */
+/* HEADER */
 .header{
 width:100%;
-height:180px;
+height:220px;
 overflow:hidden;
 border-bottom:3px solid gold;
 }
@@ -19,6 +19,7 @@ border-bottom:3px solid gold;
 width:100%;
 height:100%;
 object-fit:cover;
+display:block;
 }
 
 /* BALANCE */
@@ -82,7 +83,7 @@ overflow:auto;
 margin-top:10px;
 }
 
-/* GAME CARDS */
+/* GAME */
 .cards{
 display:flex;
 justify-content:center;
@@ -126,7 +127,7 @@ background:black;
 color:#888;
 }
 
-/* WHATSAPP BUTTON */
+/* WHATSAPP */
 .whatsapp{
 position:fixed;
 right:15px;
@@ -146,11 +147,11 @@ box-shadow:0 5px 15px rgba(0,0,0,0.5);
 
 <!-- HEADER -->
 <div class="header">
-<img src="./hider/header.png" alt="Header Banner">
+<img src="./Alig.jpg" alt="Header Banner">
 </div>
 
 <div class="balance-box">
-Balance: <span id="balance">5000</span> Coins
+Balance: <span id="balance">0</span> Coins
 </div>
 
 <div class="container">
@@ -216,23 +217,25 @@ Contact Us: <b>03491441853</b>
 © 2026 F JIND Trade | Professional Investment & Gaming Platform
 </footer>
 
-<!-- WhatsApp -->
 <a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
 
 <script>
-let balance=5000;
+let balance=0;
 let timer;
 let timeLeft=15;
 
-function updateBalance(){document.getElementById("balance").innerText=balance;}
+function updateBalance(){
+document.getElementById("balance").innerText=balance;
+}
 
-/* Recharge pending only */
+/* Recharge */
 function recharge(){
 let amount=parseInt(document.getElementById("rechargeAmount").value);
 if(!amount||amount<=0){alert("Enter amount");return;}
+balance+=amount;
+updateBalance();
 document.getElementById("rechargeHistory").innerHTML+=
-"<p style='color:orange;'>Pending Approval: "+amount+" Coins</p>";
-alert("Recharge request submitted. Waiting for admin approval.");
+"<p class='green'>Recharge Successful: "+amount+" Coins</p>";
 }
 
 /* Investment */
@@ -265,17 +268,44 @@ document.getElementById("timer").innerText="Timer: "+timeLeft;
 if(timeLeft<=0){clearInterval(timer);revealCards(bet);}
 },1000);
 }
-function resetCards(){for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText="?";c.className="card3d";}}
+
+function resetCards(){
+for(let i=1;i<=3;i++){
+let c=document.getElementById("card"+i);
+c.innerText="?";
+c.className="card3d";
+}
+}
+
 function revealCards(bet){
 let suits=["♥","♦","♠","♣"];
 let nums=["A","K","Q","J","10","9","8"];
 let cards=[];
-for(let i=0;i<3;i++){cards.push(nums[Math.floor(Math.random()*nums.length)]+suits[Math.floor(Math.random()*suits.length)]);}
-for(let i=1;i<=3;i++){let c=document.getElementById("card"+i);c.innerText=cards[i-1];c.classList.add(cards[i-1].includes("♥")||cards[i-1].includes("♦")?"red-card":"black-card");}
+for(let i=0;i<3;i++){
+cards.push(nums[Math.floor(Math.random()*nums.length)]
++suits[Math.floor(Math.random()*suits.length)]);
+}
+for(let i=1;i<=3;i++){
+let c=document.getElementById("card"+i);
+c.innerText=cards[i-1];
+c.classList.add(cards[i-1].includes("♥")||cards[i-1].includes("♦")
+?"red-card":"black-card");
+}
 let n1=cards[0][0],n2=cards[1][0],n3=cards[2][0];
-if(n1===n2&&n2===n3){let win=bet*5;balance+=win;document.getElementById("gameResult").innerHTML="<span class='green'>JACKPOT! Won "+win+"</span>";}
-else if(n1===n2||n2===n3||n1===n3){let win=bet*2;balance+=win;document.getElementById("gameResult").innerHTML="<span class='green'>You Won "+win+"</span>";}
-else{document.getElementById("gameResult").innerHTML="<span class='red'>You Lost "+bet+"</span>";}
+if(n1===n2&&n2===n3){
+let win=bet*5; balance+=win;
+document.getElementById("gameResult").innerHTML=
+"<span class='green'>JACKPOT! Won "+win+"</span>";
+}
+else if(n1===n2||n2===n3||n1===n3){
+let win=bet*2; balance+=win;
+document.getElementById("gameResult").innerHTML=
+"<span class='green'>You Won "+win+"</span>";
+}
+else{
+document.getElementById("gameResult").innerHTML=
+"<span class='red'>You Lost "+bet+"</span>";
+}
 updateBalance();
 }
 
@@ -285,11 +315,12 @@ let amount=parseInt(document.getElementById("withdrawAmount").value);
 let acc=document.getElementById("withdrawAccount").value;
 if(amount>balance){alert("Not enough coins");return;}
 if(acc==""){alert("Enter account");return;}
-balance-=amount; updateBalance();
+balance-=amount;
+updateBalance();
 document.getElementById("withdrawHistory").innerHTML+=
 "<p class='red'>Withdraw "+amount+" → "+acc+"</p>";
 }
 </script>
 
 </body>
-  </html>
+                             </html>
