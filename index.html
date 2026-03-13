@@ -5,173 +5,183 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MR FOJI INVESTMENT</title>
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0f172a;
-  color:white;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
 }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 30px;
-  background:#020617;
-  border-bottom:2px solid #22c55e;
+/* HEADER WITH LOGO IMAGE ONLY */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #020617 url('https://images.unsplash.com/photo-1612832021643-2c2f5048f3c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
+  border-bottom: 2px solid #22c55e;
 }
 
-.logo img{
-  height:70px;
-  object-fit:contain;
-}
-
-/* NAVIGATION */
-nav a{
-  color:white;
-  margin:12px;
-  text-decoration:none;
-  font-size:16px;
-}
-
-nav a:hover{
-  color:#22c55e;
+header .logo img {
+  height: 100px;
+  object-fit: contain;
 }
 
 /* LIVE TICKER */
-.ticker{
-  background:red;
-  padding:10px;
-  overflow:hidden;
-  white-space:nowrap;
-  font-weight:bold;
-  font-size:16px;
+.ticker {
+  background: red;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
 }
 
-.ticker span{
-  display:inline-block;
-  padding-left:100%;
-  animation:ticker 18s linear infinite;
+.ticker span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 18s linear infinite;
 }
 
-@keyframes ticker{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-100%);}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
-/* BUTTONS */
-.btn{
-  background:#22c55e;
-  padding:14px 35px;
-  border-radius:8px;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  cursor:pointer;
-  border:none;
-  transition:0.3s;
-}
-.btn:hover{
-  background:#16a34a;
+/* PLANS SECTION */
+.plans {
+  text-align: center;
+  padding: 80px 20px;
+  background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
 }
 
-/* PLANS */
-.plans{
-  text-align:center;
-  padding:70px 20px;
+.plans h1 {
+  margin-bottom: 50px;
+  font-size: 36px;
+  color: #22c55e;
 }
 
-.plans h1{
-  margin-bottom:40px;
-  font-size:32px;
+.plan-card {
+  display: inline-block;
+  width: 280px;
+  margin: 20px;
+  padding: 35px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
 }
 
-.plan-card{
-  display:inline-block;
-  width:260px;
-  margin:15px;
-  padding:30px;
-  border-radius:12px;
-  background:#020617;
-  box-shadow:0 0 20px rgba(0,0,0,0.5);
-  transition:0.3s;
+.plan-card:hover {
+  transform: scale(1.05);
 }
 
-.plan-card:hover{
-  transform:scale(1.05);
+.plan-card h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
-.plan-card h2{
-  font-size:24px;
-  margin-bottom:10px;
+.plan-card .price {
+  font-size: 30px;
+  color: #22c55e;
+  margin: 15px 0;
 }
 
-.price{
-  font-size:28px;
-  color:#22c55e;
-  margin:15px 0;
+.plan-card button {
+  background: #22c55e;
+  border: none;
+  padding: 12px 30px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
-/* REGISTER */
-.register{
-  text-align:center;
-  padding:70px 20px;
-  background:#020617;
+.plan-card button:hover {
+  background: #16a34a;
 }
 
-input{
-  padding:12px;
-  margin:8px;
-  width:250px;
-  border-radius:6px;
-  border:none;
+/* REGISTER SECTION */
+.register {
+  text-align: center;
+  padding: 80px 20px;
+  background: url('https://images.unsplash.com/photo-1581091870624-558ed39f2a60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
+}
+
+.register h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #22c55e;
+}
+
+.register input {
+  padding: 14px;
+  margin: 10px;
+  width: 280px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* REGISTER BUTTON */
+.register button {
+  background: #22c55e;
+  padding: 14px 40px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+}
+
+.register button:hover {
+  background: #16a34a;
 }
 
 /* FOOTER */
-footer{
-  background:#020617;
-  text-align:center;
-  padding:30px;
-  margin-top:40px;
-  font-size:14px;
-  color:#9ca3af;
+footer {
+  background: #020617;
+  text-align: center;
+  padding: 30px;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 40px;
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .plan-card{width:90%;}
-  .logo img{height:50px;}
+  .plan-card, .register input {
+    width: 90%;
+  }
+  header .logo img {
+    height: 80px;
+  }
 }
 </style>
 
 <script>
-function recharge(){
+function recharge() {
   window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
 }
 
-function register(){
-  var name=document.getElementById("name").value;
-  var phone=document.getElementById("phone").value;
-  var city=document.getElementById("city").value;
-  var msg="New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
+function register() {
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+  var city = document.getElementById("city").value;
+  var msg = "New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
   window.open("https://wa.me/923491441853?text="+msg);
 }
 </script>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- HEADER WITH LOGO IMAGE ONLY -->
 <header>
-  <!-- Logo Image -->
   <div class="logo">
     <img src="1773440347203.jpg" alt="MR FOJI INVESTMENT Logo">
   </div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#plans">Plans</a>
-    <a href="#register">Register</a>
-  </nav>
 </header>
 
 <!-- LIVE TICKER -->
@@ -186,7 +196,7 @@ function register(){
   </span>
 </div>
 
-<!-- PLANS -->
+<!-- PLANS SECTION -->
 <section class="plans" id="plans">
   <h1>Investment Plans</h1>
 
@@ -194,37 +204,36 @@ function register(){
     <h2>Basic Plan</h2>
     <p class="price">8000 PKR</p>
     <p>Profit: 12000 PKR</p>
-    <button class="btn" onclick="recharge()">Recharge</button>
+    <button onclick="recharge()">Recharge</button>
   </div>
 
   <div class="plan-card">
     <h2>Silver Plan</h2>
     <p class="price">16000 PKR</p>
     <p>Profit: 24000 PKR</p>
-    <button class="btn" onclick="recharge()">Recharge</button>
+    <button onclick="recharge()">Recharge</button>
   </div>
 
   <div class="plan-card">
     <h2>Gold Plan</h2>
     <p class="price">32000 PKR</p>
     <p>Profit: 50000 PKR</p>
-    <button class="btn" onclick="recharge()">Recharge</button>
+    <button onclick="recharge()">Recharge</button>
   </div>
-
 </section>
 
-<!-- REGISTER -->
+<!-- REGISTER SECTION -->
 <section class="register" id="register">
   <h1>User Registration</h1>
   <input id="name" placeholder="Your Name"><br>
   <input id="phone" placeholder="Phone Number"><br>
   <input id="city" placeholder="City"><br><br>
-  <button class="btn" onclick="register()">Submit Registration</button>
+  <button onclick="register()">Submit Registration</button>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  © 2026 MR FOJI INVESTMENT<br>
+  © MR FOJI INVESTMENT | Contact: +92 349 1441853<br>
   Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
 </footer>
 
