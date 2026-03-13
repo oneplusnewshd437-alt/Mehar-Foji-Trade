@@ -11,7 +11,7 @@
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+background:#0f172a;
 color:white;
 }
 
@@ -21,39 +21,68 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px;
+padding:15px 30px;
 background:#020617;
+border-bottom:2px solid #22c55e;
 }
 
 .logo{
-font-size:24px;
+font-size:26px;
 font-weight:bold;
 color:#22c55e;
 }
 
 nav a{
 color:white;
-margin:10px;
+margin:12px;
 text-decoration:none;
+font-size:16px;
 }
 
-/* HERO */
+nav a:hover{
+color:#22c55e;
+}
+
+/* HERO IMAGE */
 
 .hero{
+background:url("1773440347203.jpg") center/cover;
+height:350px;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
-padding:120px 20px;
-background:url("https://images.unsplash.com/photo-1559526324-4b87b5e36e44") center/cover;
 }
 
 .hero h1{
-font-size:45px;
-margin-bottom:10px;
+font-size:40px;
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:10px;
 }
 
-.hero p{
-font-size:18px;
-margin-bottom:25px;
+/* LIVE TICKER */
+
+.ticker{
+background:red;
+padding:10px;
+overflow:hidden;
+white-space:nowrap;
+font-weight:bold;
 }
+
+.ticker span{
+display:inline-block;
+padding-left:100%;
+animation:ticker 18s linear infinite;
+}
+
+@keyframes ticker{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+/* BUTTON */
 
 .btn{
 background:#22c55e;
@@ -62,6 +91,8 @@ border-radius:8px;
 color:white;
 text-decoration:none;
 font-weight:bold;
+cursor:pointer;
+border:none;
 }
 
 /* PLANS */
@@ -73,43 +104,40 @@ padding:70px 20px;
 
 .plans h1{
 margin-bottom:40px;
+font-size:32px;
 }
 
 .plan-card{
 display:inline-block;
-width:250px;
+width:260px;
 margin:15px;
 padding:30px;
 border-radius:12px;
-background:#0f172a;
+background:#020617;
 box-shadow:0 0 20px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.plan-card:hover{
+transform:scale(1.05);
 }
 
 .plan-card h2{
 font-size:24px;
-margin-bottom:10px;
 }
 
 .price{
-font-size:26px;
+font-size:28px;
 color:#22c55e;
 margin:15px 0;
-}
-
-.plan-card button{
-background:#22c55e;
-border:none;
-padding:12px 25px;
-color:white;
-border-radius:6px;
-cursor:pointer;
 }
 
 /* REGISTER */
 
 .register{
 text-align:center;
-padding:60px 20px;
+padding:70px 20px;
+background:#020617;
 }
 
 input{
@@ -125,8 +153,10 @@ border:none;
 footer{
 background:#020617;
 text-align:center;
-padding:20px;
+padding:30px;
 margin-top:40px;
+font-size:14px;
+color:#9ca3af;
 }
 
 </style>
@@ -171,13 +201,20 @@ window.open("https://wa.me/923491441853?text="+msg);
 
 <section class="hero">
 
-<h1>Grow Your Money With Smart Investment</h1>
-
-<p>Trusted Online Investment Platform</p>
-
-<a class="btn" onclick="recharge()">Recharge Now</a>
+<h1>Trusted Online Investment Platform</h1>
 
 </section>
+
+<div class="ticker">
+<span>
+User ID 4521 Invested 8000 PKR ✔ | 
+User ID 7281 Withdraw 12000 PKR ✔ | 
+User ID 9311 Invested 16000 PKR ✔ | 
+User ID 1142 Withdraw 24000 PKR ✔ | 
+User ID 6673 Invested 32000 PKR ✔ | 
+User ID 8881 Withdraw 50000 PKR ✔
+</span>
+</div>
 
 <section class="plans" id="plans">
 
@@ -185,37 +222,31 @@ window.open("https://wa.me/923491441853?text="+msg);
 
 <div class="plan-card">
 
-<h2>Basic</h2>
-
+<h2>Basic Plan</h2>
 <p class="price">8000 PKR</p>
-
 <p>Profit: 12000 PKR</p>
 
-<button onclick="recharge()">Recharge</button>
+<button class="btn" onclick="recharge()">Recharge</button>
 
 </div>
 
 <div class="plan-card">
 
-<h2>Silver</h2>
-
+<h2>Silver Plan</h2>
 <p class="price">16000 PKR</p>
-
 <p>Profit: 24000 PKR</p>
 
-<button onclick="recharge()">Recharge</button>
+<button class="btn" onclick="recharge()">Recharge</button>
 
 </div>
 
 <div class="plan-card">
 
-<h2>Gold</h2>
-
+<h2>Gold Plan</h2>
 <p class="price">32000 PKR</p>
-
 <p>Profit: 50000 PKR</p>
 
-<button onclick="recharge()">Recharge</button>
+<button class="btn" onclick="recharge()">Recharge</button>
 
 </div>
 
@@ -223,19 +254,23 @@ window.open("https://wa.me/923491441853?text="+msg);
 
 <section class="register" id="register">
 
-<h1>Register</h1>
+<h1>User Registration</h1>
 
 <input id="name" placeholder="Your Name"><br>
 <input id="phone" placeholder="Phone Number"><br>
 <input id="city" placeholder="City"><br>
 
-<button class="btn" onclick="register()">Submit</button>
+<br>
+
+<button class="btn" onclick="register()">Submit Registration</button>
 
 </section>
 
 <footer>
 
-© 2026 MR FOJI INVESTMENT
+© 2026 MR FOJI INVESTMENT  
+<br><br>
+Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
 
 </footer>
 
