@@ -10,25 +10,38 @@ body {
   font-family: Arial, sans-serif;
   background: #0f172a;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CONTAINER TO SET MAX WIDTH */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* HEADER WITH LOGO IMAGE ONLY */
 header {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  background: #020617 url('https://images.unsplash.com/photo-1612832021643-2c2f5048f3c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
+  padding: 20px 0;
+  background: #020617;
   border-bottom: 2px solid #22c55e;
 }
 
 header .logo img {
-  height: 100px;
+  height: 120px; /* fixed size for logo */
   object-fit: contain;
 }
 
 /* LIVE TICKER */
 .ticker {
+  width: 100%;
+  max-width: 1200px;
   background: red;
   padding: 10px 0;
   overflow: hidden;
@@ -36,6 +49,7 @@ header .logo img {
   font-weight: bold;
   font-size: 16px;
   text-align: center;
+  margin-top: 10px;
 }
 
 .ticker span {
@@ -53,17 +67,24 @@ header .logo img {
 .plans {
   text-align: center;
   padding: 80px 20px;
-  background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
+  background: #111827;
+  width: 100%;
+}
+
+.plans .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .plans h1 {
   margin-bottom: 50px;
   font-size: 36px;
   color: #22c55e;
+  text-align: center;
 }
 
 .plan-card {
-  display: inline-block;
   width: 280px;
   margin: 20px;
   padding: 35px;
@@ -107,7 +128,14 @@ header .logo img {
 .register {
   text-align: center;
   padding: 80px 20px;
-  background: url('https://images.unsplash.com/photo-1581091870624-558ed39f2a60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg') center/cover no-repeat;
+  background: #111827;
+  width: 100%;
+}
+
+.register .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .register h1 {
@@ -142,6 +170,8 @@ header .logo img {
 
 /* FOOTER */
 footer {
+  width: 100%;
+  max-width: 1200px;
   background: #020617;
   text-align: center;
   padding: 30px;
@@ -185,7 +215,7 @@ function register() {
 </header>
 
 <!-- LIVE TICKER -->
-<div class="ticker">
+<div class="ticker container">
   <span>
     User ID 4521 Invested 8000 PKR ✔ | 
     User ID 7281 Withdraw 12000 PKR ✔ | 
@@ -197,38 +227,42 @@ function register() {
 </div>
 
 <!-- PLANS SECTION -->
-<section class="plans" id="plans">
-  <h1>Investment Plans</h1>
+<section class="plans">
+  <div class="container">
+    <h1>Investment Plans</h1>
 
-  <div class="plan-card">
-    <h2>Basic Plan</h2>
-    <p class="price">8000 PKR</p>
-    <p>Profit: 12000 PKR</p>
-    <button onclick="recharge()">Recharge</button>
-  </div>
+    <div class="plan-card">
+      <h2>Basic Plan</h2>
+      <p class="price">8000 PKR</p>
+      <p>Profit: 12000 PKR</p>
+      <button onclick="recharge()">Recharge</button>
+    </div>
 
-  <div class="plan-card">
-    <h2>Silver Plan</h2>
-    <p class="price">16000 PKR</p>
-    <p>Profit: 24000 PKR</p>
-    <button onclick="recharge()">Recharge</button>
-  </div>
+    <div class="plan-card">
+      <h2>Silver Plan</h2>
+      <p class="price">16000 PKR</p>
+      <p>Profit: 24000 PKR</p>
+      <button onclick="recharge()">Recharge</button>
+    </div>
 
-  <div class="plan-card">
-    <h2>Gold Plan</h2>
-    <p class="price">32000 PKR</p>
-    <p>Profit: 50000 PKR</p>
-    <button onclick="recharge()">Recharge</button>
+    <div class="plan-card">
+      <h2>Gold Plan</h2>
+      <p class="price">32000 PKR</p>
+      <p>Profit: 50000 PKR</p>
+      <button onclick="recharge()">Recharge</button>
+    </div>
   </div>
 </section>
 
 <!-- REGISTER SECTION -->
-<section class="register" id="register">
-  <h1>User Registration</h1>
-  <input id="name" placeholder="Your Name"><br>
-  <input id="phone" placeholder="Phone Number"><br>
-  <input id="city" placeholder="City"><br><br>
-  <button onclick="register()">Submit Registration</button>
+<section class="register">
+  <div class="container">
+    <h1>User Registration</h1>
+    <input id="name" placeholder="Your Name"><br>
+    <input id="phone" placeholder="Phone Number"><br>
+    <input id="city" placeholder="City"><br><br>
+    <button onclick="register()">Submit Registration</button>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -238,4 +272,4 @@ function register() {
 </footer>
 
 </body>
-</html>
+      </html>
