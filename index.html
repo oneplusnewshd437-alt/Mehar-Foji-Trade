@@ -3,20 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MR FOJI INVESTMENT</title>
-
 <style>
-
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:#0f172a;
 color:white;
 }
 
-/* HEADER */
+/* TOP BANNER IMAGE */
+.top-banner{
+width:100%;
+height:350px;
+background:url("1773440347203.jpg") center/cover no-repeat;
+position:relative;
+}
 
+/* LIVE TICKER */
+.ticker{
+background:red;
+padding:10px;
+overflow:hidden;
+white-space:nowrap;
+font-weight:bold;
+font-size:16px;
+position:relative;
+top:-5px;
+}
+
+.ticker span{
+display:inline-block;
+padding-left:100%;
+animation:ticker 18s linear infinite;
+}
+
+@keyframes ticker{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+/* HEADER */
 header{
 display:flex;
 justify-content:space-between;
@@ -43,47 +70,7 @@ nav a:hover{
 color:#22c55e;
 }
 
-/* HERO IMAGE */
-
-.hero{
-background:url("1773440347203.jpg") center/cover;
-height:350px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-}
-
-.hero h1{
-font-size:40px;
-background:rgba(0,0,0,0.6);
-padding:20px;
-border-radius:10px;
-}
-
-/* LIVE TICKER */
-
-.ticker{
-background:red;
-padding:10px;
-overflow:hidden;
-white-space:nowrap;
-font-weight:bold;
-}
-
-.ticker span{
-display:inline-block;
-padding-left:100%;
-animation:ticker 18s linear infinite;
-}
-
-@keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
-
-/* BUTTON */
-
+/* BUTTONS */
 .btn{
 background:#22c55e;
 padding:14px 35px;
@@ -93,10 +80,13 @@ text-decoration:none;
 font-weight:bold;
 cursor:pointer;
 border:none;
+transition:0.3s;
+}
+.btn:hover{
+background:#16a34a;
 }
 
 /* PLANS */
-
 .plans{
 text-align:center;
 padding:70px 20px;
@@ -124,6 +114,7 @@ transform:scale(1.05);
 
 .plan-card h2{
 font-size:24px;
+margin-bottom:10px;
 }
 
 .price{
@@ -133,7 +124,6 @@ margin:15px 0;
 }
 
 /* REGISTER */
-
 .register{
 text-align:center;
 padding:70px 20px;
@@ -149,7 +139,6 @@ border:none;
 }
 
 /* FOOTER */
-
 footer{
 background:#020617;
 text-align:center;
@@ -162,49 +151,25 @@ color:#9ca3af;
 </style>
 
 <script>
-
 function recharge(){
-
 window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
-
 }
 
 function register(){
-
 var name=document.getElementById("name").value;
 var phone=document.getElementById("phone").value;
 var city=document.getElementById("city").value;
-
 var msg="New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
-
 window.open("https://wa.me/923491441853?text="+msg);
-
 }
-
 </script>
-
 </head>
-
 <body>
 
-<header>
+<!-- TOP IMAGE BANNER -->
+<div class="top-banner"></div>
 
-<div class="logo">MR FOJI INVESTMENT</div>
-
-<nav>
-<a href="#">Home</a>
-<a href="#plans">Plans</a>
-<a href="#register">Register</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<h1>Trusted Online Investment Platform</h1>
-
-</section>
-
+<!-- LIVE TICKER -->
 <div class="ticker">
 <span>
 User ID 4521 Invested 8000 PKR ✔ | 
@@ -216,62 +181,56 @@ User ID 8881 Withdraw 50000 PKR ✔
 </span>
 </div>
 
-<section class="plans" id="plans">
+<!-- HEADER -->
+<header>
+<div class="logo">MR FOJI INVESTMENT</div>
+<nav>
+<a href="#">Home</a>
+<a href="#plans">Plans</a>
+<a href="#register">Register</a>
+</nav>
+</header>
 
+<!-- PLANS -->
+<section class="plans" id="plans">
 <h1>Investment Plans</h1>
 
 <div class="plan-card">
-
 <h2>Basic Plan</h2>
 <p class="price">8000 PKR</p>
 <p>Profit: 12000 PKR</p>
-
 <button class="btn" onclick="recharge()">Recharge</button>
-
 </div>
 
 <div class="plan-card">
-
 <h2>Silver Plan</h2>
 <p class="price">16000 PKR</p>
 <p>Profit: 24000 PKR</p>
-
 <button class="btn" onclick="recharge()">Recharge</button>
-
 </div>
 
 <div class="plan-card">
-
 <h2>Gold Plan</h2>
 <p class="price">32000 PKR</p>
 <p>Profit: 50000 PKR</p>
-
 <button class="btn" onclick="recharge()">Recharge</button>
-
 </div>
 
 </section>
 
+<!-- REGISTER -->
 <section class="register" id="register">
-
 <h1>User Registration</h1>
-
 <input id="name" placeholder="Your Name"><br>
 <input id="phone" placeholder="Phone Number"><br>
-<input id="city" placeholder="City"><br>
-
-<br>
-
+<input id="city" placeholder="City"><br><br>
 <button class="btn" onclick="register()">Submit Registration</button>
-
 </section>
 
+<!-- FOOTER -->
 <footer>
-
-© 2026 MR FOJI INVESTMENT  
-<br><br>
+© 2026 MR FOJI INVESTMENT<br>
 Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
-
 </footer>
 
 </body>
