@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MR FOJI INVESTMENT</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+color:white;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#020617;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#22c55e;
+}
+
+nav a{
+color:white;
+margin:10px;
+text-decoration:none;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:120px 20px;
+background:url("https://images.unsplash.com/photo-1559526324-4b87b5e36e44") center/cover;
+}
+
+.hero h1{
+font-size:45px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+margin-bottom:25px;
+}
+
+.btn{
+background:#22c55e;
+padding:14px 35px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* PLANS */
+
+.plans{
+text-align:center;
+padding:70px 20px;
+}
+
+.plans h1{
+margin-bottom:40px;
+}
+
+.plan-card{
+display:inline-block;
+width:250px;
+margin:15px;
+padding:30px;
+border-radius:12px;
+background:#0f172a;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.plan-card h2{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.price{
+font-size:26px;
+color:#22c55e;
+margin:15px 0;
+}
+
+.plan-card button{
+background:#22c55e;
+border:none;
+padding:12px 25px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* REGISTER */
+
+.register{
+text-align:center;
+padding:60px 20px;
+}
+
+input{
+padding:12px;
+margin:8px;
+width:250px;
+border-radius:6px;
+border:none;
+}
+
+/* FOOTER */
+
+footer{
+background:#020617;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
+
+<script>
+
+function recharge(){
+
+window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
+
+}
+
+function register(){
+
+var name=document.getElementById("name").value;
+var phone=document.getElementById("phone").value;
+var city=document.getElementById("city").value;
+
+var msg="New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
+
+window.open("https://wa.me/923491441853?text="+msg);
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">MR FOJI INVESTMENT</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#plans">Plans</a>
+<a href="#register">Register</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Grow Your Money With Smart Investment</h1>
+
+<p>Trusted Online Investment Platform</p>
+
+<a class="btn" onclick="recharge()">Recharge Now</a>
+
+</section>
+
+<section class="plans" id="plans">
+
+<h1>Investment Plans</h1>
+
+<div class="plan-card">
+
+<h2>Basic</h2>
+
+<p class="price">8000 PKR</p>
+
+<p>Profit: 12000 PKR</p>
+
+<button onclick="recharge()">Recharge</button>
+
+</div>
+
+<div class="plan-card">
+
+<h2>Silver</h2>
+
+<p class="price">16000 PKR</p>
+
+<p>Profit: 24000 PKR</p>
+
+<button onclick="recharge()">Recharge</button>
+
+</div>
+
+<div class="plan-card">
+
+<h2>Gold</h2>
+
+<p class="price">32000 PKR</p>
+
+<p>Profit: 50000 PKR</p>
+
+<button onclick="recharge()">Recharge</button>
+
+</div>
+
+</section>
+
+<section class="register" id="register">
+
+<h1>Register</h1>
+
+<input id="name" placeholder="Your Name"><br>
+<input id="phone" placeholder="Phone Number"><br>
+<input id="city" placeholder="City"><br>
+
+<button class="btn" onclick="register()">Submit</button>
+
+</section>
+
+<footer>
+
+© 2026 MR FOJI INVESTMENT
+
+</footer>
+
+</body>
+  </html>
