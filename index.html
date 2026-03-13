@@ -6,232 +6,254 @@
 <title>MR FOJI INVESTMENT</title>
 <style>
 body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0f172a;
-color:white;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:white;
 }
 
 /* TOP BANNER IMAGE */
 .top-banner{
-width:100%;
-height:350px;
-background:url("1773440347203.jpg") center/cover no-repeat;
-position:relative;
+  width:100%;
+  height:350px;
+  background:url("1773440347203.jpg") center/cover no-repeat;
+  position:relative;
 }
 
 /* LIVE TICKER */
 .ticker{
-background:red;
-padding:10px;
-overflow:hidden;
-white-space:nowrap;
-font-weight:bold;
-font-size:16px;
-position:relative;
-top:-5px;
+  background:red;
+  padding:10px;
+  overflow:hidden;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:16px;
+  position:relative;
+  top:-5px;
 }
 
 .ticker span{
-display:inline-block;
-padding-left:100%;
-animation:ticker 18s linear infinite;
+  display:inline-block;
+  padding-left:100%;
+  animation:ticker 18s linear infinite;
 }
 
 @keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
 }
 
 /* HEADER */
 header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 30px;
-background:#020617;
-border-bottom:2px solid #22c55e;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:#020617;
+  border-bottom:2px solid #22c55e;
 }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-color:#22c55e;
+.logo img{
+  height:50px;
+  object-fit:contain;
 }
 
 nav a{
-color:white;
-margin:12px;
-text-decoration:none;
-font-size:16px;
+  color:white;
+  margin:12px;
+  text-decoration:none;
+  font-size:16px;
 }
 
 nav a:hover{
-color:#22c55e;
+  color:#22c55e;
 }
 
 /* BUTTONS */
 .btn{
-background:#22c55e;
-padding:14px 35px;
-border-radius:8px;
-color:white;
-text-decoration:none;
-font-weight:bold;
-cursor:pointer;
-border:none;
-transition:0.3s;
+  background:#22c55e;
+  padding:14px 35px;
+  border-radius:8px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+  border:none;
+  transition:0.3s;
 }
 .btn:hover{
-background:#16a34a;
+  background:#16a34a;
 }
 
 /* PLANS */
 .plans{
-text-align:center;
-padding:70px 20px;
+  text-align:center;
+  padding:70px 20px;
 }
 
 .plans h1{
-margin-bottom:40px;
-font-size:32px;
+  margin-bottom:40px;
+  font-size:32px;
 }
 
 .plan-card{
-display:inline-block;
-width:260px;
-margin:15px;
-padding:30px;
-border-radius:12px;
-background:#020617;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
-transition:0.3s;
+  display:inline-block;
+  width:260px;
+  margin:15px;
+  padding:30px;
+  border-radius:12px;
+  background:#020617;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+  transition:0.3s;
 }
 
 .plan-card:hover{
-transform:scale(1.05);
+  transform:scale(1.05);
 }
 
 .plan-card h2{
-font-size:24px;
-margin-bottom:10px;
+  font-size:24px;
+  margin-bottom:10px;
 }
 
 .price{
-font-size:28px;
-color:#22c55e;
-margin:15px 0;
+  font-size:28px;
+  color:#22c55e;
+  margin:15px 0;
 }
 
 /* REGISTER */
 .register{
-text-align:center;
-padding:70px 20px;
-background:#020617;
+  text-align:center;
+  padding:70px 20px;
+  background:#020617;
 }
 
 input{
-padding:12px;
-margin:8px;
-width:250px;
-border-radius:6px;
-border:none;
+  padding:12px;
+  margin:8px;
+  width:250px;
+  border-radius:6px;
+  border:none;
 }
 
 /* FOOTER */
 footer{
-background:#020617;
-text-align:center;
-padding:30px;
-margin-top:40px;
-font-size:14px;
-color:#9ca3af;
+  background:#020617;
+  text-align:center;
+  padding:30px;
+  margin-top:40px;
+  font-size:14px;
+  color:#9ca3af;
 }
 
+/* HERO TEXT ON BANNER (Optional) */
+.hero-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:white;
+  font-size:36px;
+  background:rgba(0,0,0,0.5);
+  padding:15px 25px;
+  border-radius:10px;
+  text-align:center;
+}
+
+@media(max-width:768px){
+  .plan-card{width:90%;}
+  .logo img{height:40px;}
+  .hero-text{font-size:24px;padding:10px 15px;}
+}
 </style>
 
 <script>
 function recharge(){
-window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
+  window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
 }
 
 function register(){
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var city=document.getElementById("city").value;
-var msg="New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
-window.open("https://wa.me/923491441853?text="+msg);
+  var name=document.getElementById("name").value;
+  var phone=document.getElementById("phone").value;
+  var city=document.getElementById("city").value;
+  var msg="New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
+  window.open("https://wa.me/923491441853?text="+msg);
 }
 </script>
 </head>
 <body>
 
 <!-- TOP IMAGE BANNER -->
-<div class="top-banner"></div>
+<div class="top-banner">
+  <div class="hero-text">Trusted Online Investment Platform</div>
+</div>
 
 <!-- LIVE TICKER -->
 <div class="ticker">
-<span>
-User ID 4521 Invested 8000 PKR ✔ | 
-User ID 7281 Withdraw 12000 PKR ✔ | 
-User ID 9311 Invested 16000 PKR ✔ | 
-User ID 1142 Withdraw 24000 PKR ✔ | 
-User ID 6673 Invested 32000 PKR ✔ | 
-User ID 8881 Withdraw 50000 PKR ✔
-</span>
+  <span>
+    User ID 4521 Invested 8000 PKR ✔ | 
+    User ID 7281 Withdraw 12000 PKR ✔ | 
+    User ID 9311 Invested 16000 PKR ✔ | 
+    User ID 1142 Withdraw 24000 PKR ✔ | 
+    User ID 6673 Invested 32000 PKR ✔ | 
+    User ID 8881 Withdraw 50000 PKR ✔
+  </span>
 </div>
 
 <!-- HEADER -->
 <header>
-<div class="logo">MR FOJI INVESTMENT</div>
-<nav>
-<a href="#">Home</a>
-<a href="#plans">Plans</a>
-<a href="#register">Register</a>
-</nav>
+  <!-- Logo as Image -->
+  <div class="logo">
+    <img src="1773440347203.jpg" alt="MR FOJI INVESTMENT Logo">
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#plans">Plans</a>
+    <a href="#register">Register</a>
+  </nav>
 </header>
 
 <!-- PLANS -->
 <section class="plans" id="plans">
-<h1>Investment Plans</h1>
+  <h1>Investment Plans</h1>
 
-<div class="plan-card">
-<h2>Basic Plan</h2>
-<p class="price">8000 PKR</p>
-<p>Profit: 12000 PKR</p>
-<button class="btn" onclick="recharge()">Recharge</button>
-</div>
+  <div class="plan-card">
+    <h2>Basic Plan</h2>
+    <p class="price">8000 PKR</p>
+    <p>Profit: 12000 PKR</p>
+    <button class="btn" onclick="recharge()">Recharge</button>
+  </div>
 
-<div class="plan-card">
-<h2>Silver Plan</h2>
-<p class="price">16000 PKR</p>
-<p>Profit: 24000 PKR</p>
-<button class="btn" onclick="recharge()">Recharge</button>
-</div>
+  <div class="plan-card">
+    <h2>Silver Plan</h2>
+    <p class="price">16000 PKR</p>
+    <p>Profit: 24000 PKR</p>
+    <button class="btn" onclick="recharge()">Recharge</button>
+  </div>
 
-<div class="plan-card">
-<h2>Gold Plan</h2>
-<p class="price">32000 PKR</p>
-<p>Profit: 50000 PKR</p>
-<button class="btn" onclick="recharge()">Recharge</button>
-</div>
-
+  <div class="plan-card">
+    <h2>Gold Plan</h2>
+    <p class="price">32000 PKR</p>
+    <p>Profit: 50000 PKR</p>
+    <button class="btn" onclick="recharge()">Recharge</button>
+  </div>
 </section>
 
 <!-- REGISTER -->
 <section class="register" id="register">
-<h1>User Registration</h1>
-<input id="name" placeholder="Your Name"><br>
-<input id="phone" placeholder="Phone Number"><br>
-<input id="city" placeholder="City"><br><br>
-<button class="btn" onclick="register()">Submit Registration</button>
+  <h1>User Registration</h1>
+  <input id="name" placeholder="Your Name"><br>
+  <input id="phone" placeholder="Phone Number"><br>
+  <input id="city" placeholder="City"><br><br>
+  <button class="btn" onclick="register()">Submit Registration</button>
 </section>
 
 <!-- FOOTER -->
 <footer>
-© 2026 MR FOJI INVESTMENT<br>
-Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
+  © 2026 MR FOJI INVESTMENT<br>
+  Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
 </footer>
 
 </body>
-  </html>
+    </html>
