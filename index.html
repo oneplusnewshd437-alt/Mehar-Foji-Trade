@@ -17,20 +17,23 @@ font-family:Segoe UI,Arial;
 }
 
 body{
-background:linear-gradient(135deg,#0f172a,#020617);
+background:#020617;
 color:white;
 }
 
-/* HEADER */
+/* TOP LOGO CARD */
 
-.header{
+.top-card{
+background:linear-gradient(135deg,#16a34a,#22c55e,#15803d);
+padding:35px;
 text-align:center;
-padding:30px;
-font-size:48px;
-font-weight:bold;
-color:#22c55e;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.top-card h1{
+font-size:45px;
 letter-spacing:4px;
-text-shadow:0 0 20px #22c55e;
+text-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 /* NAVBAR */
@@ -39,30 +42,27 @@ nav{
 background:black;
 display:flex;
 justify-content:center;
-gap:40px;
+gap:35px;
 padding:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.6);
 }
 
 nav a{
 color:white;
 text-decoration:none;
-font-weight:600;
-font-size:17px;
-transition:.3s;
+font-weight:bold;
 }
 
 nav a:hover{
 color:#22c55e;
 }
 
-/* NEWS BAR */
+/* NEWS */
 
 .news{
-background:#ff0000;
+background:red;
+padding:10px;
 overflow:hidden;
 white-space:nowrap;
-padding:10px;
 font-weight:bold;
 }
 
@@ -81,19 +81,35 @@ animation:slide 18s linear infinite;
 
 .hero{
 text-align:center;
-padding:90px 20px;
+padding:80px 20px;
 }
 
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
+.hero h2{
+font-size:36px;
+margin-bottom:10px;
 }
 
-.hero p{
-color:#ccc;
+/* STATS */
+
+.stats{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
+background:#111827;
+padding:40px;
 }
 
-/* SECTIONS */
+.stat{
+text-align:center;
+}
+
+.stat h3{
+color:#22c55e;
+font-size:30px;
+}
+
+/* SECTION */
 
 section{
 padding:70px 10%;
@@ -101,8 +117,8 @@ text-align:center;
 }
 
 section h2{
-margin-bottom:40px;
 color:#22c55e;
+margin-bottom:40px;
 }
 
 /* PLANS */
@@ -114,21 +130,20 @@ justify-content:center;
 gap:30px;
 }
 
-.card{
+.plan{
 width:280px;
 padding:35px;
 border-radius:15px;
-backdrop-filter:blur(10px);
 box-shadow:0 10px 30px rgba(0,0,0,0.6);
-transition:.4s;
+transition:.3s;
 }
 
-.card:hover{
-transform:translateY(-10px) scale(1.05);
+.plan:hover{
+transform:scale(1.05);
 }
 
 .basic{
-background:linear-gradient(145deg,#1e293b,#334155);
+background:linear-gradient(145deg,#1e293b,#374151);
 }
 
 .silver{
@@ -142,30 +157,28 @@ color:black;
 }
 
 .price{
-font-size:30px;
+font-size:28px;
 font-weight:bold;
-margin:12px 0;
+margin:10px 0;
 }
 
-.card button{
+.plan button{
+background:#22c55e;
 padding:12px 30px;
 border:none;
 border-radius:8px;
-background:#22c55e;
 color:white;
 cursor:pointer;
-font-weight:bold;
 }
 
-/* BOX */
+/* FORM BOX */
 
 .box{
 background:#111827;
 max-width:420px;
 margin:auto;
 padding:30px;
-border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,0.6);
+border-radius:10px;
 }
 
 .box input{
@@ -182,7 +195,6 @@ background:#22c55e;
 border:none;
 border-radius:6px;
 color:white;
-cursor:pointer;
 }
 
 /* CALCULATOR */
@@ -190,9 +202,9 @@ cursor:pointer;
 .calc input{
 padding:12px;
 width:250px;
-border:none;
-border-radius:6px;
 margin:10px;
+border-radius:6px;
+border:none;
 }
 
 .calc button{
@@ -203,79 +215,81 @@ border-radius:6px;
 color:white;
 }
 
+/* FAQ */
+
+.faq{
+max-width:700px;
+margin:auto;
+text-align:left;
+}
+
+.faq h4{
+margin-top:20px;
+color:#22c55e;
+}
+
 /* FOOTER */
 
 footer{
 background:black;
-padding:25px;
 text-align:center;
+padding:25px;
 color:#aaa;
-margin-top:40px;
 }
 
-/* WHATSAPP BUTTON */
+/* WHATSAPP */
 
 .whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
-color:white;
 padding:14px 18px;
 border-radius:50px;
+color:white;
 text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.4);
 }
 
 </style>
 
 <script>
 
-/* INVEST */
-
 function invest(plan,amount){
 
-let msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
+var msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
 
 window.open("https://wa.me/923491441853?text="+msg);
 
 }
-
-/* DEPOSIT */
 
 function deposit(){
 
-let name=document.getElementById("dname").value;
-let phone=document.getElementById("dphone").value;
+var name=document.getElementById("dname").value;
+var phone=document.getElementById("dphone").value;
 
-let msg="Deposit Request %0AName:"+name+"%0APhone:"+phone+"%0AMethod:Easypaisa";
+var msg="Deposit Request %0AName:"+name+"%0APhone:"+phone+"%0AMethod:Easypaisa";
 
 window.open("https://wa.me/923491441853?text="+msg);
 
 }
-
-/* WITHDRAW */
 
 function withdraw(){
 
-let name=document.getElementById("wname").value;
-let number=document.getElementById("wnumber").value;
-let amount=document.getElementById("wamount").value;
+var name=document.getElementById("wname").value;
+var number=document.getElementById("wnumber").value;
+var amount=document.getElementById("wamount").value;
 
-let msg="Withdraw Request %0AName:"+name+"%0ANumber:"+number+"%0AAmount:"+amount;
+var msg="Withdraw Request %0AName:"+name+"%0ANumber:"+number+"%0AAmount:"+amount;
 
 window.open("https://wa.me/923491441853?text="+msg);
 
 }
 
-/* CALCULATOR */
-
 function calc(){
 
-let amount=document.getElementById("amount").value;
+var amount=document.getElementById("amount").value;
 
-let profit=amount*1.5;
+var profit=amount*1.5;
 
 document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
@@ -287,22 +301,54 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
 <body>
 
-<div class="header">MR FOJI</div>
+<div class="top-card">
+<h1>MR FOJI</h1>
+</div>
 
 <nav>
+
 <a href="#">Home</a>
 <a href="#plans">Plans</a>
 <a href="#deposit">Deposit</a>
 <a href="#withdraw">Withdraw</a>
+
 </nav>
 
 <div class="news">
-<span>Welcome to MR FOJI Investment | Fast Withdraw | Secure System | 24/7 Support</span>
+
+<span>
+
+Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
+
+</span>
+
 </div>
 
 <div class="hero">
-<h1>Professional Investment Platform</h1>
-<p>Fast • Secure • Trusted</p>
+
+<h2>Trusted Online Investment Platform</h2>
+
+<p>Fast • Secure • Professional</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h3>12,548</h3>
+<p>Total Users</p>
+</div>
+
+<div class="stat">
+<h3>3,400,000 PKR</h3>
+<p>Total Deposits</p>
+</div>
+
+<div class="stat">
+<h3>2,900,000 PKR</h3>
+<p>Total Withdraw</p>
+</div>
+
 </div>
 
 <section id="plans">
@@ -311,7 +357,7 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
 <div class="plans">
 
-<div class="card basic">
+<div class="plan basic">
 <h3>Basic Plan</h3>
 <div class="price">8000 PKR</div>
 <p>Return 12000 PKR</p>
@@ -319,7 +365,7 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <button onclick="invest('Basic Plan','8000 PKR')">Invest</button>
 </div>
 
-<div class="card silver">
+<div class="plan silver">
 <h3>Silver Plan</h3>
 <div class="price">16000 PKR</div>
 <p>Return 24000 PKR</p>
@@ -327,7 +373,7 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <button onclick="invest('Silver Plan','16000 PKR')">Invest</button>
 </div>
 
-<div class="card gold">
+<div class="plan gold">
 <h3>Gold Plan</h3>
 <div class="price">32000 PKR</div>
 <p>Return 50000 PKR</p>
@@ -346,9 +392,11 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <div class="box">
 
 <p>Send Payment To</p>
+
 <h3>03220751486</h3>
 
 <input id="dname" placeholder="Your Name">
+
 <input id="dphone" placeholder="Your Phone">
 
 <button onclick="deposit()">Submit Deposit</button>
@@ -364,7 +412,9 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <div class="box">
 
 <input id="wname" placeholder="Your Name">
-<input id="wnumber" placeholder="Easypaisa / JazzCash Number">
+
+<input id="wnumber" placeholder="JazzCash / Easypaisa Number">
+
 <input id="wamount" placeholder="Withdraw Amount">
 
 <button onclick="withdraw()">Submit Withdraw</button>
@@ -384,6 +434,28 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <button onclick="calc()">Calculate</button>
 
 <p id="result"></p>
+
+</section>
+
+<section>
+
+<h2>FAQ</h2>
+
+<div class="faq">
+
+<h4>How to deposit?</h4>
+
+<p>Send payment to Easypaisa 03220751486 and submit deposit form.</p>
+
+<h4>How to withdraw?</h4>
+
+<p>Submit withdraw form and our team will process it.</p>
+
+<h4>Support?</h4>
+
+<p>Contact us anytime on WhatsApp support.</p>
+
+</div>
 
 </section>
 
