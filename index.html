@@ -1,314 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MR FOJI INVESTMENT</title>
+
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+scroll-behavior:smooth;
 }
 
-/* CONTAINER */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+body{
+background:#0f172a;
+color:white;
 }
 
-/* TOP IMAGE SECTION */
-.header-image {
-  width: 100%;
-  height: 350px;
-  background: url('1773440347203.jpg') center/cover no-repeat;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+background:#020617;
+position:sticky;
+top:0;
+z-index:999;
 }
 
-.header-image::after {
-  content: "";
-  position: absolute;
-  inset:0;
-  background: rgba(0,0,0,0.35); /* dark overlay */
+nav h2{
+color:#22c55e;
 }
 
-/* LOGO / TEXT OVER IMAGE */
-.header-image .logo {
-  position: relative;
-  z-index: 1;
-  text-align: center;
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
 }
 
-.header-image .logo img {
-  height: 120px;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+nav ul li a{
+text-decoration:none;
+color:#ccc;
+font-weight:bold;
 }
 
-/* LIVE TICKER */
-.ticker {
-  width: 100%;
-  max-width: 1200px;
-  background: red;
-  padding: 10px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  margin: 20px 0;
-  border-radius: 5px;
+nav ul li a:hover{
+color:#22c55e;
 }
 
-.ticker span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker 18s linear infinite;
+/* HERO */
+
+.hero{
+height:450px;
+background:url('1773440347203.jpg') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
 }
 
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.6);
 }
 
-/* PLANS SECTION */
-.plans {
-  text-align: center;
-  padding: 80px 20px;
-  width: 100%;
+.hero-text{
+position:relative;
+z-index:2;
 }
 
-.plans h1 {
-  margin-bottom: 50px;
-  font-size: 36px;
-  color: #22c55e;
-  text-align: center;
+.hero h1{
+font-size:50px;
+margin-bottom:10px;
 }
 
-.plans .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+.hero p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.hero button{
+padding:14px 40px;
+background:#22c55e;
+border:none;
+color:white;
+font-size:18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* TICKER */
+
+.ticker{
+background:red;
+padding:10px;
+overflow:hidden;
+white-space:nowrap;
+font-weight:bold;
+}
+
+.ticker span{
+display:inline-block;
+padding-left:100%;
+animation:ticker 18s linear infinite;
+}
+
+@keyframes ticker{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+/* SECTION */
+
+section{
+padding:80px 8%;
+text-align:center;
+}
+
+section h1{
+font-size:34px;
+margin-bottom:40px;
+color:#22c55e;
 }
 
 /* PLAN CARDS */
-.plan-card {
-  width: 280px;
-  margin: 20px;
-  padding: 35px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-align: center;
+
+.plans{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
 }
 
-.plan-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.8);
+.plan{
+width:300px;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 40px rgba(0,0,0,0.7);
+transition:.3s;
 }
 
-.plan-card h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px black;
+.plan:hover{
+transform:scale(1.08);
 }
 
-.plan-card .price {
-  font-size: 30px;
-  margin: 15px 0;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px black;
+.basic{
+background:linear-gradient(145deg,#1e293b,#374151);
 }
 
-/* 3D Gradient Backgrounds */
-.plan-basic {
-  background: linear-gradient(145deg,#1e293b,#374151);
+.silver{
+background:linear-gradient(145deg,#e0e0e0,#bfbfbf);
+color:black;
 }
 
-.plan-silver {
-  background: linear-gradient(145deg,#c0c0c0,#a0a0a0);
-  color: black;
+.gold{
+background:linear-gradient(145deg,#ffd700,#e6c200);
+color:black;
 }
 
-.plan-gold {
-  background: linear-gradient(145deg,#ffd700,#e6c200);
-  color: black;
+.price{
+font-size:32px;
+font-weight:bold;
+margin:15px 0;
 }
 
-.plan-card button {
-  background: #22c55e;
-  border: none;
-  padding: 12px 30px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
+.plan button{
+background:#22c55e;
+border:none;
+padding:12px 35px;
+color:white;
+border-radius:6px;
+cursor:pointer;
 }
 
-.plan-card button:hover {
-  background: #16a34a;
+/* STATS */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:60px;
+flex-wrap:wrap;
 }
 
-/* REGISTER SECTION */
-.register {
-  text-align: center;
-  padding: 80px 20px;
-  width: 100%;
-  background: #111827;
+.stat{
+font-size:30px;
+font-weight:bold;
 }
 
-.register .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* CALCULATOR */
+
+.calculator input{
+padding:14px;
+width:250px;
+border:none;
+border-radius:6px;
+margin:10px;
 }
 
-.register h1 {
-  font-size: 32px;
-  margin-bottom: 30px;
-  color: #22c55e;
+.calculator button{
+padding:12px 30px;
+background:#22c55e;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
 }
 
-.register input {
-  padding: 14px;
-  margin: 10px;
-  width: 280px;
-  border-radius: 6px;
-  border: none;
+/* REGISTER */
+
+.register input{
+padding:14px;
+width:280px;
+margin:10px;
+border-radius:6px;
+border:none;
 }
 
-.register button {
-  background: #22c55e;
-  padding: 14px 40px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  border: none;
-  transition: background 0.3s;
+.register button{
+padding:14px 40px;
+background:#22c55e;
+border:none;
+border-radius:6px;
+color:white;
+cursor:pointer;
 }
 
-.register button:hover {
-  background: #16a34a;
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px 20px;
+border-radius:50px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* WITHDRAW POPUP */
+
+.popup{
+position:fixed;
+bottom:90px;
+left:20px;
+background:#111827;
+padding:15px 20px;
+border-radius:8px;
+box-shadow:0 5px 20px rgba(0,0,0,0.7);
+display:none;
 }
 
 /* FOOTER */
-footer {
-  width: 100%;
-  max-width: 1200px;
-  background: #020617;
-  text-align: center;
-  padding: 30px;
-  font-size: 14px;
-  color: #9ca3af;
-  margin-top: 40px;
+
+footer{
+background:#020617;
+padding:30px;
+text-align:center;
+color:#888;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  .plan-card, .register input {
-    width: 90%;
-  }
-  .header-image {
-    height: 200px;
-  }
-  .header-image .logo img {
-    height: 80px;
-  }
-}
 </style>
 
 <script>
-function recharge() {
-  window.open("https://wa.me/923491441853?text=Hello I want to recharge my investment plan");
+
+/* recharge */
+
+function recharge(){
+window.open("https://wa.me/923491441853?text=Hello I want to invest");
 }
 
-function register() {
-  var name = document.getElementById("name").value;
-  var phone = document.getElementById("phone").value;
-  var city = document.getElementById("city").value;
-  var msg = "New User Registration %0A%0AName: "+name+"%0APhone: "+phone+"%0ACity: "+city;
-  window.open("https://wa.me/923491441853?text="+msg);
+/* register */
+
+function register(){
+
+var name=document.getElementById("name").value;
+var phone=document.getElementById("phone").value;
+var city=document.getElementById("city").value;
+
+var msg="New User Registration %0AName:"+name+"%0APhone:"+phone+"%0ACity:"+city;
+
+window.open("https://wa.me/923491441853?text="+msg);
+
 }
+
+/* calculator */
+
+function calculate(){
+
+var amount=document.getElementById("amount").value;
+
+var profit=amount*1.5;
+
+document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
+
+}
+
+/* fake withdraw popup */
+
+var users=["Ali","Ahmed","Usman","Bilal","Hamza","Zain","Arslan"];
+
+function showPopup(){
+
+var user=users[Math.floor(Math.random()*users.length)];
+
+var amount=[8000,12000,24000,50000];
+
+var money=amount[Math.floor(Math.random()*amount.length)];
+
+var popup=document.getElementById("popup");
+
+popup.innerHTML=user+" withdraw "+money+" PKR";
+
+popup.style.display="block";
+
+setTimeout(function(){
+popup.style.display="none";
+},4000);
+
+}
+
+setInterval(showPopup,7000);
+
 </script>
+
 </head>
+
 <body>
 
-<!-- TOP MAIN IMAGE -->
-<div class="header-image">
-  <div class="logo">
-    <img src="1773440347203.jpg" alt="MR FOJI INVESTMENT Logo">
-  </div>
+<nav>
+
+<h2>MR FOJI</h2>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#plans">Plans</a></li>
+<li><a href="#calculator">Calculator</a></li>
+<li><a href="#register">Register</a></li>
+
+</ul>
+
+</nav>
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>MR FOJI INVESTMENT</h1>
+
+<p>Pakistan Trusted Investment Platform</p>
+
+<button onclick="recharge()">Start Investment</button>
+
 </div>
 
-<!-- LIVE TICKER -->
-<div class="ticker container">
-  <span>
-    User ID 4521 Invested 8000 PKR ✔ | 
-    User ID 7281 Withdraw 12000 PKR ✔ | 
-    User ID 9311 Invested 16000 PKR ✔ | 
-    User ID 1142 Withdraw 24000 PKR ✔ | 
-    User ID 6673 Invested 32000 PKR ✔ | 
-    User ID 8881 Withdraw 50000 PKR ✔
-  </span>
 </div>
 
-<!-- PLANS SECTION -->
-<section class="plans">
-  <div class="container">
-    <h1>Investment Plans</h1>
+<div class="ticker">
 
-    <div class="plan-card plan-basic">
-      <h2>Basic Plan</h2>
-      <p class="price">8000 PKR</p>
-      <p>Profit: 12000 PKR</p>
-      <button onclick="recharge()">Recharge</button>
-    </div>
+<span>
 
-    <div class="plan-card plan-silver">
-      <h2>Silver Plan</h2>
-      <p class="price">16000 PKR</p>
-      <p>Profit: 24000 PKR</p>
-      <button onclick="recharge()">Recharge</button>
-    </div>
+User 4521 Invested 8000 PKR ✔ |
+User 7281 Withdraw 12000 PKR ✔ |
+User 9311 Invested 16000 PKR ✔ |
+User 1142 Withdraw 24000 PKR ✔
 
-    <div class="plan-card plan-gold">
-      <h2>Gold Plan</h2>
-      <p class="price">32000 PKR</p>
-      <p>Profit: 50000 PKR</p>
-      <button onclick="recharge()">Recharge</button>
-    </div>
-  </div>
+</span>
+
+</div>
+
+<section class="stats">
+
+<div class="stat">50K+<p>Users</p></div>
+<div class="stat">12M PKR<p>Withdraw</p></div>
+<div class="stat">24/7<p>Support</p></div>
+
 </section>
 
-<!-- REGISTER SECTION -->
-<section class="register">
-  <div class="container">
-    <h1>User Registration</h1>
-    <input id="name" placeholder="Your Name"><br>
-    <input id="phone" placeholder="Phone Number"><br>
-    <input id="city" placeholder="City"><br><br>
-    <button onclick="register()">Submit Registration</button>
-  </div>
+<section id="plans">
+
+<h1>Investment Plans</h1>
+
+<div class="plans">
+
+<div class="plan basic">
+
+<h2>Basic</h2>
+
+<p class="price">8000 PKR</p>
+
+<p>Profit 12000 PKR</p>
+
+<br>
+
+<button onclick="recharge()">Invest</button>
+
+</div>
+
+<div class="plan silver">
+
+<h2>Silver</h2>
+
+<p class="price">16000 PKR</p>
+
+<p>Profit 24000 PKR</p>
+
+<br>
+
+<button onclick="recharge()">Invest</button>
+
+</div>
+
+<div class="plan gold">
+
+<h2>Gold</h2>
+
+<p class="price">32000 PKR</p>
+
+<p>Profit 50000 PKR</p>
+
+<br>
+
+<button onclick="recharge()">Invest</button>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- FOOTER -->
+<section id="calculator" class="calculator">
+
+<h1>Profit Calculator</h1>
+
+<input id="amount" placeholder="Enter Investment">
+
+<br>
+
+<button onclick="calculate()">Calculate Profit</button>
+
+<p id="result"></p>
+
+</section>
+
+<section id="register" class="register">
+
+<h1>User Registration</h1>
+
+<input id="name" placeholder="Name"><br>
+
+<input id="phone" placeholder="Phone"><br>
+
+<input id="city" placeholder="City"><br>
+
+<br>
+
+<button onclick="register()">Submit</button>
+
+</section>
+
 <footer>
-  © MR FOJI INVESTMENT | Contact: +92 349 1441853<br>
-  Secure Investment Platform | Fast Withdraw | Trusted By Thousands Of Users
+
+© MR FOJI INVESTMENT 2026  
+Secure Platform | Fast Withdraw
+
 </footer>
 
+<a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
+
+<div id="popup" class="popup"></div>
+
 </body>
-</html>
+  </html>
