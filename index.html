@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -15,7 +14,6 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Arial;
-scroll-behavior:smooth;
 }
 
 body{
@@ -23,46 +21,56 @@ background:#0f172a;
 color:white;
 }
 
-/* HEADER */
+/* LOGO */
 
-header{
-background:linear-gradient(135deg,#020617,#1e293b,#0f172a);
+.logo-bar{
 text-align:center;
-padding:40px 20px 20px 20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.7);
-}
-
-.logo{
-font-size:60px;
+padding:25px;
+font-size:50px;
 font-weight:bold;
 color:#22c55e;
-letter-spacing:4px;
-text-shadow:0 0 20px #22c55e;
-margin-bottom:20px;
+text-shadow:0 0 15px #22c55e;
 }
 
-/* MENU */
+/* NAVBAR */
 
 nav{
+background:black;
 display:flex;
 justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+gap:35px;
+padding:15px;
 }
 
 nav a{
-text-decoration:none;
 color:white;
+text-decoration:none;
 font-weight:bold;
-font-size:18px;
-padding:10px 20px;
-border-radius:6px;
-transition:.3s;
 }
 
 nav a:hover{
-background:#22c55e;
-color:black;
+color:#22c55e;
+}
+
+/* NEWS SLIDER */
+
+.news{
+background:red;
+padding:10px;
+overflow:hidden;
+white-space:nowrap;
+font-weight:bold;
+}
+
+.news span{
+display:inline-block;
+padding-left:100%;
+animation:slide 18s linear infinite;
+}
+
+@keyframes slide{
+0%{transform:translateX(0)}
+100%{transform:translateX(-100%)}
 }
 
 /* HERO */
@@ -74,56 +82,32 @@ padding:80px 20px;
 
 .hero h1{
 font-size:40px;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 .hero p{
-font-size:18px;
-margin-bottom:20px;
 color:#ccc;
+margin-bottom:20px;
 }
 
 .hero button{
-padding:14px 40px;
 background:#22c55e;
+padding:14px 40px;
 border:none;
-border-radius:6px;
-font-size:18px;
 color:white;
+font-size:18px;
+border-radius:6px;
 cursor:pointer;
-}
-
-/* TICKER */
-
-.ticker{
-background:red;
-padding:10px;
-overflow:hidden;
-white-space:nowrap;
-font-weight:bold;
-margin-top:20px;
-}
-
-.ticker span{
-display:inline-block;
-padding-left:100%;
-animation:ticker 18s linear infinite;
-}
-
-@keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
 }
 
 /* SECTION */
 
 section{
-padding:80px 8%;
+padding:70px 10%;
 text-align:center;
 }
 
 section h1{
-font-size:34px;
 margin-bottom:40px;
 color:#22c55e;
 }
@@ -138,54 +122,70 @@ gap:30px;
 }
 
 .plan{
-width:300px;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 40px rgba(0,0,0,0.7);
-transition:.3s;
+width:280px;
+padding:35px;
+border-radius:10px;
+background:#1e293b;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-.plan:hover{
-transform:scale(1.07);
-}
-
-.basic{
-background:linear-gradient(145deg,#1e293b,#374151);
-}
-
-.silver{
-background:linear-gradient(145deg,#e0e0e0,#bfbfbf);
-color:black;
-}
-
-.gold{
-background:linear-gradient(145deg,#ffd700,#e6c200);
-color:black;
+.plan h2{
+margin-bottom:10px;
 }
 
 .price{
-font-size:32px;
+font-size:30px;
 font-weight:bold;
-margin:15px 0;
+margin:10px 0;
 }
 
 .plan button{
 background:#22c55e;
+padding:12px 30px;
 border:none;
-padding:12px 35px;
-color:white;
 border-radius:6px;
+color:white;
 cursor:pointer;
+}
+
+/* DEPOSIT */
+
+.deposit-box{
+max-width:500px;
+margin:auto;
+background:#111827;
+padding:30px;
+border-radius:10px;
+}
+
+.deposit-box p{
+margin:10px 0;
+}
+
+/* WITHDRAW */
+
+.withdraw{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.method{
+background:#1e293b;
+padding:25px;
+border-radius:10px;
+width:220px;
 }
 
 /* CALCULATOR */
 
 .calculator input{
-padding:14px;
+padding:12px;
 width:250px;
+margin:10px;
 border:none;
 border-radius:6px;
-margin:10px;
 }
 
 .calculator button{
@@ -194,37 +194,24 @@ background:#22c55e;
 border:none;
 color:white;
 border-radius:6px;
-cursor:pointer;
 }
 
 /* REGISTER */
 
 .register input{
-padding:14px;
-width:280px;
+padding:12px;
+width:260px;
 margin:10px;
 border-radius:6px;
 border:none;
 }
 
 .register button{
-padding:14px 40px;
+padding:12px 35px;
 background:#22c55e;
 border:none;
 border-radius:6px;
 color:white;
-cursor:pointer;
-}
-
-/* STATS */
-
-.stats{
-display:flex;
-justify-content:center;
-gap:60px;
-flex-wrap:wrap;
-font-size:28px;
-font-weight:bold;
 }
 
 /* WHATSAPP */
@@ -234,50 +221,20 @@ position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
-padding:15px 20px;
+padding:14px 18px;
 border-radius:50px;
 color:white;
 text-decoration:none;
-font-weight:bold;
-}
-
-/* POPUP */
-
-.popup{
-position:fixed;
-bottom:90px;
-left:20px;
-background:#111827;
-padding:15px 20px;
-border-radius:8px;
-box-shadow:0 5px 20px rgba(0,0,0,0.7);
-display:none;
 }
 
 /* FOOTER */
 
 footer{
-background:#020617;
-padding:30px;
+background:black;
 text-align:center;
+padding:25px;
 color:#888;
-}
-
-@media(max-width:768px){
-
-.logo{
-font-size:40px;
-}
-
-.hero h1{
-font-size:30px;
-}
-
-.plans{
-flex-direction:column;
-align-items:center;
-}
-
+margin-top:40px;
 }
 
 </style>
@@ -286,18 +243,6 @@ align-items:center;
 
 function recharge(){
 window.open("https://wa.me/923491441853?text=Hello I want to invest");
-}
-
-function register(){
-
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var city=document.getElementById("city").value;
-
-var msg="New User Registration %0AName:"+name+"%0APhone:"+phone+"%0ACity:"+city;
-
-window.open("https://wa.me/923491441853?text="+msg);
-
 }
 
 function calculate(){
@@ -310,83 +255,45 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
 }
 
-var users=["Ali","Ahmed","Usman","Bilal","Hamza","Zain","Arslan"];
-
-function showPopup(){
-
-var user=users[Math.floor(Math.random()*users.length)];
-
-var amount=[8000,12000,24000,50000];
-
-var money=amount[Math.floor(Math.random()*amount.length)];
-
-var popup=document.getElementById("popup");
-
-popup.innerHTML=user+" withdraw "+money+" PKR";
-
-popup.style.display="block";
-
-setTimeout(function(){
-
-popup.style.display="none";
-
-},4000);
-
-}
-
-setInterval(showPopup,7000);
-
 </script>
 
 </head>
 
 <body>
 
-<header>
-
-<div class="logo">MR FOJI</div>
+<div class="logo-bar">
+MR FOJI
+</div>
 
 <nav>
 
 <a href="#">Home</a>
 <a href="#plans">Plans</a>
-<a href="#calculator">Calculator</a>
+<a href="#deposit">Deposit</a>
+<a href="#withdraw">Withdraw</a>
 <a href="#register">Register</a>
 
 </nav>
 
-</header>
-
-<div class="hero">
-
-<h1>MR FOJI INVESTMENT PLATFORM</h1>
-
-<p>Secure & Trusted Online Investment Platform</p>
-
-<button onclick="recharge()">Start Investment</button>
-
-</div>
-
-<div class="ticker">
+<div class="news">
 
 <span>
 
-User 4521 Invested 8000 PKR ✔ |
-User 7281 Withdraw 12000 PKR ✔ |
-User 9311 Invested 16000 PKR ✔ |
-User 1142 Withdraw 24000 PKR ✔
+Welcome to MR FOJI INVESTMENT Platform | Fast Withdraw | Secure System | 24/7 Support
 
 </span>
 
 </div>
 
-<section class="stats">
+<div class="hero">
 
-<div>50K+ Users</div>
-<div>12M PKR Withdraw</div>
-<div>24/7 Support</div>
+<h1>Trusted Investment Platform</h1>
 
-</section>
+<p>Secure & Fast Online Investment System</p>
+
+<button onclick="recharge()">Start Investment</button>
+
+</div>
 
 <section id="plans">
 
@@ -394,9 +301,9 @@ User 1142 Withdraw 24000 PKR ✔
 
 <div class="plans">
 
-<div class="plan basic">
+<div class="plan">
 
-<h2>Basic</h2>
+<h2>Basic Plan</h2>
 
 <p class="price">8000 PKR</p>
 
@@ -408,9 +315,9 @@ User 1142 Withdraw 24000 PKR ✔
 
 </div>
 
-<div class="plan silver">
+<div class="plan">
 
-<h2>Silver</h2>
+<h2>Silver Plan</h2>
 
 <p class="price">16000 PKR</p>
 
@@ -422,9 +329,9 @@ User 1142 Withdraw 24000 PKR ✔
 
 </div>
 
-<div class="plan gold">
+<div class="plan">
 
-<h2>Gold</h2>
+<h2>Gold Plan</h2>
 
 <p class="price">32000 PKR</p>
 
@@ -440,7 +347,43 @@ User 1142 Withdraw 24000 PKR ✔
 
 </section>
 
-<section id="calculator" class="calculator">
+<section id="deposit">
+
+<h1>Deposit Methods</h1>
+
+<div class="deposit-box">
+
+<p>Bank Wallet: XXXXXXXX</p>
+
+<p>Account Name: MR FOJI</p>
+
+<p>After deposit send screenshot on WhatsApp.</p>
+
+</div>
+
+</section>
+
+<section id="withdraw">
+
+<h1>Withdraw Methods</h1>
+
+<div class="withdraw">
+
+<div class="method">
+<h3>Easypaisa</h3>
+<p>Fast Withdraw Available</p>
+</div>
+
+<div class="method">
+<h3>JazzCash</h3>
+<p>Fast Withdraw Available</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="calculator">
 
 <h1>Profit Calculator</h1>
 
@@ -448,7 +391,7 @@ User 1142 Withdraw 24000 PKR ✔
 
 <br>
 
-<button onclick="calculate()">Calculate Profit</button>
+<button onclick="calculate()">Calculate</button>
 
 <p id="result"></p>
 
@@ -458,29 +401,26 @@ User 1142 Withdraw 24000 PKR ✔
 
 <h1>User Registration</h1>
 
-<input id="name" placeholder="Name"><br>
+<input placeholder="Name"><br>
 
-<input id="phone" placeholder="Phone"><br>
+<input placeholder="Phone"><br>
 
-<input id="city" placeholder="City"><br>
+<input placeholder="City"><br>
 
 <br>
 
-<button onclick="register()">Submit</button>
+<button onclick="recharge()">Submit</button>
 
 </section>
 
 <footer>
 
 © MR FOJI INVESTMENT 2026  
-Secure Platform | Fast Withdraw | Trusted By Users
+Secure Platform | Fast Withdraw | 24/7 Support
 
 </footer>
 
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
 
-<div id="popup" class="popup"></div>
-
 </body>
-
   </html>
