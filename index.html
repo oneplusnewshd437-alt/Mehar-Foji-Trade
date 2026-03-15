@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -21,19 +22,19 @@ background:#020617;
 color:white;
 }
 
-/* TOP LOGO CARD */
+/* HEADER */
 
 .top-card{
 background:linear-gradient(135deg,#16a34a,#22c55e,#15803d);
-padding:35px;
+padding:40px;
 text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
+box-shadow:0 10px 40px rgba(0,0,0,0.7);
 }
 
 .top-card h1{
-font-size:45px;
-letter-spacing:4px;
-text-shadow:0 0 20px rgba(0,0,0,0.4);
+font-size:48px;
+letter-spacing:5px;
+text-shadow:0 0 20px black;
 }
 
 /* NAVBAR */
@@ -56,7 +57,7 @@ nav a:hover{
 color:#22c55e;
 }
 
-/* NEWS */
+/* LIVE NEWS */
 
 .news{
 background:red;
@@ -69,7 +70,7 @@ font-weight:bold;
 .news span{
 display:inline-block;
 padding-left:100%;
-animation:slide 18s linear infinite;
+animation:slide 25s linear infinite;
 }
 
 @keyframes slide{
@@ -85,7 +86,7 @@ padding:80px 20px;
 }
 
 .hero h2{
-font-size:36px;
+font-size:38px;
 margin-bottom:10px;
 }
 
@@ -106,7 +107,7 @@ text-align:center;
 
 .stat h3{
 color:#22c55e;
-font-size:30px;
+font-size:32px;
 }
 
 /* SECTION */
@@ -254,6 +255,8 @@ text-decoration:none;
 
 <script>
 
+/* WHATSAPP INVEST */
+
 function invest(plan,amount){
 
 var msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
@@ -261,6 +264,8 @@ var msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
 window.open("https://wa.me/923491441853?text="+msg);
 
 }
+
+/* DEPOSIT */
 
 function deposit(){
 
@@ -272,6 +277,8 @@ var msg="Deposit Request %0AName:"+name+"%0APhone:"+phone+"%0AMethod:Easypaisa";
 window.open("https://wa.me/923491441853?text="+msg);
 
 }
+
+/* WITHDRAW */
 
 function withdraw(){
 
@@ -285,6 +292,8 @@ window.open("https://wa.me/923491441853?text="+msg);
 
 }
 
+/* PROFIT CALCULATOR */
+
 function calc(){
 
 var amount=document.getElementById("amount").value;
@@ -294,6 +303,52 @@ var profit=amount*1.5;
 document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
 }
+
+/* LIVE INVESTMENT TICKER */
+
+var realUsers=[
+"ID1001 Ali Asghar invested 64000 PKR",
+"ID1002 M Hussain invested 8000 PKR",
+"ID1003 Jamshad Ahmad invested 12000 PKR"
+];
+
+var fakeNames=[
+"Ahmad Khan","Usman Ali","Bilal Ahmed","Zain Shah",
+"Rizwan Malik","Adnan Raza","Faizan Ali","Danish Khan",
+"Umer Farooq","Arslan Khan"
+];
+
+function randomActivity(){
+
+var name=fakeNames[Math.floor(Math.random()*fakeNames.length)];
+
+var money=[8000,12000,16000,20000,24000,32000];
+
+var amount=money[Math.floor(Math.random()*money.length)];
+
+var type=Math.random()>0.5?"invested":"withdraw";
+
+return name+" "+type+" "+amount+" PKR";
+
+}
+
+function ticker(){
+
+var list=[...realUsers];
+
+for(var i=0;i<20;i++){
+
+list.push(randomActivity());
+
+}
+
+document.getElementById("liveTicker").innerHTML=list.join(" | ");
+
+}
+
+setInterval(ticker,4000);
+
+window.onload=ticker;
 
 </script>
 
@@ -315,13 +370,7 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 </nav>
 
 <div class="news">
-
-<span>
-
-Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
-
-</span>
-
+<span id="liveTicker"></span>
 </div>
 
 <div class="hero">
@@ -396,7 +445,6 @@ Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
 <h3>03220751486</h3>
 
 <input id="dname" placeholder="Your Name">
-
 <input id="dphone" placeholder="Your Phone">
 
 <button onclick="deposit()">Submit Deposit</button>
@@ -412,9 +460,7 @@ Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
 <div class="box">
 
 <input id="wname" placeholder="Your Name">
-
 <input id="wnumber" placeholder="JazzCash / Easypaisa Number">
-
 <input id="wamount" placeholder="Withdraw Amount">
 
 <button onclick="withdraw()">Submit Withdraw</button>
@@ -428,7 +474,6 @@ Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
 <h2>Profit Calculator</h2>
 
 <input id="amount" placeholder="Enter Investment">
-
 <br>
 
 <button onclick="calc()">Calculate</button>
@@ -444,15 +489,12 @@ Welcome To MR FOJI Investment | Fast Withdraw | Secure Platform | 24/7 Support
 <div class="faq">
 
 <h4>How to deposit?</h4>
-
 <p>Send payment to Easypaisa 03220751486 and submit deposit form.</p>
 
 <h4>How to withdraw?</h4>
-
 <p>Submit withdraw form and our team will process it.</p>
 
 <h4>Support?</h4>
-
 <p>Contact us anytime on WhatsApp support.</p>
 
 </div>
