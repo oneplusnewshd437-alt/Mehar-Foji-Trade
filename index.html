@@ -57,7 +57,7 @@ nav a:hover{
 color:#22c55e;
 }
 
-/* LIVE NEWS */
+/* LIVE TICKER */
 
 .news{
 background:red;
@@ -70,7 +70,7 @@ font-weight:bold;
 .news span{
 display:inline-block;
 padding-left:100%;
-animation:slide 25s linear infinite;
+animation:slide 60s linear infinite;
 }
 
 @keyframes slide{
@@ -255,7 +255,7 @@ text-decoration:none;
 
 <script>
 
-/* WHATSAPP INVEST */
+/* INVEST BUTTON */
 
 function invest(plan,amount){
 
@@ -304,19 +304,30 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 
 }
 
-/* LIVE INVESTMENT TICKER */
+/* REAL USERS */
 
 var realUsers=[
-"ID1001 Ali Asghar invested 64000 PKR",
-"ID1002 M Hussain invested 8000 PKR",
-"ID1003 Jamshad Ahmad invested 12000 PKR"
+
+"USER ID:64001 | Ali Asghar | Invested 64000 PKR",
+"USER ID:80002 | M Hussain | Invested 8000 PKR",
+"USER ID:12003 | Jamshad Ahmad | Invested 12000 PKR",
+
+"USER ID:64001 | Ali Asghar | Withdraw 18000 PKR",
+"USER ID:80002 | M Hussain | Withdraw 4000 PKR"
+
 ];
 
+/* FAKE NAMES */
+
 var fakeNames=[
+
 "Ahmad Khan","Usman Ali","Bilal Ahmed","Zain Shah",
 "Rizwan Malik","Adnan Raza","Faizan Ali","Danish Khan",
-"Umer Farooq","Arslan Khan"
+"Umer Farooq","Arslan Khan","Sajid Mehmood"
+
 ];
+
+/* RANDOM ACTIVITY */
 
 function randomActivity(){
 
@@ -326,17 +337,21 @@ var money=[8000,12000,16000,20000,24000,32000];
 
 var amount=money[Math.floor(Math.random()*money.length)];
 
-var type=Math.random()>0.5?"invested":"withdraw";
+var type=Math.random()>0.5?"Invested":"Withdraw";
 
-return name+" "+type+" "+amount+" PKR";
+var id=Math.floor(Math.random()*90000)+10000;
+
+return "USER ID:"+id+" | "+name+" | "+type+" "+amount+" PKR";
 
 }
+
+/* TICKER */
 
 function ticker(){
 
 var list=[...realUsers];
 
-for(var i=0;i<20;i++){
+for(var i=0;i<25;i++){
 
 list.push(randomActivity());
 
@@ -345,8 +360,6 @@ list.push(randomActivity());
 document.getElementById("liveTicker").innerHTML=list.join(" | ");
 
 }
-
-setInterval(ticker,4000);
 
 window.onload=ticker;
 
@@ -389,12 +402,12 @@ window.onload=ticker;
 </div>
 
 <div class="stat">
-<h3>3,40,000 PKR</h3>
+<h3>340,000 PKR</h3>
 <p>Total Deposits</p>
 </div>
 
 <div class="stat">
-<h3>2,10,000 PKR</h3>
+<h3>210,000 PKR</h3>
 <p>Total Withdraw</p>
 </div>
 
@@ -489,7 +502,7 @@ window.onload=ticker;
 <div class="faq">
 
 <h4>How to deposit?</h4>
-<p>Send payment to Easypaisa 03220751486 and submit deposit form.</p>
+<p>Send payment to Easypaisa and submit deposit form.</p>
 
 <h4>How to withdraw?</h4>
 <p>Submit withdraw form and our team will process it.</p>
