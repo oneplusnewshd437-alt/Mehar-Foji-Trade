@@ -7,518 +7,229 @@
 <title>MR FOJI Investment</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI,Arial;
-}
-
-body{
-background:#020617;
-color:white;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
+body{background:#020617;color:white;}
 
 /* TOP BANNER */
-
-.top-banner{
-width:100%;
-background:black;
-text-align:center;
-}
-
-.top-banner img{
-width:100%;
-max-height:180px;
-object-fit:cover;
-}
+.top-banner{text-align:center;}
+.top-banner img{width:100%;max-height:180px;object-fit:cover;}
 
 /* NAVBAR */
-
-nav{
-background:#000;
-display:flex;
-justify-content:center;
-gap:35px;
-padding:15px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-weight:bold;
-}
-
-nav a:hover{
-color:#22c55e;
-}
+nav{background:#000;display:flex;justify-content:center;gap:35px;padding:15px;}
+nav a{color:white;text-decoration:none;font-weight:bold;}
+nav a:hover{color:#22c55e;}
 
 /* NEWS TICKER */
-
-.news{
-background:red;
-padding:10px;
-overflow:hidden;
-white-space:nowrap;
-font-weight:bold;
-}
-
-.news span{
-display:inline-block;
-padding-left:100%;
-animation:slide 60s linear infinite;
-}
-
-@keyframes slide{
-0%{transform:translateX(0)}
-100%{transform:translateX(-100%)}
-}
+.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;font-weight:bold;}
+.news span{display:inline-block;padding-left:100%;animation:slide 60s linear infinite;}
+@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
 /* HERO */
-
-.hero{
-text-align:center;
-padding:70px 20px;
-}
-
-.hero h2{
-font-size:36px;
-margin-bottom:10px;
-}
+.hero{text-align:center;padding:70px 20px;}
+.hero h2{font-size:36px;margin-bottom:10px;}
 
 /* STATS */
-
-.stats{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-background:#111827;
-padding:40px;
-}
-
-.stat{
-text-align:center;
-}
-
-.stat h3{
-color:#22c55e;
-font-size:32px;
-}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;background:#111827;padding:40px;}
+.stat{text-align:center;}
+.stat h3{color:#22c55e;font-size:32px;}
 
 /* SECTIONS */
-
-section{
-padding:60px 10%;
-text-align:center;
-}
-
-section h2{
-color:#22c55e;
-margin-bottom:40px;
-}
+section{padding:60px 10%;text-align:center;}
+section h2{color:#22c55e;margin-bottom:40px;}
 
 /* PLANS */
-
-.plans{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
-}
-
-.plan{
-width:280px;
-padding:35px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
-transition:.3s;
-}
-
-.plan:hover{
-transform:scale(1.05);
-}
-
-.basic{
-background:#1e293b;
-}
-
-.silver{
-background:#e5e5e5;
-color:black;
-}
-
-.gold{
-background:#ffd700;
-color:black;
-}
-
-.price{
-font-size:28px;
-font-weight:bold;
-margin:10px 0;
-}
-
-.plan button{
-background:#22c55e;
-padding:12px 30px;
-border:none;
-border-radius:8px;
-color:white;
-cursor:pointer;
-}
+.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
+.plan{width:280px;padding:35px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.6);transition:.3s;}
+.plan:hover{transform:scale(1.05);}
+.basic{background:#1e293b;}
+.silver{background:#e5e5e5;color:black;}
+.gold{background:#ffd700;color:black;}
+.price{font-size:28px;font-weight:bold;margin:10px 0;}
+.plan button{background:#22c55e;padding:12px 30px;border:none;border-radius:8px;color:white;cursor:pointer;}
 
 /* FORM BOX */
-
-.box{
-background:#111827;
-max-width:420px;
-margin:auto;
-padding:30px;
-border-radius:10px;
-}
-
-.box input{
-width:90%;
-padding:12px;
-margin:10px;
-border-radius:6px;
-border:none;
-}
-
-.box button{
-padding:12px 30px;
-background:#22c55e;
-border:none;
-border-radius:6px;
-color:white;
-cursor:pointer;
-}
+.box{background:#111827;max-width:420px;margin:auto;padding:30px;border-radius:10px;}
+.box input{width:90%;padding:12px;margin:10px;border-radius:6px;border:none;}
+.box button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
 
 /* CALCULATOR */
-
-.calc input{
-padding:12px;
-width:250px;
-margin:10px;
-border-radius:6px;
-border:none;
-}
-
-.calc button{
-padding:12px 30px;
-background:#22c55e;
-border:none;
-border-radius:6px;
-color:white;
-cursor:pointer;
-}
+.calc input{padding:12px;width:250px;margin:10px;border-radius:6px;border:none;}
+.calc button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
 
 /* FAQ */
-
-.faq{
-max-width:700px;
-margin:auto;
-text-align:left;
-}
-
-.faq h4{
-margin-top:20px;
-color:#22c55e;
-}
+.faq{max-width:700px;margin:auto;text-align:left;}
+.faq h4{margin-top:20px;color:#22c55e;}
 
 /* FOOTER */
-
-footer{
-background:black;
-text-align:center;
-padding:25px;
-color:#aaa;
-}
+footer{background:black;text-align:center;padding:25px;color:#aaa;}
 
 /* WHATSAPP */
-
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-padding:14px 18px;
-border-radius:50px;
-color:white;
-text-decoration:none;
-box-shadow:0 5px 15px rgba(0,0,0,0.4);
-}
-
-.whatsapp:hover{
-background:#1ebe56;
-}
-
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.4);}
+.whatsapp:hover{background:#1ebe56;}
 </style>
 
 <script>
-
 /* INVEST */
-
 function invest(plan,amount){
-
 var msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
-
 window.open("https://wa.me/923491441853?text="+msg);
-
 }
 
 /* DEPOSIT */
-
 function deposit(){
-
 var name=document.getElementById("dname").value;
-
 var phone=document.getElementById("dphone").value;
-
 var msg="Deposit Request %0AName:"+name+"%0APhone:"+phone+"%0AMethod:Easypaisa";
-
 window.open("https://wa.me/923491441853?text="+msg);
-
 }
 
 /* WITHDRAW */
-
 function withdraw(){
-
 var name=document.getElementById("wname").value;
-
 var number=document.getElementById("wnumber").value;
-
 var amount=document.getElementById("wamount").value;
-
 var msg="Withdraw Request %0AName:"+name+"%0ANumber:"+number+"%0AAmount:"+amount;
-
 window.open("https://wa.me/923491441853?text="+msg);
-
 }
 
 /* PROFIT CALCULATOR */
-
 function calc(){
-
 var amount=document.getElementById("amount").value;
-
 var profit=amount*1.5;
-
 document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
-
 }
 
-/* LIVE ACTIVITY */
-
+/* LIVE TICKER */
 var names=["Ali","Usman","Bilal","Zain","Rizwan","Faizan","Arslan","Sajid","Danish"];
-
 function ticker(){
-
 var text="";
-
 for(var i=0;i<30;i++){
-
 var name=names[Math.floor(Math.random()*names.length)];
-
 var amount=[8000,12000,16000,20000,24000,32000][Math.floor(Math.random()*6)];
-
 var type=Math.random()>0.5?"Invested":"Withdraw";
-
 var id=Math.floor(Math.random()*90000)+10000;
-
 text+="USER ID:"+id+" | "+name+" | "+type+" "+amount+" PKR | ";
-
 }
-
 document.getElementById("liveTicker").innerHTML=text;
-
 }
-
 window.onload=ticker;
-
 </script>
 
 </head>
 
 <body>
 
+<!-- TOP BANNER -->
 <div class="top-banner">
-<img src="jpgAlig00014.png">
+<img src="Alig00014.png" alt="MR FOJI Banner">
 </div>
 
+<!-- NAVBAR -->
 <nav>
-
 <a href="#">Home</a>
-
 <a href="#plans">Plans</a>
-
 <a href="#deposit">Deposit</a>
-
 <a href="#withdraw">Withdraw</a>
-
 </nav>
 
+<!-- LIVE TICKER -->
 <div class="news">
-
 <span id="liveTicker"></span>
-
 </div>
 
+<!-- HERO -->
 <div class="hero">
-
 <h2>Trusted Online Investment Platform</h2>
-
 <p>Fast • Secure • Professional</p>
-
 </div>
 
+<!-- STATS -->
 <div class="stats">
-
 <div class="stat"><h3>12,558</h3><p>Total Users</p></div>
-
 <div class="stat"><h3>340,000 PKR</h3><p>Total Deposits</p></div>
-
 <div class="stat"><h3>210,000 PKR</h3><p>Total Withdraw</p></div>
-
 </div>
 
+<!-- PLANS -->
 <section id="plans">
-
 <h2>Investment Plans</h2>
-
 <div class="plans">
-
 <div class="plan basic">
-
 <h3>Basic Plan</h3>
-
 <div class="price">8000 PKR</div>
-
 <p>Return 12000 PKR</p>
-
 <br>
-
 <button onclick="invest('Basic Plan','8000 PKR')">Invest</button>
-
 </div>
-
 <div class="plan silver">
-
 <h3>Silver Plan</h3>
-
 <div class="price">16000 PKR</div>
-
 <p>Return 24000 PKR</p>
-
 <br>
-
 <button onclick="invest('Silver Plan','16000 PKR')">Invest</button>
-
 </div>
-
 <div class="plan gold">
-
 <h3>Gold Plan</h3>
-
 <div class="price">32000 PKR</div>
-
 <p>Return 50000 PKR</p>
-
 <br>
-
 <button onclick="invest('Gold Plan','32000 PKR')">Invest</button>
-
 </div>
-
 </div>
-
 </section>
 
+<!-- DEPOSIT -->
 <section id="deposit">
-
 <h2>Deposit (Easypaisa)</h2>
-
 <div class="box">
-
 <p>Send Payment To</p>
-
 <h3>03220751486</h3>
-
 <input id="dname" placeholder="Your Name">
-
 <input id="dphone" placeholder="Your Phone">
-
 <button onclick="deposit()">Submit Deposit</button>
-
 </div>
-
 </section>
 
+<!-- WITHDRAW -->
 <section id="withdraw">
-
 <h2>Withdraw Request</h2>
-
 <div class="box">
-
 <input id="wname" placeholder="Your Name">
-
 <input id="wnumber" placeholder="JazzCash / Easypaisa Number">
-
 <input id="wamount" placeholder="Withdraw Amount">
-
 <button onclick="withdraw()">Submit Withdraw</button>
-
 </div>
-
 </section>
 
+<!-- PROFIT CALCULATOR -->
 <section class="calc">
-
 <h2>Profit Calculator</h2>
-
 <input id="amount" placeholder="Enter Investment">
-
 <br>
-
 <button onclick="calc()">Calculate</button>
-
 <p id="result"></p>
-
 </section>
 
+<!-- FAQ -->
 <section>
-
 <h2>FAQ</h2>
-
 <div class="faq">
-
 <h4>How to deposit?</h4>
-
 <p>Send payment to Easypaisa and submit deposit form.</p>
-
 <h4>How to withdraw?</h4>
-
 <p>Submit withdraw form and our team will process it.</p>
-
 <h4>Support?</h4>
-
 <p>Contact us anytime on WhatsApp support.</p>
-
 </div>
-
 </section>
 
+<!-- FOOTER -->
 <footer>
-
 © 2026 MR FOJI Investment | Secure Platform | Fast Withdraw | 24/7 Support
-
 </footer>
 
+<!-- WHATSAPP BUTTON -->
 <a class="whatsapp" href="https://wa.me/923491441853" target="_blank">WhatsApp</a>
 
 </body>
-
-                              </html>
+  </html>
