@@ -41,7 +41,9 @@ nav .coins{color:white;font-weight:bold;}
 
 /* EVENT */
 .event{text-align:center;padding:30px;}
-.event-img{width:300px;height:300px;object-fit:cover;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.event-img{width:100%;max-width:350px;height:auto;object-fit:cover;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);margin:auto;display:block;}
+.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;font-weight:bold;box-shadow:0 5px 15px rgba(0,0,0,0.4);margin-top:10px;transition:0.3s;}
+.event-button:hover{background:#1ebe56;}
 
 /* PLANS */
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
@@ -159,9 +161,10 @@ window.onload=function(){loadCoins();ticker();};
 
 <!-- EVENT -->
 <div class="event">
-  <h3>Event</h3>
+  <h3>Special Event</h3>
   <img src="F Crown.png" class="event-img" alt="Event Image">
-  <p>500 RS Entry</p>
+  <br>
+  <a href="https://wa.me/923491441853?text=I%20want%20to%20join%20the%20event%20for%20500%20RS" target="_blank" class="event-button">500 RS Entry</a>
 </div>
 
 <!-- PLANS -->
@@ -210,4 +213,4 @@ window.onload=function(){loadCoins();ticker();};
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
 
 </body>
-</html>
+   </html>
