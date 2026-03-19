@@ -1,148 +1,162 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MR FOJI Investment</title><style>
+<title>MR FOJI Investment</title>
+<style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-
 body{background:#020617;color:white;}
 
-/* APP STYLE CONTAINER */
-.app{max-width:420px;margin:auto;background:#0f172a;min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,0.7);}
-
-/* BANNER FULL */
+/* BANNER */
 .top-banner img{width:100%;height:auto;object-fit:contain;}
 
-/* NAV */
-nav{display:flex;justify-content:space-between;padding:15px;background:#020617;border-bottom:1px solid #1f2937;}
-nav h1{color:#22c55e;font-size:18px;}
+/* NAVBAR */
+nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#020617;border-bottom:1px solid #1f2937;}
+nav h1{color:#22c55e;}
+nav .coins{color:#fff;font-weight:bold;}
 
 /* HERO */
-.hero{text-align:center;padding:20px;}
+.hero{text-align:center;padding:40px;background:radial-gradient(circle,#0f172a,#020617);}
+.hero h2{font-size:38px;margin-bottom:10px;}
+.hero p{color:#9ca3af;}
 
 /* DAILY TASK */
-.task{
-background:#111827;
-margin:15px;
-padding:20px;
-border-radius:10px;
-text-align:center;
-border:1px solid #22c55e;
-}
-.task button{
-margin-top:10px;
-padding:10px 20px;
-background:#22c55e;
-border:none;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
+.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;}
+.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
 /* STATS */
-.stats{display:flex;justify-content:space-around;padding:15px;}
-.stat{text-align:center;}
-.stat h3{color:#22c55e;}
+.stats{display:flex;justify-content:space-around;flex-wrap:wrap;padding:20px;}
+.stat{text-align:center;margin:10px;}
+.stat h3{color:#22c55e;font-size:28px;}
 
 /* EVENT */
-.event{text-align:center;padding:20px;}
-.event-img{width:200px;height:200px;object-fit:cover;border-radius:10px;}
+.event{text-align:center;padding:30px;}
+.event-img{width:250px;height:250px;object-fit:cover;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 
 /* PLANS */
-.plans{padding:15px;}
-.plan{
-background:#111827;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-}
-.plan.vip{border:2px solid #22c55e;}
-.plan button{margin-top:10px;padding:10px;background:#22c55e;border:none;color:white;border-radius:5px;}
+.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
+.plan{background:#111827;padding:20px;width:260px;border-radius:12px;transition:.3s;}
+.plan:hover{transform:translateY(-10px);}
+.plan.vip{border:2px solid #22c55e;box-shadow:0 0 20px rgba(34,197,94,0.6);}
+.plan button{margin-top:10px;padding:10px;background:#22c55e;border:none;color:white;border-radius:5px;cursor:pointer;}
 
-/* FOOTER NAV */
-.footer-nav{
-position:fixed;
-bottom:0;
-width:100%;
-max-width:420px;
-display:flex;
-justify-content:space-around;
-background:#020617;
-padding:10px;
-border-top:1px solid #1f2937;
-}
+/* FOOTER */
+footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;}
 
-</style><script>
+/* WHATSAPP */
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.4);}
+</style>
+
+<script>
+// INVEST BUTTON
 function invest(plan){
-window.open("https://wa.me/923491441853?text="+plan);
+  window.open("https://wa.me/923491441853?text="+plan);
 }
 
-/* DAILY TASK SYSTEM */
+// DAILY COINS SYSTEM
 function claimReward(){
-var last=localStorage.getItem("lastClaim");
-var now=new Date().getTime();
-
-if(!last || now - last > 86400000){
-localStorage.setItem("lastClaim",now);
-var coins=localStorage.getItem("coins")||0;
-coins=parseInt(coins)+10;
-localStorage.setItem("coins",coins);
-document.getElementById("coins").innerHTML=coins;
-alert("10 Coins Added ✅");
-}else{
-alert("You already claimed reward today ❌");
-}
+  var last=localStorage.getItem("lastClaim");
+  var now=new Date().getTime();
+  if(!last || now - last > 86400000){
+    localStorage.setItem("lastClaim",now);
+    var coins=localStorage.getItem("coins")||0;
+    coins=parseInt(coins)+10;
+    localStorage.setItem("coins",coins);
+    document.getElementById("coins").innerHTML=coins;
+    alert("10 Coins Added ✅");
+  }else{
+    alert("You already claimed reward today ❌");
+  }
 }
 
 function loadCoins(){
-var coins=localStorage.getItem("coins")||0;
-document.getElementById("coins").innerHTML=coins;
+  var coins=localStorage.getItem("coins")||0;
+  document.getElementById("coins").innerHTML=coins;
 }
 
-/* AUTO PROFIT */
+// AUTO PROFIT
 var profit=210000;
 setInterval(()=>{
-profit+=Math.floor(Math.random()*200);
-document.getElementById("profit").innerHTML=profit+" PKR";
+  profit+=Math.floor(Math.random()*200);
+  document.getElementById("profit").innerHTML=profit+" PKR";
 },3000);
 
+// FAKE LIVE USERS
+var names=["Ali","Usman","Bilal","Zain","Rizwan"];
+setInterval(()=>{
+  var n=names[Math.floor(Math.random()*names.length)];
+  var a=[8000,12000,16000,32000,50000][Math.floor(Math.random()*5)];
+  document.getElementById("liveUser").innerHTML=n+" invested "+a+" PKR";
+},2000);
+
 window.onload=loadCoins;
-</script></head><body><div class="app"><div class="top-banner">
-<img src="Ali888.jpg">
-</div><nav>
-<h1>MR FOJI</h1>
-<h1>Coins: <span id="coins">0</span></h1>
-</nav><div class="hero">
-<h3>Daily Reward System</h3>
-</div><div class="task">
-<h3>Daily Login Reward</h3>
-<p>Get 10 Coins every 24 hours</p>
-<button onclick="claimReward()">Claim Reward</button>
-</div><div class="stats">
-<div class="stat"><h3 id="profit">210000</h3><p>Profit</p></div>
-</div><div class="event">
-<h3>Event</h3>
-<img src="F Crown.png" class="event-img">
-<p>500 RS Entry</p>
-</div><div class="plans"><div class="plan">
-<h3>Basic</h3>
-<p>8000 → 12000</p>
-<button onclick="invest('Basic')">Invest</button>
-</div><div class="plan">
-<h3>Silver</h3>
-<p>16000 → 24000</p>
-<button onclick="invest('Silver')">Invest</button>
-</div><div class="plan">
-<h3>Gold</h3>
-<p>32000 → 50000</p>
-<button onclick="invest('Gold')">Invest</button>
-</div><div class="plan vip">
-<h3>VIP 🔥</h3>
-<p>50000 → 85000</p>
-<button onclick="invest('VIP')">Invest</button>
-</div></div><div class="footer-nav">
-<div>Home</div>
-<div>Plans</div>
-<div>Profile</div>
-</div></div></body>
-</html>
+</script>
+
+</head>
+<body>
+
+<div class="top-banner">
+  <img src="Ali888.jpg">
+</div>
+
+<nav>
+  <h1>MR FOJI</h1>
+  <div class="coins">Coins: <span id="coins">0</span></div>
+</nav>
+
+<div class="hero">
+  <h2>Professional Investment Platform</h2>
+  <p id="liveUser">Loading live users...</p>
+</div>
+
+<div class="task">
+  <h3>Daily Login Reward</h3>
+  <p>Get 10 Coins every 24 hours</p>
+  <button onclick="claimReward()">Claim Reward</button>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <h3 id="profit">210000</h3>
+    <p>Live Profit</p>
+  </div>
+</div>
+
+<div class="event">
+  <h3>Event</h3>
+  <img src="F Crown.png" class="event-img">
+  <p>500 RS Entry</p>
+</div>
+
+<section class="plans">
+  <div class="plan">
+    <h3>Basic</h3>
+    <p>8000 → 12000</p>
+    <button onclick="invest('Basic')">Invest</button>
+  </div>
+  <div class="plan">
+    <h3>Silver</h3>
+    <p>16000 → 24000</p>
+    <button onclick="invest('Silver')">Invest</button>
+  </div>
+  <div class="plan">
+    <h3>Gold</h3>
+    <p>32000 → 50000</p>
+    <button onclick="invest('Gold')">Invest</button>
+  </div>
+  <div class="plan vip">
+    <h3>VIP 🔥</h3>
+    <p>50000 → 85000</p>
+    <button onclick="invest('VIP')">Invest</button>
+  </div>
+</section>
+
+<footer>
+  © 2026 MR FOJI Investment
+</footer>
+
+<a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
+
+</body>
+    </html>
