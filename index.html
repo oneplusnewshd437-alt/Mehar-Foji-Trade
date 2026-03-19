@@ -1,212 +1,148 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MR FOJI Investment</title><style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
 
-/* MOVING 3D BACKGROUND */
-body{
+body{background:#020617;color:white;}
+
+/* APP STYLE CONTAINER */
+.app{max-width:420px;margin:auto;background:#0f172a;min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,0.7);}
+
+/* BANNER FULL */
+.top-banner img{width:100%;height:auto;object-fit:contain;}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;padding:15px;background:#020617;border-bottom:1px solid #1f2937;}
+nav h1{color:#22c55e;font-size:18px;}
+
+/* HERO */
+.hero{text-align:center;padding:20px;}
+
+/* DAILY TASK */
+.task{
+background:#111827;
+margin:15px;
+padding:20px;
+border-radius:10px;
+text-align:center;
+border:1px solid #22c55e;
+}
+.task button{
+margin-top:10px;
+padding:10px 20px;
+background:#22c55e;
+border:none;
 color:white;
-background: url('https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?auto=format&fit=crop&w=1920&q=80');
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-animation:bgMove 20s ease-in-out infinite alternate;
+border-radius:6px;
+cursor:pointer;
 }
 
-@keyframes bgMove{
-0%{background-position:center top;}
-100%{background-position:center bottom;}
-}
+/* STATS */
+.stats{display:flex;justify-content:space-around;padding:15px;}
+.stat{text-align:center;}
+.stat h3{color:#22c55e;}
 
-body::before{
-content:"";
+/* EVENT */
+.event{text-align:center;padding:20px;}
+.event-img{width:200px;height:200px;object-fit:cover;border-radius:10px;}
+
+/* PLANS */
+.plans{padding:15px;}
+.plan{
+background:#111827;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+}
+.plan.vip{border:2px solid #22c55e;}
+.plan button{margin-top:10px;padding:10px;background:#22c55e;border:none;color:white;border-radius:5px;}
+
+/* FOOTER NAV */
+.footer-nav{
 position:fixed;
-top:0;left:0;width:100%;height:100%;
-background:linear-gradient(120deg, rgba(2,6,23,0.85), rgba(2,6,23,0.95));
-z-index:-1;
+bottom:0;
+width:100%;
+max-width:420px;
+display:flex;
+justify-content:space-around;
+background:#020617;
+padding:10px;
+border-top:1px solid #1f2937;
 }
-
-.top-banner img{width:100%;height:180px;object-fit:cover;border-bottom:3px solid #22c55e;}
-
-nav{background:rgba(0,0,0,0.8);display:flex;justify-content:center;gap:35px;padding:15px;backdrop-filter:blur(6px);}
-nav a{color:white;text-decoration:none;font-weight:bold;}
-nav a:hover{color:#22c55e;}
-
-.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;font-weight:bold;}
-.news span{display:inline-block;padding-left:100%;animation:slide 60s linear infinite;}
-@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-
-.hero{text-align:center;padding:70px 20px;}
-.hero h2{font-size:36px;margin-bottom:10px;}
-
-.stats, section, .box, .plan{
-background:rgba(17,24,39,0.75);
-backdrop-filter:blur(10px);
-border-radius:15px;
-}
-
-.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;padding:40px;margin:20px;}
-.stat h3{color:#22c55e;font-size:32px;}
-
-section{padding:60px 10%;text-align:center;margin:20px;}
-section h2{color:#22c55e;margin-bottom:40px;}
-
-.event-img{width:280px;height:280px;object-fit:cover;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
-
-.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
-.plan{width:280px;padding:35px;transition:.3s;}
-.plan:hover{transform:scale(1.05) rotateX(5deg);}
-
-.basic{background:rgba(30,41,59,0.9);}
-.silver{background:#e5e5e5;color:black;}
-.gold{background:#ffd700;color:black;}
-
-/* VIP PLAN SPECIAL */
-.vip{
-background:linear-gradient(135deg,#22c55e,#16a34a);
-color:white;
-box-shadow:0 0 25px rgba(34,197,94,0.8);
-animation:vipGlow 2s infinite alternate;
-}
-
-@keyframes vipGlow{
-0%{box-shadow:0 0 10px rgba(34,197,94,0.6);}
-100%{box-shadow:0 0 35px rgba(34,197,94,1);}
-}
-
-.price{font-size:28px;font-weight:bold;margin:10px 0;}
-.plan button{background:#22c55e;padding:12px 30px;border:none;border-radius:8px;color:white;cursor:pointer;}
-
-.box{max-width:420px;margin:auto;padding:30px;}
-.box input{width:90%;padding:12px;margin:10px;border-radius:6px;border:none;}
-.box button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
-
-.calc input{padding:12px;width:250px;margin:10px;border-radius:6px;border:none;}
-.calc button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
-
-footer{background:black;text-align:center;padding:25px;color:#aaa;}
-
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 
 </style><script>
-function invest(plan,amount){
-var msg="MR FOJI Investment %0APlan:"+plan+"%0AAmount:"+amount;
-window.open("https://wa.me/923491441853?text="+msg);
+function invest(plan){
+window.open("https://wa.me/923491441853?text="+plan);
 }
 
-function deposit(){
-var name=document.getElementById("dname").value;
-var phone=document.getElementById("dphone").value;
-var msg="Deposit Request %0AName:"+name+"%0APhone:"+phone;
-window.open("https://wa.me/923491441853?text="+msg);
+/* DAILY TASK SYSTEM */
+function claimReward(){
+var last=localStorage.getItem("lastClaim");
+var now=new Date().getTime();
+
+if(!last || now - last > 86400000){
+localStorage.setItem("lastClaim",now);
+var coins=localStorage.getItem("coins")||0;
+coins=parseInt(coins)+10;
+localStorage.setItem("coins",coins);
+document.getElementById("coins").innerHTML=coins;
+alert("10 Coins Added ✅");
+}else{
+alert("You already claimed reward today ❌");
+}
 }
 
-function withdraw(){
-var name=document.getElementById("wname").value;
-var number=document.getElementById("wnumber").value;
-var amount=document.getElementById("wamount").value;
-var msg="Withdraw Request %0AName:"+name+"%0ANumber:"+number+"%0AAmount:"+amount;
-window.open("https://wa.me/923491441853?text="+msg);
+function loadCoins(){
+var coins=localStorage.getItem("coins")||0;
+document.getElementById("coins").innerHTML=coins;
 }
 
-function calc(){
-var amount=document.getElementById("amount").value;
-var profit=amount*1.5;
-document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
-}
-/* DAILY AUTO PROFIT COUNTER */
-var totalProfit = 210000;
-function autoProfit(){
-  totalProfit += Math.floor(Math.random()*500)+100;
-  document.getElementById("profitCounter").innerHTML = totalProfit + " PKR";
-}
-setInterval(autoProfit,3000);
+/* AUTO PROFIT */
+var profit=210000;
+setInterval(()=>{
+profit+=Math.floor(Math.random()*200);
+document.getElementById("profit").innerHTML=profit+" PKR";
+},3000);
 
-/* FAKE LIVE USERS */
-var names=["Ali","Usman","Bilal","Zain","Rizwan","Faizan","Arslan","Sajid","Danish"];
-function fakeUsers(){
-  var text="";
-  for(var i=0;i<20;i++){
-    var name=names[Math.floor(Math.random()*names.length)];
-    var amount=[8000,12000,16000,20000,24000,32000,50000][Math.floor(Math.random()*7)];
-    var type=Math.random()>0.5?"Invested":"Withdraw";
-    var id=Math.floor(Math.random()*90000)+10000;
-    text+="USER ID:"+id+" | "+name+" | "+type+" "+amount+" PKR | ";
-  }
-  document.getElementById("liveTicker").innerHTML=text;
-}
-setInterval(fakeUsers,5000);
-</script></head><body><div class="top-banner">
+window.onload=loadCoins;
+</script></head><body><div class="app"><div class="top-banner">
 <img src="Ali888.jpg">
 </div><nav>
-<a href="#">Home</a>
-<a href="#plans">Plans</a>
-<a href="#deposit">Deposit</a>
-<a href="#event">Event</a>
-</nav><div class="news">
-<span id="liveTicker"></span>
-</div><div class="hero">
-<h2>Trusted Online Investment Platform</h2>
-<p>Fast • Secure • Professional</p>
+<h1>MR FOJI</h1>
+<h1>Coins: <span id="coins">0</span></h1>
+</nav><div class="hero">
+<h3>Daily Reward System</h3>
+</div><div class="task">
+<h3>Daily Login Reward</h3>
+<p>Get 10 Coins every 24 hours</p>
+<button onclick="claimReward()">Claim Reward</button>
 </div><div class="stats">
-<div class="stat"><h3>12,558</h3><p>Total Users</p></div>
-<div class="stat"><h3>340,000 PKR</h3><p>Total Deposits</p></div>
-<div class="stat"><h3>210,000 PKR</h3><p>Total Withdraw</p></div>
-<div class="stat"><h3 id="profitCounter">210000 PKR</h3><p>Live Profit</p></div>
-</div><section id="event">
-<h2>Special Event</h2>
+<div class="stat"><h3 id="profit">210000</h3><p>Profit</p></div>
+</div><div class="event">
+<h3>Event</h3>
 <img src="F Crown.png" class="event-img">
-<p style="font-size:24px;margin:20px 0;">500 RS Entry</p>
-<a href="https://wa.me/923491441853">Join via WhatsApp</a>
-</section><section id="plans">
-<h2>Investment Plans</h2>
-<div class="plans"><div class="plan basic">
-<h3>Basic Plan</h3>
-<div class="price">8000 PKR</div>
-<p>Return 12000 PKR</p>
-<button onclick="invest('Basic','8000')">Invest</button>
-</div><div class="plan silver">
-<h3>Silver Plan</h3>
-<div class="price">16000 PKR</div>
-<p>Return 24000 PKR</p>
-<button onclick="invest('Silver','16000')">Invest</button>
-</div><div class="plan gold">
-<h3>Gold Plan</h3>
-<div class="price">32000 PKR</div>
-<p>Return 50000 PKR</p>
-<button onclick="invest('Gold','32000')">Invest</button>
+<p>500 RS Entry</p>
+</div><div class="plans"><div class="plan">
+<h3>Basic</h3>
+<p>8000 → 12000</p>
+<button onclick="invest('Basic')">Invest</button>
+</div><div class="plan">
+<h3>Silver</h3>
+<p>16000 → 24000</p>
+<button onclick="invest('Silver')">Invest</button>
+</div><div class="plan">
+<h3>Gold</h3>
+<p>32000 → 50000</p>
+<button onclick="invest('Gold')">Invest</button>
 </div><div class="plan vip">
-<h3>VIP Plan 🔥</h3>
-<div class="price">50000 PKR</div>
-<p>Return 85000 PKR</p>
-<button onclick="invest('VIP','50000')">Invest</button>
-</div></div>
-</section><section id="deposit">
-<h2>Deposit</h2>
-<div class="box">
-<h3>03220751486</h3>
-<input id="dname" placeholder="Your Name">
-<input id="dphone" placeholder="Your Phone">
-<button onclick="deposit()">Submit</button>
-</div>
-</section><section id="withdraw">
-<h2>Withdraw</h2>
-<div class="box">
-<input id="wname" placeholder="Your Name">
-<input id="wnumber" placeholder="Number">
-<input id="wamount" placeholder="Amount">
-<button onclick="withdraw()">Submit</button>
-</div>
-</section><section class="calc">
-<h2>Profit Calculator</h2>
-<input id="amount" placeholder="Enter Amount">
-<br>
-<button onclick="calc()">Calculate</button>
-<p id="result"></p>
-</section><footer>
-© 2026 MR FOJI Investment | All Rights Reserved
-</footer><a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
-
-</body>
-                              </html>
+<h3>VIP 🔥</h3>
+<p>50000 → 85000</p>
+<button onclick="invest('VIP')">Invest</button>
+</div></div><div class="footer-nav">
+<div>Home</div>
+<div>Plans</div>
+<div>Profile</div>
+</div></div></body>
+</html>
