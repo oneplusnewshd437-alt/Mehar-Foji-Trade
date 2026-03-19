@@ -4,23 +4,30 @@
 <title>MR FOJI Investment</title><style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
 
+/* MOVING 3D BACKGROUND */
 body{
 color:white;
 background: url('https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?auto=format&fit=crop&w=1920&q=80');
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
+animation:bgMove 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove{
+0%{background-position:center top;}
+100%{background-position:center bottom;}
 }
 
 body::before{
 content:"";
 position:fixed;
 top:0;left:0;width:100%;height:100%;
-background:rgba(2,6,23,0.85);
+background:linear-gradient(120deg, rgba(2,6,23,0.85), rgba(2,6,23,0.95));
 z-index:-1;
 }
 
-.top-banner img{width:100%;max-height:180px;object-fit:cover;}
+.top-banner img{width:100%;height:180px;object-fit:cover;border-bottom:3px solid #22c55e;}
 
 nav{background:rgba(0,0,0,0.8);display:flex;justify-content:center;gap:35px;padding:15px;backdrop-filter:blur(6px);}
 nav a{color:white;text-decoration:none;font-weight:bold;}
@@ -34,8 +41,8 @@ nav a:hover{color:#22c55e;}
 .hero h2{font-size:36px;margin-bottom:10px;}
 
 .stats, section, .box, .plan{
-background:rgba(17,24,39,0.7);
-backdrop-filter:blur(8px);
+background:rgba(17,24,39,0.75);
+backdrop-filter:blur(10px);
 border-radius:15px;
 }
 
@@ -45,12 +52,28 @@ border-radius:15px;
 section{padding:60px 10%;text-align:center;margin:20px;}
 section h2{color:#22c55e;margin-bottom:40px;}
 
+.event-img{width:280px;height:280px;object-fit:cover;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
 .plan{width:280px;padding:35px;transition:.3s;}
-.plan:hover{transform:scale(1.05);}
+.plan:hover{transform:scale(1.05) rotateX(5deg);}
+
 .basic{background:rgba(30,41,59,0.9);}
 .silver{background:#e5e5e5;color:black;}
 .gold{background:#ffd700;color:black;}
+
+/* VIP PLAN SPECIAL */
+.vip{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+color:white;
+box-shadow:0 0 25px rgba(34,197,94,0.8);
+animation:vipGlow 2s infinite alternate;
+}
+
+@keyframes vipGlow{
+0%{box-shadow:0 0 10px rgba(34,197,94,0.6);}
+100%{box-shadow:0 0 35px rgba(34,197,94,1);}
+}
 
 .price{font-size:28px;font-weight:bold;margin:10px 0;}
 .plan button{background:#22c55e;padding:12px 30px;border:none;border-radius:8px;color:white;cursor:pointer;}
@@ -62,14 +85,9 @@ section h2{color:#22c55e;margin-bottom:40px;}
 .calc input{padding:12px;width:250px;margin:10px;border-radius:6px;border:none;}
 .calc button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
 
-.faq{max-width:700px;margin:auto;text-align:left;}
-.faq h4{margin-top:20px;color:#22c55e;}
-
 footer{background:black;text-align:center;padding:25px;color:#aaa;}
 
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
-
-.event-img{max-width:300px;border-radius:15px;}
 
 </style><script>
 function invest(plan,amount){
@@ -97,15 +115,37 @@ var amount=document.getElementById("amount").value;
 var profit=amount*1.5;
 document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 }
+/* DAILY AUTO PROFIT COUNTER */
+var totalProfit = 210000;
+function autoProfit(){
+  totalProfit += Math.floor(Math.random()*500)+100;
+  document.getElementById("profitCounter").innerHTML = totalProfit + " PKR";
+}
+setInterval(autoProfit,3000);
+
+/* FAKE LIVE USERS */
+var names=["Ali","Usman","Bilal","Zain","Rizwan","Faizan","Arslan","Sajid","Danish"];
+function fakeUsers(){
+  var text="";
+  for(var i=0;i<20;i++){
+    var name=names[Math.floor(Math.random()*names.length)];
+    var amount=[8000,12000,16000,20000,24000,32000,50000][Math.floor(Math.random()*7)];
+    var type=Math.random()>0.5?"Invested":"Withdraw";
+    var id=Math.floor(Math.random()*90000)+10000;
+    text+="USER ID:"+id+" | "+name+" | "+type+" "+amount+" PKR | ";
+  }
+  document.getElementById("liveTicker").innerHTML=text;
+}
+setInterval(fakeUsers,5000);
 </script></head><body><div class="top-banner">
-<img src="Ali888.jpg" alt="MR FOJI Banner">
+<img src="Ali888.jpg">
 </div><nav>
 <a href="#">Home</a>
 <a href="#plans">Plans</a>
 <a href="#deposit">Deposit</a>
 <a href="#event">Event</a>
 </nav><div class="news">
-<span>USER ID: 45821 | Ali | Invested 8000 PKR | USER ID: 77421 | Usman | Withdraw 12000 PKR | Welcome to MR FOJI Investment</span>
+<span id="liveTicker"></span>
 </div><div class="hero">
 <h2>Trusted Online Investment Platform</h2>
 <p>Fast • Secure • Professional</p>
@@ -113,15 +153,15 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <div class="stat"><h3>12,558</h3><p>Total Users</p></div>
 <div class="stat"><h3>340,000 PKR</h3><p>Total Deposits</p></div>
 <div class="stat"><h3>210,000 PKR</h3><p>Total Withdraw</p></div>
+<div class="stat"><h3 id="profitCounter">210000 PKR</h3><p>Live Profit</p></div>
 </div><section id="event">
 <h2>Special Event</h2>
-<img src="F Crown.png" class="event-img" alt="Event Image">
+<img src="F Crown.png" class="event-img">
 <p style="font-size:24px;margin:20px 0;">500 RS Entry</p>
-<a href="https://wa.me/923491441853" class="event-button">Join via WhatsApp</a>
+<a href="https://wa.me/923491441853">Join via WhatsApp</a>
 </section><section id="plans">
 <h2>Investment Plans</h2>
-<div class="plans">
-<div class="plan basic">
+<div class="plans"><div class="plan basic">
 <h3>Basic Plan</h3>
 <div class="price">8000 PKR</div>
 <p>Return 12000 PKR</p>
@@ -136,8 +176,12 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 <div class="price">32000 PKR</div>
 <p>Return 50000 PKR</p>
 <button onclick="invest('Gold','32000')">Invest</button>
-</div>
-</div>
+</div><div class="plan vip">
+<h3>VIP Plan 🔥</h3>
+<div class="price">50000 PKR</div>
+<p>Return 85000 PKR</p>
+<button onclick="invest('VIP','50000')">Invest</button>
+</div></div>
 </section><section id="deposit">
 <h2>Deposit</h2>
 <div class="box">
@@ -165,4 +209,4 @@ document.getElementById("result").innerHTML="Estimated Profit: "+profit+" PKR";
 </footer><a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
 
 </body>
-                                                                         </html>
+                              </html>
