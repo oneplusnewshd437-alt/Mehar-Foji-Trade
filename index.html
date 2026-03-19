@@ -6,22 +6,30 @@
 <title>MR FOJI Investment</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-body{background:#020617;color:white;}
+body, html{height:100%;overflow-x:hidden;background:#020617;color:white;}
 
-/* BANNER */
+/* BACKGROUND VIDEO */
+#bgVideo{position:fixed;right:0;bottom:0;min-width:100%;min-height:100%;z-index:-1;object-fit:cover;}
+
+/* TOP BANNER */
 .top-banner img{width:100%;height:auto;object-fit:contain;}
 
 /* NAVBAR */
-nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#020617;border-bottom:1px solid #1f2937;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#020617;border-bottom:1px solid #1f2937;position:relative;z-index:2;}
 nav h1{color:#22c55e;}
-nav .coins{color:#fff;font-weight:bold;}
+nav .coins{color:white;font-weight:bold;}
+
+/* LIVE SLIDER */
+.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;font-weight:bold;}
+.news span{display:inline-block;padding-left:100%;animation:slide 60s linear infinite;}
+@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-100%)}
 
 /* HERO */
-.hero{text-align:center;padding:40px;background:radial-gradient(circle,#0f172a,#020617);}
+.hero{text-align:center;padding:40px;color:white;}
 .hero h2{font-size:38px;margin-bottom:10px;}
 .hero p{color:#9ca3af;}
 
-/* DAILY TASK */
+/* DAILY COINS TASK */
 .task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;}
 .task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
@@ -41,122 +49,124 @@ nav .coins{color:#fff;font-weight:bold;}
 .plan.vip{border:2px solid #22c55e;box-shadow:0 0 20px rgba(34,197,94,0.6);}
 .plan button{margin-top:10px;padding:10px;background:#22c55e;border:none;color:white;border-radius:5px;cursor:pointer;}
 
+/* FORMS */
+.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
+.box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
+.box button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
+
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;}
 
 /* WHATSAPP */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.4);}
 </style>
-
 <script>
-// INVEST BUTTON
-function invest(plan){
-  window.open("https://wa.me/923491441853?text="+plan);
-}
+// INVEST FUNCTION
+function invest(plan){ window.open("https://wa.me/923491441853?text="+plan);}
 
 // DAILY COINS SYSTEM
 function claimReward(){
-  var last=localStorage.getItem("lastClaim");
-  var now=new Date().getTime();
-  if(!last || now - last > 86400000){
-    localStorage.setItem("lastClaim",now);
-    var coins=localStorage.getItem("coins")||0;
-    coins=parseInt(coins)+10;
-    localStorage.setItem("coins",coins);
-    document.getElementById("coins").innerHTML=coins;
-    alert("10 Coins Added ✅");
-  }else{
-    alert("You already claimed reward today ❌");
-  }
+ var last=localStorage.getItem("lastClaim");
+ var now=new Date().getTime();
+ if(!last || now - last > 86400000){
+   localStorage.setItem("lastClaim",now);
+   var coins=localStorage.getItem("coins")||0;
+   coins=parseInt(coins)+10;
+   localStorage.setItem("coins",coins);
+   document.getElementById("coins").innerHTML=coins;
+   alert("10 Coins Added ✅");
+ }else{ alert("You already claimed reward today ❌"); }
 }
-
-function loadCoins(){
-  var coins=localStorage.getItem("coins")||0;
-  document.getElementById("coins").innerHTML=coins;
-}
+function loadCoins(){var coins=localStorage.getItem("coins")||0;document.getElementById("coins").innerHTML=coins;}
 
 // AUTO PROFIT
 var profit=210000;
-setInterval(()=>{
-  profit+=Math.floor(Math.random()*200);
-  document.getElementById("profit").innerHTML=profit+" PKR";
-},3000);
+setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
 
-// FAKE LIVE USERS
+// LIVE USERS SLIDER
 var names=["Ali","Usman","Bilal","Zain","Rizwan"];
-setInterval(()=>{
-  var n=names[Math.floor(Math.random()*names.length)];
-  var a=[8000,12000,16000,32000,50000][Math.floor(Math.random()*5)];
-  document.getElementById("liveUser").innerHTML=n+" invested "+a+" PKR";
-},2000);
-
-window.onload=loadCoins;
+function ticker(){var text='';for(var i=0;i<30;i++){var name=names[Math.floor(Math.random()*names.length)];var amount=[8000,12000,16000,32000,50000][Math.floor(Math.random()*5)];var type=Math.random()>0.5?"Invested":"Withdraw";var id=Math.floor(Math.random()*90000)+10000;text+=`USER ID:${id} | ${name} | ${type} ${amount} PKR | `;}document.getElementById("liveTicker").innerHTML=text;}
+window.onload=function(){loadCoins();ticker();};
 </script>
-
 </head>
 <body>
 
-<div class="top-banner">
-  <img src="Ali888.jpg">
-</div>
+<!-- BACKGROUND VIDEO -->
+<video autoplay muted loop id="bgVideo">
+  <source src="background.mp4" type="video/mp4">
+</video>
 
+<!-- TOP BANNER -->
+<div class="top-banner"><img src="Ali888.jpg"></div>
+
+<!-- NAVBAR -->
 <nav>
   <h1>MR FOJI</h1>
   <div class="coins">Coins: <span id="coins">0</span></div>
 </nav>
 
+<!-- LIVE SLIDER -->
+<div class="news"><span id="liveTicker"></span></div>
+
+<!-- HERO -->
 <div class="hero">
   <h2>Professional Investment Platform</h2>
-  <p id="liveUser">Loading live users...</p>
+  <p>Fast • Secure • Professional</p>
 </div>
 
+<!-- DAILY TASK -->
 <div class="task">
   <h3>Daily Login Reward</h3>
   <p>Get 10 Coins every 24 hours</p>
   <button onclick="claimReward()">Claim Reward</button>
 </div>
 
+<!-- STATS -->
 <div class="stats">
-  <div class="stat">
-    <h3 id="profit">210000</h3>
-    <p>Live Profit</p>
-  </div>
+  <div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div>
 </div>
 
+<!-- EVENT -->
 <div class="event">
   <h3>Event</h3>
   <img src="F Crown.png" class="event-img">
   <p>500 RS Entry</p>
 </div>
 
+<!-- PLANS -->
 <section class="plans">
-  <div class="plan">
-    <h3>Basic</h3>
-    <p>8000 → 12000</p>
-    <button onclick="invest('Basic')">Invest</button>
-  </div>
-  <div class="plan">
-    <h3>Silver</h3>
-    <p>16000 → 24000</p>
-    <button onclick="invest('Silver')">Invest</button>
-  </div>
-  <div class="plan">
-    <h3>Gold</h3>
-    <p>32000 → 50000</p>
-    <button onclick="invest('Gold')">Invest</button>
-  </div>
-  <div class="plan vip">
-    <h3>VIP 🔥</h3>
-    <p>50000 → 85000</p>
-    <button onclick="invest('VIP')">Invest</button>
+  <div class="plan"><h3>Basic</h3><p>8000 → 12000</p><button onclick="invest('Basic')">Invest</button></div>
+  <div class="plan"><h3>Silver</h3><p>16000 → 24000</p><button onclick="invest('Silver')">Invest</button></div>
+  <div class="plan"><h3>Gold</h3><p>32000 → 50000</p><button onclick="invest('Gold')">Invest</button></div>
+  <div class="plan vip"><h3>VIP 🔥</h3><p>50000 → 85000</p><button onclick="invest('VIP')">Invest</button></div>
+</section>
+
+<!-- DEPOSIT FORM -->
+<section id="deposit">
+  <h2 style="text-align:center;color:#22c55e;">Deposit (Easypaisa)</h2>
+  <div class="box">
+    <p>Send Payment To</p><h3>03220751486</h3>
+    <input id="dname" placeholder="Your Name">
+    <input id="dphone" placeholder="Your Phone">
+    <button onclick="window.open('https://wa.me/923491441853?text=Deposit Request %0AName:'+document.getElementById('dname').value+'%0APhone:'+document.getElementById('dphone').value+'%0AMethod:Easypaisa')">Submit Deposit</button>
   </div>
 </section>
 
-<footer>
-  © 2026 MR FOJI Investment
-</footer>
+<!-- WITHDRAW FORM -->
+<section id="withdraw">
+  <h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
+  <div class="box">
+    <input id="wname" placeholder="Your Name">
+    <input id="wnumber" placeholder="JazzCash / Easypaisa Number">
+    <input id="wamount" placeholder="Withdraw Amount">
+    <button onclick="window.open('https://wa.me/923491441853?text=Withdraw Request %0AName:'+document.getElementById('wname').value+'%0ANumber:'+document.getElementById('wnumber').value+'%0AAmount:'+document.getElementById('wamount').value)">Submit Withdraw</button>
+  </div>
+</section>
 
+<!-- FOOTER -->
+<footer>© 2026 MR FOJI Investment</footer>
+
+<!-- WHATSAPP BUTTON -->
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
-
 </body>
-    </html>
+</html>
