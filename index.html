@@ -9,7 +9,7 @@
 body, html{height:100%;overflow-x:hidden;background:#020617;color:white;}
 
 /* BACKGROUND VIDEO */
-#bgVideo{position:fixed;right:0;bottom:0;min-width:100%;min-height:100%;z-index:-2;object-fit:cover;}
+#bgVideo{position:fixed;right:0;bottom:0;width:100%;height:100%;z-index:-2;object-fit:cover;}
 .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:-1;}
 
 /* TOP BANNER */
@@ -60,6 +60,11 @@ nav .coins{color:white;font-weight:bold;}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
 .box button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
 
+/* PROFIT CALCULATOR */
+.calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
+.calc input{padding:12px;width:80%;border-radius:6px;border:none;margin:10px 0;}
+.calc button{padding:12px 30px;background:#22c55e;border:none;border-radius:6px;color:white;cursor:pointer;}
+
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
@@ -84,6 +89,13 @@ function claimReward(){
  }else{ alert("You already claimed reward today ❌"); }
 }
 function loadCoins(){var coins=localStorage.getItem("coins")||0;document.getElementById("coins").innerHTML=coins;}
+
+// PROFIT CALCULATOR
+function calcProfit(){
+  var amt = document.getElementById("amount").value;
+  var profit = amt * 1.5;
+  document.getElementById("result").innerHTML = "Estimated Profit: " + profit + " PKR";
+}
 
 // AUTO PROFIT
 var profit=210000;
@@ -115,7 +127,7 @@ window.onload=function(){loadCoins();ticker();};
 
 <!-- TOP BANNER -->
 <div class="top-banner">
-  <img src="https://i.ibb.co/2dM1VhP/Ali888.jpg" alt="Banner Image">
+  <img src="Ali888.jpg" alt="Banner Image">
 </div>
 
 <!-- NAVBAR -->
@@ -148,7 +160,7 @@ window.onload=function(){loadCoins();ticker();};
 <!-- EVENT -->
 <div class="event">
   <h3>Event</h3>
-  <img src="https://i.ibb.co/qYV8zB2/F-Crown.png" class="event-img" alt="Event Image">
+  <img src="F Crown.png" class="event-img" alt="Event Image">
   <p>500 RS Entry</p>
 </div>
 
@@ -158,6 +170,15 @@ window.onload=function(){loadCoins();ticker();};
   <div class="plan silver"><h3>Silver</h3><p>16000 → 24000</p><button onclick="invest('Silver')">Invest</button></div>
   <div class="plan gold"><h3>Gold</h3><p>32000 → 50000</p><button onclick="invest('Gold')">Invest</button></div>
   <div class="plan vip"><h3>VIP 🔥</h3><p>50000 → 85000</p><button onclick="invest('VIP')">Invest</button></div>
+</section>
+
+<!-- PROFIT CALCULATOR -->
+<section class="calc">
+<h2>Profit Calculator</h2>
+<input type="number" id="amount" placeholder="Enter Investment">
+<br>
+<button onclick="calcProfit()">Calculate</button>
+<p id="result"></p>
 </section>
 
 <!-- DEPOSIT FORM -->
