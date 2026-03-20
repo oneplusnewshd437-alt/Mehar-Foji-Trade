@@ -103,15 +103,25 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* STATS */
+/* STATS - Live Profit Card */
 .stats{
 display:flex;
-justify-content:space-around;
+justify-content:center;
 flex-wrap:wrap;
 padding:20px;
 }
-.stat{text-align:center;margin:10px;}
+.stat{
+text-align:center;
+margin:10px auto;
+background:#111827;        
+padding:20px;
+border-radius:12px;
+border:2px solid #22c55e; 
+max-width:300px;           
+box-shadow: 0 10px 20px rgba(34,197,94,0.4); 
+}
 .stat h3{color:#22c55e;font-size:28px;}
+.stat p{margin-top:5px;color:#9ca3af;}
 
 /* EVENT */
 .event{text-align:center;padding:30px;}
@@ -369,4 +379,4 @@ window.onload=function(){loadCoins();ticker();};
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
 
 </body>
-                    </html>
+  </html>
