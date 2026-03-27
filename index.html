@@ -251,8 +251,8 @@ function calculateProfit(){
 
 // SIMULATED ONLINE USERS
 function simulateOnlineUsers(){
-    const minUsers = 11;
-    const maxUsers = 81;
+    const minUsers = 95;
+    const maxUsers = 200;
     setInterval(()=>{
         const online = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
         document.getElementById("onlineUsers").innerText = online + " Users Online";
