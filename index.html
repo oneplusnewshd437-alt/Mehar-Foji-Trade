@@ -10,55 +10,78 @@ body, html{
     height:100%;
     overflow-x:hidden;
     color:white;
-    background-image:url('investment.jpg'); /* Website background */
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
+    transition: background 0.5s;
 }
-@media(max-width:768px){body{background-attachment:scroll;}}
 
-/* LOGIN FULLSCREEN */
+/* LOGIN FULL SCREEN BACKGROUND */
 #loginBox{
     position:fixed;
-    top:0;
-    left:0;
+    top:0; left:0;
     width:100%;
     height:100%;
-    background-image:url('LoginCard.jpg'); /* Login card background */
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    z-index:9999;
     display:flex;
     justify-content:center;
     align-items:center;
+    z-index:9999;
+    background-image:url('LoginCard.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
+
+/* LOGIN BOX */
 .login-box{
-    background: rgba(0,0,0,0.6);
+    background:#111827cc;
     padding:25px;
     border-radius:10px;
     width:300px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.7);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
-.login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
-.login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;transition:0.3s;}
-.login-box button:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(34,197,94,0.5);}
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+}
+.login-box button{
+    width:100%;
+    padding:10px;
+    background:#22c55e;
+    border:none;
+    color:white;
+    border-radius:6px;
+    margin-top:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.login-box button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(34,197,94,0.5);
+}
+.login-box button.reset{background:red;}
 
 /* NAV 3D + BORDER + COIN ICON */
 nav{
-display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
-background:#111827;
-border-radius:10px;
-margin:10px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    background:#111827;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
 }
 nav h1{color:#22c55e;font-size:28px;}
 .coins{
-font-weight:bold;font-size:18px;color:#fff;
-padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
-box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
+    font-weight:bold;font-size:18px;color:#fff;
+    padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 }
 .coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
 
@@ -109,9 +132,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 
 /* PROFIT CALCULATOR 3D ENHANCED */
 .calc-3d{
-text-align:center;
-margin:30px auto;
-perspective: 1000px;
+    text-align:center;
+    margin:30px auto;
+    perspective: 1000px;
 }
 .calc-card{
     background: linear-gradient(145deg, #0f172a, #0f3c6a);
@@ -205,12 +228,18 @@ function loginUser(){
         localStorage.setItem("userPass",p);
         localStorage.setItem("coins",60);
         alert("Account Created ✅");
-        location.reload();
+        afterLogin();
     }else{
         if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
-            document.getElementById("loginBox").style.display="none"; // Hide login
+            afterLogin();
         }else{alert("Wrong Details ❌");}
     }
+}
+
+// AFTER LOGIN
+function afterLogin(){
+    document.getElementById("loginBox").style.display="none";
+    document.body.style.backgroundImage="url('investment.jpg')";
 }
 
 // RESET PASSWORD
@@ -296,7 +325,7 @@ window.onload=function(){
 <input id="mobile" placeholder="Mobile Number">
 <input id="pass" type="password" placeholder="Password">
 <button onclick="loginUser()">Login</button>
-<button onclick="resetPassword()" style="background:red;margin-top:10px;">Reset Password</button>
+<button onclick="resetPassword()" class="reset">Reset Password</button>
 </div>
 </div>
 
