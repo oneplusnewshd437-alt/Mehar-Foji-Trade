@@ -18,34 +18,33 @@ body, html{
 }
 @media(max-width:768px){body{background-attachment:scroll;}}
 
-/* LOGIN FULL SCREEN WITH OWN BACKGROUND */
+/* LOGIN CARD WITH BACKGROUND */
 #loginBox{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    height:100%;
-    background:url('login 888.jpg') no-repeat center center;
-    background-size:cover;
+    height:100vh;
+    background:url("login 888.jpg") center/cover no-repeat;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
+    padding-top:120px;
     z-index:9999;
 }
 .login-box{
-    background:rgba(0,0,0,0.85); /* semi-transparent overlay */
-    padding:25px; /* reduced padding */
-    border-radius:15px; /* stylish border */
-    width:300px; /* smaller width */
+    background:rgba(0,0,0,0.85);
+    padding:25px;
+    border-radius:15px;
+    width:300px;
     text-align:center;
-    border: 2px solid #22c55e; /* green border */
+    border: 2px solid #22c55e;
     box-shadow: 0 0 15px #22c55e, 0 8px 20px rgba(0,0,0,0.6);
 }
 .login-box h2{
     color:#22c55e;
     margin-bottom:20px;
     font-size:20px;
-    text-shadow: 0 0 6px #22c55e, 0 0 10px #0f3c6a;
 }
 .login-box input{
     width:100%;
@@ -54,24 +53,22 @@ body, html{
     border:none;
     border-radius:6px;
 }
+/* Buttons in one line */
+.login-box .btn-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
 .login-box button{
-    width:100%;
+    flex:1;
     padding:10px;
-    background:#22c55e;
     border:none;
     color:white;
     border-radius:6px;
     cursor:pointer;
-    transition:0.3s;
 }
-.login-box button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 5px 10px rgba(34,197,94,0.5);
-}
-.login-box .reset-btn{
-    background:red;
-    margin-top:8px;
-}
+.login-btn{background:#22c55e;}
+.reset-btn{background:red;margin-top:0;}
 
 /* NAV 3D + BORDER + COIN ICON */
 nav{
@@ -274,8 +271,12 @@ window.onload=function(){
 <h2>LOGIN REGISTERED ID</h2>
 <input id="mobile" placeholder="Mobile Number">
 <input id="pass" type="password" placeholder="Password">
-<button onclick="loginUser()">Login</button>
+
+<div class="btn-row">
+<button class="login-btn" onclick="loginUser()">Login</button>
 <button class="reset-btn" onclick="resetPassword()">Reset Password</button>
+</div>
+
 </div>
 </div>
 
