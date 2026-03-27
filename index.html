@@ -46,8 +46,18 @@ nav h1 {
     background: rgba(0,0,0,0.5);
 }
 
-/* USER INFO */
-.user-info{text-align:center;margin:15px;font-size:18px;color:#22c55e;}
+/* USER INFO HTML */
+.user-info{
+    text-align:center;
+    margin:15px auto;
+    font-size:18px;
+    color:#22c55e;
+    border:2px solid #22c55e;
+    border-radius:10px;
+    padding:10px;
+    max-width:400px;
+    background: rgba(0,0,0,0.5);
+}
 
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
@@ -140,7 +150,7 @@ function claimReward(){
         localStorage.setItem("coins", coins);
         document.getElementById("coins").innerHTML = coins; 
         alert("10 Coins Added ✅");
-        updateUserInfo(); // Update user info dynamically
+        updateUserInfo();
     } else{alert("Already claimed ❌");}
 }
 
@@ -148,10 +158,9 @@ function loadCoins(){
     document.getElementById("coins").innerHTML=localStorage.getItem("coins")||0;
 }
 
-// UPDATE USER INFO
 function updateUserInfo() {
-    var mobile = localStorage.getItem("userMobile") || "Guest";
-    var coins = localStorage.getItem("coins") || 0;
+    var mobile = localStorage.getItem("userMobile") || "03491234567"; // default HTML number
+    var coins = localStorage.getItem("coins") || 120; // default HTML coins
     document.getElementById("userID").innerText = mobile;
     document.getElementById("userCoins").innerText = coins;
 }
@@ -210,11 +219,12 @@ window.onload=function(){
 <div class="overlay"></div>
 <div class="top-banner"><img src="Ali888.jpg"></div>
 
+<!-- NAV -->
 <nav><h1>MR FOJI</h1><div class="coins">Coins: <span id="coins">0</span></div></nav>
 
-<!-- USER INFO DISPLAY -->
+<!-- USER INFO HTML -->
 <div class="user-info">
-Logged in as: <span id="userID">Guest</span> | Coins: <span id="userCoins">0</span>
+Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins">120</span>
 </div>
 
 <div class="news"><span id="liveTicker"></span></div>
@@ -272,4 +282,4 @@ Logged in as: <span id="userID">Guest</span> | Coins: <span id="userCoins">0</sp
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
 
 </body>
-                          </html>
+    </html>
