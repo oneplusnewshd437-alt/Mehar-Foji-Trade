@@ -6,81 +6,108 @@
 <title>MR FOJI Investment</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-body, html{height:100%;overflow-x:hidden;color:white;}
+body, html{
+    height:100%;
+    overflow-x:hidden;
+    color:white;
+    background-image:url('investment.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+@media(max-width:768px){body{background-attachment:scroll;}}
 
 /* LOGIN */
 #loginBox{
     position:fixed;top:0;left:0;width:100%;height:100%;
-    background:url('Login.jpg') center/cover no-repeat;
     display:flex;justify-content:center;align-items:center;
     z-index:9999;
+    background:rgba(0,0,0,0.8);
 }
 .login-box{
-    background:rgba(0,0,0,0.75);
-    padding:20px;
-    border-radius:10px;
-    width:90%;
-    max-width:350px;
+    padding:25px;
+    border-radius:20px;
+    width:320px;
     text-align:center;
+    background:url('LoginCard.jpg') center/cover no-repeat;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 20px rgba(34,197,94,0.6);
 }
-.login-box input{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
-.login-box button{width:100%;padding:12px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;transition:0.3s;}
-.login-box button:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(34,197,94,0.5);}
-.login-box .reset-btn{background:red;margin-top:10px;}
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+}
+.login-box button{
+    width:100%;
+    padding:10px;
+    background:#22c55e;
+    border:none;
+    color:white;
+    border-radius:6px;
+    margin-top:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.login-box button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(34,197,94,0.5);
+}
+.reset-btn{
+    background:red !important;
+}
 
-/* WEBSITE CONTENT */
-#websiteContent{display:none; background:url('investment.jpg') center/cover no-repeat; min-height:100vh;}
-
-/* NAV 3D + BORDER + COIN ICON */
+/* NAV */
 nav{
-display:flex;justify-content:space-between;align-items:center;padding:12px 20px;
-background:#111827;
-border-radius:10px;
-margin:10px;
-box-shadow:0 8px 20px rgba(0,0,0,0.5), 0 0 12px #22c55e inset;
-flex-wrap:wrap;
+    display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
+    background:#111827;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
 }
-nav h1{color:#22c55e;font-size:24px;}
+nav h1{color:#22c55e;font-size:28px;}
 .coins{
-font-weight:bold;font-size:16px;color:#fff;
-padding:6px 14px;border-radius:50px;background: rgba(0,0,0,0.6);
-box-shadow: 0 5px 12px rgba(0,0,0,0.6), inset 0 0 8px rgba(34,197,94,0.5);
+    font-weight:bold;font-size:18px;color:#fff;
+    padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 }
-.coins img{width:20px;height:20px;vertical-align:middle;margin-right:5px;border-radius:50%;}
+.coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
 
 /* NEWS TICKER */
-.news{background:red;padding:8px;overflow:hidden;white-space:nowrap;border-radius:6px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 25s linear infinite;font-size:14px;}
+.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
+.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
 @keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
-.top-banner img{width:100%;max-height:250px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
+.top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
 
 /* HERO */
-.hero{text-align:center;padding:20px;}
-.hero h2{font-size:28px;}
-.hero p{color:#9ca3af;font-size:14px;}
+.hero{text-align:center;padding:40px;}
+.hero h2{font-size:38px;}
+.hero p{color:#9ca3af;}
 
 /* TASK / DAILY COINS */
-.task{background:#111827;margin:15px auto;padding:15px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-.task button{margin-top:10px;padding:10px 18px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
-.task button:hover{transform:translateY(-2px) translateZ(3px);box-shadow:0 8px 20px rgba(34,197,94,0.5);}
+.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
+.task button:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(34,197,94,0.5);}
 
 /* STATS */
-.stats{display:flex;justify-content:center;flex-wrap:wrap;padding:15px;}
-.stat{text-align:center;margin:8px auto;background:#111827;padding:15px;border-radius:12px;border:1px solid #22c55e;max-width:250px;box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-.stat h3{color:#22c55e;font-size:22px;}
-.stat p{margin-top:5px;color:#9ca3af;font-size:14px;}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;padding:20px;}
+.stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:1px solid #22c55e;max-width:300px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.stat h3{color:#22c55e;font-size:28px;}
+.stat p{margin-top:5px;color:#9ca3af;}
 
 /* EVENT */
-.event{text-align:center;padding:20px;}
-.event-img{width:100%;max-width:300px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-.event-button{display:inline-block;background:#22c55e;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;margin-top:10px;font-size:14px;}
+.event{text-align:center;padding:30px;}
+.event-img{width:100%;max-width:350px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;margin-top:10px;}
 
 /* PLANS */
-.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:15px;}
-.plan{padding:15px;width:100%;max-width:220px;border-radius:12px;transition:.3s;box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-.plan:hover{transform:translateY(-3px) translateZ(3px);box-shadow:0 12px 25px rgba(0,0,0,0.7);}
+.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.plan:hover{transform:translateY(-5px);}
 .plan.basic{background:#1e3c72;}
 .plan.silver{background:#c0c0c0;color:black;}
 .plan.gold{background:#ffd700;color:black;}
@@ -88,47 +115,81 @@ box-shadow: 0 5px 12px rgba(0,0,0,0.6), inset 0 0 8px rgba(34,197,94,0.5);
 .plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
 /* BOXES (Deposit / Withdraw) */
-.box{background:#111827;padding:15px;border-radius:10px;max-width:350px;margin:15px auto;box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-.box input{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;background:#1f2937;color:white;font-size:14px;}
+.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#1f2937;color:white;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
-.box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
+.box button:hover{background:#1ebe5d;transform:translateY(-2px);}
 
-/* PROFIT CALCULATOR 3D */
-.calc-3d{text-align:center;margin:20px auto;perspective:1000px;}
+/* PROFIT CALCULATOR */
+.calc{
+text-align:center;
+margin:30px auto;
+}
 .calc-card{
     background: linear-gradient(145deg, #0f172a, #0f3c6a);
-    padding:25px;border-radius:20px;width:90%;max-width:380px;margin:auto;
-    box-shadow:8px 8px 25px rgba(0,0,0,0.7), -8px -8px 25px rgba(0,120,255,0.3);
-    transform-style: preserve-3d;
-    transition: transform 0.4s, box-shadow 0.4s;
+    padding:35px;
+    border-radius:25px;
+    width:90%;
+    max-width:420px;
+    margin:auto;
+    box-shadow: 12px 12px 30px rgba(0,0,0,0.7), -12px -12px 30px rgba(0,120,255,0.3);
 }
-.calc-card:hover{transform: rotateX(6deg) rotateY(6deg);box-shadow:10px 10px 30px rgba(0,0,0,0.8), -10px -10px 30px rgba(0,150,255,0.5);}
-.calc-card input{background:#112244;color:#00f3ff;font-size:16px;padding:12px;border-radius:12px;border:none;margin-bottom:12px;width:95%;}
-.calc-card button{background:#00f3ff;color:#0f172a;font-weight:bold;padding:12px;border-radius:12px;font-size:16px;border:none;cursor:pointer;width:100%;}
-.calc-card button:hover{transform: translateY(-3px) translateZ(4px);box-shadow:0 10px 20px rgba(0,243,255,0.5);}
+.calc-card input{
+    background:#112244;
+    color:#00f3ff;
+    font-size:18px;
+    padding:16px;
+    border-radius:15px;
+    border:none;
+    margin-bottom:15px;
+}
+.calc-card button{
+    background:#00f3ff;
+    color:#0f172a;
+    font-weight:bold;
+    padding:16px;
+    border-radius:15px;
+    font-size:18px;
+    border:none;
+    cursor:pointer;
+}
+.calc-card button:hover{
+    transform: translateY(-4px);
+    box-shadow:0 12px 25px rgba(0,243,255,0.5);
+}
 
-/* ONLINE USERS 3D REDESIGN */
-.computer-users{text-align:center;background: linear-gradient(145deg, #111827, #0f1a2b);padding:20px;margin:15px auto;border-radius:15px;max-width:380px;box-shadow:8px 8px 20px rgba(0,0,0,0.6), -8px -8px 20px rgba(0,255,200,0.05);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
-.computer-users:hover{transform: rotateX(6deg) rotateY(-6deg);box-shadow: 10px 10px 25px rgba(0,0,0,0.7), -10px -10px 25px rgba(0,255,200,0.2);}
-.computer-users h2{font-size:24px;color:#00f3ff;margin-bottom:10px;}
-.user-card{background: rgba(0,243,255,0.05);padding:15px;border-radius:12px;font-size:18px;font-weight:bold;color:#00f3ff;box-shadow: inset 0 0 15px rgba(0,243,255,0.2);transition: transform 0.3s;}
-.user-card:hover{transform: translateY(-2px) translateZ(4px);}
+/* ONLINE USERS */
+.computer-users{
+    text-align:center;
+    background: linear-gradient(145deg, #111827, #0f1a2b);
+    padding:30px;
+    margin:25px auto;
+    border-radius:20px;
+    max-width:420px;
+    box-shadow: 10px 10px 25px rgba(0,0,0,0.6), -10px -10px 25px rgba(0,255,200,0.05);
+}
+.computer-users h2{
+    font-size:30px;
+    color:#00f3ff;
+    margin-bottom:15px;
+}
+.user-card{
+    background: rgba(0,243,255,0.05);
+    padding:25px;
+    border-radius:15px;
+    font-size:24px;
+    font-weight:bold;
+    color:#00f3ff;
+    box-shadow: inset 0 0 20px rgba(0,243,255,0.2);
+}
 
 /* FOOTER */
-footer{background:#020617;padding:15px;text-align:center;color:#aaa;margin-top:15px;border-radius:10px;font-size:14px;}
+footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
 /* WHATSAPP FLOAT */
-.whatsapp{position:fixed;bottom:15px;right:15px;background:#25D366;padding:12px 16px;border-radius:50px;color:white;text-decoration:none;font-size:14px;}
-
-/* RESPONSIVE TEXT */
-@media (max-width:480px){
-    nav h1{font-size:20px;}
-    .coins{font-size:14px;padding:5px 10px;}
-    .hero h2{font-size:22px;}
-    .hero p{font-size:12px;}
-    .plans{flex-direction:column;align-items:center;}
-}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
+
 <script>
 // LOGIN SYSTEM
 function loginUser(){
@@ -140,15 +201,15 @@ function loginUser(){
         localStorage.setItem("userPass",p);
         localStorage.setItem("coins",60);
         alert("Account Created ✅");
+        location.reload();
     }else{
         if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
             document.getElementById("loginBox").style.display="none";
-            document.getElementById("websiteContent").style.display="block";
-        }else{alert("Wrong Details ❌");return;}
+        }else{alert("Wrong Details ❌");}
     }
-    document.getElementById("loginBox").style.display="none";
-    document.getElementById("websiteContent").style.display="block";
 }
+
+// RESET PASSWORD
 function resetPassword(){
     var m=prompt("Enter Mobile Number");
     if(m===localStorage.getItem("userMobile")){
@@ -172,7 +233,7 @@ function claimReward(){
         localStorage.setItem("lastClaim", now);
         var coins = parseInt(localStorage.getItem("coins")||0) + 10;
         localStorage.setItem("coins", coins);
-        alert("10 Coins Added ✅");
+        alert("20 Coins Added ✅");
         loadCoins();
     }else{alert("Already claimed today ❌");}
 }
@@ -199,10 +260,10 @@ function ticker(){
 // PROFIT CALCULATOR
 function calculateProfit(){
     var invest = parseFloat(document.getElementById("investment").value) || 0;
-    var prof = invest * 0.25;
-    var total = invest + prof;
+    var profit = invest * 0.25;
+    var total = invest + profit;
     document.getElementById("calcResult").innerText =
-        `Profit: ${prof.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
+        `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
 // SIMULATED ONLINE USERS
@@ -226,41 +287,45 @@ window.onload=function(){
 
 <!-- LOGIN -->
 <div id="loginBox">
-<div class="login-box">
-<h2 style="color:#22c55e;">Login / Register</h2>
-<input id="mobile" placeholder="Mobile Number">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="loginUser()">Login</button>
-<button onclick="resetPassword()" class="reset-btn">Reset Password</button>
-</div>
+  <div class="login-box">
+    <h2 style="color:#22c55e;">Login / Register</h2>
+    <input id="mobile" placeholder="Mobile Number">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+    <button onclick="resetPassword()" class="reset-btn">Reset Password</button>
+  </div>
 </div>
 
-<!-- WEBSITE CONTENT -->
-<div id="websiteContent">
+<!-- TOP BANNER -->
+<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
 
+<!-- NAV -->
 <nav>
 <h1>MR FOJI</h1>
 <div class="coins" id="coins">0</div>
 </nav>
 
+<!-- LIVE NEWS TICKER -->
 <div class="news"><span id="liveTicker"></span></div>
 
-<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
-
+<!-- HERO -->
 <div class="hero">
 <h2>Professional Investment Platform</h2>
 <p>Fast • Secure • Professional</p>
 </div>
 
+<!-- DAILY REWARD -->
 <div class="task">
 <h3>Daily Login Reward</h3>
 <button onclick="claimReward()">Claim Reward</button>
 </div>
 
+<!-- STATS -->
 <div class="stats">
 <div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div>
 </div>
 
+<!-- EVENT -->
 <div class="event">
 <h3>Special Event</h3>
 <img src="Agent Hussain.jpg" class="event-img">
@@ -268,6 +333,7 @@ window.onload=function(){
 <a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a>
 </div>
 
+<!-- PLANS -->
 <section class="plans">
 <div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Basic 2000')">Invest</button></div>
 <div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Silver 5000')">Invest</button></div>
@@ -275,6 +341,7 @@ window.onload=function(){
 <div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest VIP 16000')">Invest</button></div>
 </section>
 
+<!-- DEPOSIT -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Deposit (Easypaisa)</h2>
 <div class="box">
@@ -285,6 +352,7 @@ window.onload=function(){
 </div>
 </section>
 
+<!-- WITHDRAW -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
 <div class="box">
@@ -295,25 +363,29 @@ window.onload=function(){
 </div>
 </section>
 
-<!-- 3D PROFIT CALCULATOR -->
-<section class="calc-3d">
+<!-- PROFIT CALCULATOR -->
+<section class="calc">
 <h2>Profit Calculator</h2>
 <div class="calc-card">
-<input id="investment" placeholder="Enter Investment">
-<button onclick="calculateProfit()">Calculate</button>
-<p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
+<input type="number" id="investment" placeholder="Enter Investment Amount">
+<button onclick="calculateProfit()">Calculate Profit</button>
+<p id="calcResult" style="margin-top:15px;font-size:18px;"></p>
 </div>
 </section>
 
-<!-- 3D ONLINE USERS -->
+<!-- ONLINE USERS -->
 <div class="computer-users">
-<h2 id="onlineUsers">0 Users Online</h2>
-<div class="user-card">Current Online Users</div>
+<h2>Online Users</h2>
+<div class="user-card" id="onlineUsers">0 Users Online</div>
 </div>
 
-<footer>© MR FOJI Investment</footer>
-<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+<!-- WHATSAPP -->
+<a href="https://wa.me/923491441853" target="_blank" class="whatsapp">WhatsApp</a>
 
-</div>
+<!-- FOOTER -->
+<footer>
+&copy; 2026 MR FOJI Investment. All Rights Reserved.
+</footer>
+
 </body>
     </html>
