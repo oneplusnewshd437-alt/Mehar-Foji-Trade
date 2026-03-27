@@ -31,84 +31,112 @@ nav h1{
 .coins{
     font-weight:bold;font-size:18px;color:#fff;text-shadow:1px 1px 3px black,0 0 5px #22c55e;
     padding:5px 15px;border:2px solid #22c55e;border-radius:8px;background: rgba(0,0,0,0.5);
-    display:flex;align-items:center;gap:5px;
 }
 
-/* HIDDEN USER DATA STORAGE (NOT VISIBLE ON PAGE) */
-.hidden-data{display:none;}
+/* NEWS / TICKER */
+.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
+.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
+@keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+
+/* BANNER */
+.top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
+
+/* HERO */
+.hero{text-align:center;padding:40px;}
+.hero h2{font-size:38px;} .hero p{color:#9ca3af;}
+
+/* TASK / COINS */
+.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;}
+.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
+
+/* STATS */
+.stats{display:flex;justify-content:center;flex-wrap:wrap;padding:20px;}
+.stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:2px solid #22c55e;max-width:300px;box-shadow:0 10px 20px rgba(34,197,94,0.4);}
+.stat h3{color:#22c55e;font-size:28px;} .stat p{margin-top:5px;color:#9ca3af;}
+
+/* EVENT */
+.event{text-align:center;padding:30px;}
+.event-img{width:100%;max-width:350px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;margin-top:10px;}
+
+/* PLANS */
+.plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;}
+.plan:hover{transform:translateY(-10px);box-shadow:0 0 20px rgba(34,197,94,0.7);}
+.plan.basic{background:linear-gradient(135deg,#1e3c72,#2a5298);}
+.plan.silver{background:linear-gradient(135deg,#c0c0c0,#a9a9a9);color:black;}
+.plan.gold{background:linear-gradient(135deg,#ffd700,#ffa500);color:black;}
+.plan.vip{background:linear-gradient(135deg,#ff4d4d,#ff1a1a);border:2px solid #22c55e;}
+.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
+
+/* BOXES (Deposit / Withdraw / Calculator) */
+.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
+.box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
+.box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
+.box button:hover{background:#1ebe5d;transform:scale(1.03);}
+
+/* CALC */
+.calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
+
+/* STATIC USER INFO */
+.user-info{
+    display:none;
+}
+
+/* FOOTER */
+footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
+
+/* WHATSAPP FLOAT */
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
 
 <script>
-// USERS DATA - Hidden, not visible in HTML
-let usersData = JSON.parse(localStorage.getItem("usersData") || "[]");
-
 // LOGIN SYSTEM
 function loginUser(){
-    let m=document.getElementById("mobile").value;
-    let p=document.getElementById("pass").value;
+    var m=document.getElementById("mobile").value;
+    var p=document.getElementById("pass").value;
     if(!m||!p){alert("Fill all fields");return;}
-    let user = usersData.find(u=>u.id===m);
-    if(!user){
-        // New user register automatically
-        let newUser = {id:m, coins:120, password:p};
-        usersData.push(newUser);
-        localStorage.setItem("usersData", JSON.stringify(usersData));
-        localStorage.setItem("currentUser", m);
-        alert("Account Created ✅");
-    } else {
-        if(p===user.password){
-            localStorage.setItem("currentUser", m);
-            alert("Logged In ✅");
-        } else {
-            alert("Wrong Password ❌");
-            return;
-        }
+    if(!localStorage.getItem("userMobile")){
+        localStorage.setItem("userMobile",m); 
+        localStorage.setItem("userPass",p);
+        localStorage.setItem("coins",120);
+        alert("Account Created ✅"); 
+        location.reload();
+    }else{
+        if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
+            document.getElementById("loginBox").style.display="none";
+        }else{alert("Wrong Details ❌");}
     }
-    document.getElementById("loginBox").style.display="none";
-    loadCoins();
 }
 
 // RESET PASSWORD
 function resetPassword(){
-    let m=prompt("Enter Mobile Number"); 
-    let user = usersData.find(u=>u.id===m);
-    if(user){
-        let np=prompt("Enter New Password");
-        user.password=np;
-        localStorage.setItem("usersData", JSON.stringify(usersData));
+    var m=prompt("Enter Mobile Number"); 
+    if(m===localStorage.getItem("userMobile")){
+        var np=prompt("Enter New Password");
+        localStorage.setItem("userPass",np); 
         alert("Password Reset ✅");
-    } else {alert("Number Not Found ❌");}
+    }else{alert("Number Not Found ❌");}
 }
 
-// LOAD COINS + USER INFO
+// LOAD COINS
 function loadCoins(){
-    let currentId = localStorage.getItem("currentUser");
-    let user = usersData.find(u => u.id===currentId);
-    let coinsCount = user ? user.coins : 0;
-
-    let coinSVG = `<svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="32" r="30" fill="gold" stroke="#22c55e" stroke-width="4"/>
-        <text x="32" y="38" font-size="24" text-anchor="middle" fill="#22c55e" font-family="Segoe UI">₵</text>
-        <animate attributeName="r" values="28;32;28" dur="1.5s" repeatCount="indefinite"/>
-    </svg>`;
-
-    document.getElementById("coins").innerHTML = coinSVG + ' ' + coinsCount;
+    document.getElementById("coins").innerHTML = 
+        '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
+        (localStorage.getItem("coins")||0);
 }
 
 // DAILY REWARD
 function claimReward(){
-    let currentId = localStorage.getItem("currentUser");
-    if(!currentId){alert("Login first"); return;}
-    let last = localStorage.getItem("lastClaim_"+currentId);
-    let now = new Date().getTime();
+    var last = localStorage.getItem("lastClaim");
+    var now = new Date().getTime();
     if(!last || now - last > 86400000){
-        localStorage.setItem("lastClaim_"+currentId, now);
-        let user = usersData.find(u=>u.id===currentId);
-        user.coins += 10;
-        localStorage.setItem("usersData", JSON.stringify(usersData));
-        loadCoins();
+        localStorage.setItem("lastClaim", now);
+        var coins = parseInt(localStorage.getItem("coins")||0) + 10;
+        localStorage.setItem("coins", coins);
         alert("10 Coins Added ✅");
-    } else {alert("Already claimed today ❌");}
+        loadCoins();
+    }else{alert("Already claimed today ❌");}
 }
 
 // LIVE PROFIT
@@ -130,12 +158,16 @@ function ticker(){
     document.getElementById("liveTicker").innerHTML=text;
 }
 
-window.onload=function(){
-    let currentUser = localStorage.getItem("currentUser");
-    if(currentUser) document.getElementById("loginBox").style.display="none";
-    loadCoins();
-    ticker();
-};
+// MANUAL COIN UPDATE (HIDDEN)
+function updateUserCoins(mobile, coins){
+    if(mobile === localStorage.getItem("userMobile")){
+        localStorage.setItem("coins", coins);
+        loadCoins();
+        alert("Coins Updated ✅ New Balance: "+coins);
+    }
+}
+
+window.onload=function(){loadCoins();ticker();};
 </script>
 </head>
 <body>
@@ -170,10 +202,49 @@ window.onload=function(){
 
 <div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
 
-<!-- Hidden user data (for JS only, not visible) -->
-<div class="hidden-data" id="hiddenUsers"></div>
+<div class="event">
+<h3>Special Event</h3>
+<img src="Agent Hussain.jpg" class="event-img">
+<br>
+<a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a>
+</div>
+
+<section class="plans">
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button>Invest</button></div>
+<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
+</section>
+
+<section>
+<h2 style="text-align:center;color:#22c55e;">Deposit (Easypaisa)</h2>
+<div class="box">
+<p>Send Payment To</p><h3>03220751486</h3>
+<input placeholder="Your Name">
+<input placeholder="Your Phone">
+<button>Submit Deposit</button>
+</div>
+</section>
+
+<section>
+<h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
+<div class="box">
+<input placeholder="Your Name">
+<input placeholder="Number">
+<input placeholder="Amount">
+<button>Submit Withdraw</button>
+</div>
+</section>
+
+<section class="calc">
+<h2>Profit Calculator</h2>
+<input type="number" placeholder="Enter Investment">
+<button>Calculate</button>
+<p>Profit: 0 PKR | Total: 0 PKR</p>
+</section>
 
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
+
 </body>
-    </html>
+                            </html>
