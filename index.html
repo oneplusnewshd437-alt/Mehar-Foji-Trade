@@ -46,7 +46,7 @@ nav h1 {
     background: rgba(0,0,0,0.5);
 }
 
-/* USER INFO HTML */
+/* USER INFO HTML STATIC ONLY */
 .user-info{
     text-align:center;
     margin:15px auto;
@@ -112,122 +112,54 @@ footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:2
 </style>
 
 <script>
-// LOGIN SYSTEM
-function loginUser(){
-    var m=document.getElementById("mobile").value;
-    var p=document.getElementById("pass").value;
-    if(!m||!p){alert("Fill all fields");return;}
-    if(!localStorage.getItem("userMobile")){
-        localStorage.setItem("userMobile",m); 
-        localStorage.setItem("userPass",p);
-        alert("Account Created ✅"); 
-        location.reload();
-    }else{
-        if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
-            document.getElementById("loginBox").style.display="none";
-            updateUserInfo();
-        }else{alert("Wrong Details ❌");}
-    }
-}
-
-function resetPassword(){
-    var m=prompt("Enter Mobile Number"); 
-    if(m===localStorage.getItem("userMobile")){
-        var np=prompt("Enter New Password");
-        localStorage.setItem("userPass",np); 
-        alert("Password Reset ✅");
-    } else{alert("Number Not Found ❌");}
-}
-
-// COINS
+// DAILY REWARD SYSTEM (CLAIM ONLY ONCE PER DAY AFTER 12 AM)
 function claimReward(){
-    var last = localStorage.getItem("lastClaim");
-    var now = new Date().getTime();
-    if(!last || now - last > 86400000){
-        localStorage.setItem("lastClaim", now);
-        var coins = localStorage.getItem("coins") || 0; 
-        coins = parseInt(coins) + 10; 
-        localStorage.setItem("coins", coins);
-        document.getElementById("coins").innerHTML = coins; 
-        alert("10 Coins Added ✅");
-        updateUserInfo();
-    } else{alert("Already claimed ❌");}
+    let lastClaim = localStorage.getItem("lastClaim");
+    let now = new Date();
+    let today = now.toDateString();
+
+    if(lastClaim){
+        let lastDate = new Date(parseInt(lastClaim));
+        if(lastDate.toDateString() === today){
+            alert("Already claimed today ❌");
+            return;
+        }
+    }
+
+    // Add reward
+    let coins = parseInt(localStorage.getItem("coins") || 0) + 10;
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("lastClaim", now.getTime());
+    alert("10 Coins Added ✅");
+    document.getElementById("coins").innerHTML = coins;
 }
-
-function loadCoins(){
-    document.getElementById("coins").innerHTML=localStorage.getItem("coins")||0;
-}
-
-function updateUserInfo() {
-    var mobile = localStorage.getItem("userMobile") || "03491234567"; // default HTML number
-    var coins = localStorage.getItem("coins") || 120; // default HTML coins
-    document.getElementById("userID").innerText = mobile;
-    document.getElementById("userCoins").innerText = coins;
-}
-
-// CALCULATOR
-function calcProfit(){
-    var amt=document.getElementById("amount").value;
-    var profit=amt*0.25; 
-    var total=parseInt(amt)+profit;
-    document.getElementById("result").innerHTML="Profit: "+profit+" PKR | Total: "+total+" PKR";
-}
-
-// INVEST
-function invest(plan){window.open("https://wa.me/923491441853?text="+plan);}
-
-// LIVE PROFIT
-var profit=210000;
-setInterval(()=>{
-    profit+=Math.floor(Math.random()*200);
-    document.getElementById("profit").innerHTML=profit+" PKR";
-},3000);
-
-// TICKER
-var names=["Ali","Zain","Usman","Bilal"];
-function ticker(){
-    var text=''; 
-    for(var i=0;i<30;i++){
-        var name=names[Math.floor(Math.random()*names.length)];
-        var amount=[2000,5000,8000,16000][Math.floor(Math.random()*4)];
-        var type=Math.random()>0.5?"Invested":"Withdraw";
-        text+=name+" "+type+" "+amount+" PKR | ";
-    } 
-    document.getElementById("liveTicker").innerHTML=text;
-}
-
-window.onload=function(){
-    loadCoins();
-    ticker();
-    updateUserInfo();
-};
 </script>
+
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN BOX -->
 <div id="loginBox">
 <div class="login-box">
 <h2 style="color:#22c55e;">Login / Register</h2>
-<input id="mobile" placeholder="Mobile Number">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="loginUser()">Login</button>
-<button onclick="resetPassword()" style="background:red;margin-top:10px;">Reset Password</button>
+<input placeholder="Mobile Number">
+<input type="password" placeholder="Password">
+<button onclick="claimReward()">Login</button>
 </div>
 </div>
 
 <div class="overlay"></div>
 <div class="top-banner"><img src="Ali888.jpg"></div>
 
-<!-- NAV -->
-<nav><h1>MR FOJI</h1><div class="coins">Coins: <span id="coins">0</span></div></nav>
+<!-- NAV BAR -->
+<nav><h1>MR FOJI</h1><div class="coins">Coins</div></nav>
 
-<!-- USER INFO HTML -->
+<!-- STATIC USER INFO -->
 <div class="user-info">
-Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins">120</span>
+Login ID: 03491234567 | Coins: 120
 </div>
 
-<div class="news"><span id="liveTicker"></span></div>
+<div class="news"><span>Ali Invested 5000 PKR | Zain Withdraw 2000 PKR | …</span></div>
 <div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
 
 <div class="task">
@@ -235,7 +167,7 @@ Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins"
 <button onclick="claimReward()">Claim Reward</button>
 </div>
 
-<div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
+<div class="stats"><div class="stat"><h3>210000</h3><p>Live Profit</p></div></div>
 
 <div class="event">
 <h3>Special Event</h3>
@@ -245,10 +177,10 @@ Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins"
 </div>
 
 <section class="plans">
-<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button onclick="invest('Basic')">Invest</button></div>
-<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button onclick="invest('Silver')">Invest</button></div>
-<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button onclick="invest('Gold')">Invest</button></div>
-<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button onclick="invest('VIP')">Invest</button></div>
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button>Invest</button></div>
+<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
 </section>
 
 <section>
@@ -257,7 +189,7 @@ Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins"
 <p>Send Payment To</p><h3>03220751486</h3>
 <input placeholder="Your Name">
 <input placeholder="Your Phone">
-<button onclick="window.open('https://wa.me/923491441853')">Submit Deposit</button>
+<button>Submit Deposit</button>
 </div>
 </section>
 
@@ -267,15 +199,15 @@ Logged in as: <span id="userID">03491234567</span> | Coins: <span id="userCoins"
 <input placeholder="Your Name">
 <input placeholder="Number">
 <input placeholder="Amount">
-<button onclick="window.open('https://wa.me/923491441853')">Submit Withdraw</button>
+<button>Submit Withdraw</button>
 </div>
 </section>
 
 <section class="calc">
 <h2>Profit Calculator</h2>
-<input type="number" id="amount" placeholder="Enter Investment">
-<button onclick="calcProfit()">Calculate</button>
-<p id="result"></p>
+<input type="number" placeholder="Enter Investment">
+<button>Calculate</button>
+<p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
 
 <footer>© 2026 MR FOJI Investment</footer>
