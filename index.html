@@ -49,7 +49,7 @@ nav h1 {
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
 .news span{display:inline-block;padding-left:100%;animation:slide 20s linear infinite;} 
-@keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+@keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
 .top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
@@ -120,7 +120,7 @@ function loginUser(){
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m); 
         localStorage.setItem("userPass",p);
-        localStorage.setItem("coins", 120); // Default coins
+        localStorage.setItem("coins", 120);
         alert("Account Created ✅"); 
         location.reload();
     }else{
@@ -172,11 +172,9 @@ var fixedTicker = [
 
 function ticker(){
     var text = "";
-    // Add fixed examples first
     for(var i=0;i<fixedTicker.length;i++){
         text += fixedTicker[i];
     }
-    // Add random users for scrolling effect
     for(var i=0;i<30;i++){
         var name = names[Math.floor(Math.random()*names.length)];
         var amount = [2000,5000,8000,16000][Math.floor(Math.random()*4)];
@@ -205,27 +203,22 @@ window.onload=function(){loadCoins(); ticker();};
 <div class="overlay"></div>
 <div class="top-banner"><img src="Ali888.jpg"></div>
 
-<!-- NAV BAR -->
 <nav>
     <h1>MR FOJI</h1>
     <div class="coins" id="coins">0</div>
 </nav>
 
-<!-- NEWS / LIVE TICKER -->
 <div class="news"><span id="liveTicker"></span></div>
 
 <div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
 
-<!-- DAILY REWARD -->
 <div class="task">
 <h3>Daily Login Reward</h3>
 <button onclick="claimReward()">Claim Reward</button>
 </div>
 
-<!-- STATS -->
 <div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
 
-<!-- EVENT -->
 <div class="event">
 <h3>Special Event</h3>
 <img src="Agent Hussain.jpg" class="event-img">
@@ -233,7 +226,6 @@ window.onload=function(){loadCoins(); ticker();};
 <a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a>
 </div>
 
-<!-- PLANS -->
 <section class="plans">
 <div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
 <div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
@@ -241,7 +233,6 @@ window.onload=function(){loadCoins(); ticker();};
 <div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
 </section>
 
-<!-- DEPOSIT -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Deposit (Easypaisa)</h2>
 <div class="box">
@@ -252,7 +243,6 @@ window.onload=function(){loadCoins(); ticker();};
 </div>
 </section>
 
-<!-- WITHDRAW -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
 <div class="box">
@@ -263,7 +253,6 @@ window.onload=function(){loadCoins(); ticker();};
 </div>
 </section>
 
-<!-- CALCULATOR -->
 <section class="calc">
 <h2>Profit Calculator</h2>
 <input type="number" placeholder="Enter Investment">
@@ -271,7 +260,6 @@ window.onload=function(){loadCoins(); ticker();};
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
 
-<!-- STATIC USER INFO LAST -->
 <div class="user-info" id="userInfo">
 Login ID: N/A | Coins: 0
 </div>
