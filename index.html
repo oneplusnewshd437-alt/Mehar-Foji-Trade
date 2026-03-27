@@ -16,17 +16,18 @@ background-repeat:no-repeat;background-attachment:fixed;}
 #loginBox{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:9999;}
 .login-box{background:#111827;padding:25px;border-radius:10px;width:300px;text-align:center;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
-.login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;transition:0.3s;}
-.login-box button:hover{background:#1eb44b;}
+.login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;}
 
-/* NAV */
+/* NAV 3D + BORDER + COIN ICON */
 nav{
     display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
     background:rgba(0,0,0,0.7);border-radius:10px;margin:10px;
     box-shadow:0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
     border:2px solid #22c55e;
 }
-nav h1{color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c55e;}
+nav h1{
+    color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c55e;
+}
 .coins{
     font-weight:bold;font-size:18px;color:#fff;text-shadow:1px 1px 3px black,0 0 5px #22c55e;
     padding:5px 15px;border:2px solid #22c55e;border-radius:8px;background: rgba(0,0,0,0.5);
@@ -42,106 +43,106 @@ nav h1{color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c5
 
 /* HERO */
 .hero{text-align:center;padding:40px;}
-.hero h2{font-size:38px;} 
-.hero p{color:#9ca3af;}
+.hero h2{font-size:38px;} .hero p{color:#9ca3af;}
 
 /* TASK / COINS */
 .task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;}
-.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
-.task button:hover{background:#1eb44b;}
+.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
 /* STATS */
 .stats{display:flex;justify-content:center;flex-wrap:wrap;padding:20px;}
 .stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:2px solid #22c55e;max-width:300px;box-shadow:0 10px 20px rgba(34,197,94,0.4);}
-.stat h3{color:#22c55e;font-size:28px;} 
-.stat p{margin-top:5px;color:#9ca3af;}
+.stat h3{color:#22c55e;font-size:28px;} .stat p{margin-top:5px;color:#9ca3af;}
 
 /* EVENT */
 .event{text-align:center;padding:30px;}
 .event-img{width:100%;max-width:350px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
-.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;margin-top:10px;transition:0.3s;}
-.event-button:hover{background:#1eb44b;}
+.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;margin-top:10px;}
 
 /* PLANS */
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
-.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;cursor:pointer;}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;}
 .plan:hover{transform:translateY(-10px);box-shadow:0 0 20px rgba(34,197,94,0.7);}
 .plan.basic{background:linear-gradient(135deg,#1e3c72,#2a5298);}
 .plan.silver{background:linear-gradient(135deg,#c0c0c0,#a9a9a9);color:black;}
 .plan.gold{background:linear-gradient(135deg,#ffd700,#ffa500);color:black;}
 .plan.vip{background:linear-gradient(135deg,#ff4d4d,#ff1a1a);border:2px solid #22c55e;}
-.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
-.plan button:hover{background:#1eb44b;}
+.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
 /* BOXES (Deposit / Withdraw / Calculator) */
 .box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
-.box button:hover{background:#1ebe5d;}
+.box button:hover{background:#1ebe5d;transform:scale(1.03);}
 
 /* CALC */
 .calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
+
+/* STATIC USER INFO */
+.user-info{
+    background:#111827;border:2px solid #22c55e;padding:15px;max-width:400px;margin:20px auto;
+    border-radius:10px;text-align:center;color:#22c55e;font-weight:bold;display:none;
+}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
 /* WHATSAPP FLOAT */
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;transition:0.3s;}
-.whatsapp:hover{background:#1ebe5d;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
 
 <script>
-// User system with hidden coins
+// LOGIN SYSTEM
 function loginUser(){
     var m=document.getElementById("mobile").value;
     var p=document.getElementById("pass").value;
     if(!m||!p){alert("Fill all fields");return;}
-    
-    let users = JSON.parse(localStorage.getItem("users")||"{}");
-    if(!users[m]){
-        users[m] = {pass:p, coins:120};
-        localStorage.setItem("users",JSON.stringify(users));
-        alert("Account Created ✅"); location.reload();
+    if(!localStorage.getItem("userMobile")){
+        localStorage.setItem("userMobile",m); 
+        localStorage.setItem("userPass",p);
+        localStorage.setItem("coins",120);
+        alert("Account Created ✅"); 
+        location.reload();
     }else{
-        if(users[m].pass===p){
+        if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
             document.getElementById("loginBox").style.display="none";
-            loadCoins(m);
         }else{alert("Wrong Details ❌");}
     }
 }
 
+// RESET PASSWORD
 function resetPassword(){
     var m=prompt("Enter Mobile Number"); 
-    let users = JSON.parse(localStorage.getItem("users")||"{}");
-    if(users[m]){
+    if(m===localStorage.getItem("userMobile")){
         var np=prompt("Enter New Password");
-        users[m].pass=np;
-        localStorage.setItem("users",JSON.stringify(users));
+        localStorage.setItem("userPass",np); 
         alert("Password Reset ✅");
     }else{alert("Number Not Found ❌");}
 }
 
-function loadCoins(id){
-    let users = JSON.parse(localStorage.getItem("users")||"{}");
-    if(users[id]){
-        document.getElementById("coins").innerHTML = '💰 '+users[id].coins;
-    }
+// LOAD COINS + USER INFO
+function loadCoins(){
+    // Top nav coins
+    document.getElementById("coins").innerHTML = 
+        '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
+        (localStorage.getItem("coins")||0);
+    // Niche user info (HTML only)
+    document.getElementById("userInfo").innerHTML = 
+        "Login ID: " + (localStorage.getItem("userMobile")||"N/A") + 
+        " | Coins: " + (localStorage.getItem("coins")||0);
+    document.getElementById("userInfo").style.display="block";
 }
 
-// Daily reward
+// DAILY REWARD
 function claimReward(){
-    var m=document.getElementById("mobile").value;
-    let users = JSON.parse(localStorage.getItem("users")||"{}");
-    if(!users[m]){alert("Login first ❌"); return;}
-    
     var last = localStorage.getItem("lastClaim");
     var now = new Date().getTime();
     if(!last || now - last > 86400000){
         localStorage.setItem("lastClaim", now);
-        users[m].coins +=10;
-        localStorage.setItem("users",JSON.stringify(users));
+        var coins = parseInt(localStorage.getItem("coins")||0) + 10;
+        localStorage.setItem("coins", coins);
         alert("10 Coins Added ✅");
-        loadCoins(m);
+        loadCoins();
     }else{alert("Already claimed today ❌");}
 }
 
@@ -164,7 +165,7 @@ function ticker(){
     document.getElementById("liveTicker").innerHTML=text;
 }
 
-window.onload=function(){ticker();};
+window.onload=function(){loadCoins();ticker();};
 </script>
 </head>
 <body>
@@ -185,7 +186,7 @@ window.onload=function(){ticker();};
 
 <nav>
     <h1>MR FOJI</h1>
-    <div class="coins" id="coins">💰 0</div>
+    <div class="coins" id="coins">0</div>
 </nav>
 
 <div class="news"><span id="liveTicker"></span></div>
@@ -207,10 +208,10 @@ window.onload=function(){ticker();};
 </div>
 
 <section class="plans">
-<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><a href="https://wa.me/923491441853?text=Invest 2000" class="plan-button">Invest</a></div>
-<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><a href="https://wa.me/923491441853?text=Invest 5000" class="plan-button">Invest</a></div>
-<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><a href="https://wa.me/923491441853?text=Invest 8000" class="plan-button">Invest</a></div>
-<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><a href="https://wa.me/923491441853?text=Invest 16000" class="plan-button">Invest</a></div>
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button>Invest</button></div>
+<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
 </section>
 
 <section>
@@ -219,7 +220,7 @@ window.onload=function(){ticker();};
 <p>Send Payment To</p><h3>03220751486</h3>
 <input placeholder="Your Name">
 <input placeholder="Your Phone">
-<a href="https://wa.me/923491441853?text=Deposit" class="box-button">Submit Deposit</a>
+<button>Submit Deposit</button>
 </div>
 </section>
 
@@ -229,7 +230,7 @@ window.onload=function(){ticker();};
 <input placeholder="Your Name">
 <input placeholder="Number">
 <input placeholder="Amount">
-<a href="https://wa.me/923491441853?text=Withdraw" class="box-button">Submit Withdraw</a>
+<button>Submit Withdraw</button>
 </div>
 </section>
 
@@ -239,6 +240,9 @@ window.onload=function(){ticker();};
 <button>Calculate</button>
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
+
+<!-- HTML ONLY: User ID + Coins -->
+<div class="user-info" id="userInfo">Login ID: N/A | Coins: 0</div>
 
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
