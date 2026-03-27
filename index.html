@@ -182,7 +182,7 @@ function loginUser(){
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m);
         localStorage.setItem("userPass",p);
-        localStorage.setItem("coins",120);
+        localStorage.setItem("coins",60);
         alert("Account Created ✅");
         location.reload();
     }else{
@@ -216,13 +216,13 @@ function claimReward(){
         localStorage.setItem("lastClaim", now);
         var coins = parseInt(localStorage.getItem("coins")||0) + 10;
         localStorage.setItem("coins", coins);
-        alert("10 Coins Added ✅");
+        alert("20 Coins Added ✅");
         loadCoins();
     }else{alert("Already claimed today ❌");}
 }
 
 // LIVE PROFIT
-var profit=110000;
+var profit=210000;
 setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
 
 // LIVE TICKER
