@@ -7,8 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
 body, html{height:100%;overflow-x:hidden;color:white;
-background-image:url('./investment.jpg');background-size:cover;background-position:center;
-background-repeat:no-repeat;background-attachment:fixed;}
+background-image:url('./investment.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;}
 @media(max-width:768px){body{background-attachment:scroll;}}
 .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:-1;}
 
@@ -69,19 +68,36 @@ nav h1{
 .plan.vip{background:linear-gradient(135deg,#ff4d4d,#ff1a1a);border:2px solid #22c55e;}
 .plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
-/* BOXES (Deposit / Withdraw / Calculator) */
+/* BOXES (Deposit / Withdraw) */
 .box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
 .box button:hover{background:#1ebe5d;transform:scale(1.03);}
 
-/* CALC */
-.calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
-
-/* STATIC USER INFO (HIDDEN HTML) */
-.user-info{
-    display:none;
+/* 3D PROFIT CALCULATOR */
+.calc-3d{text-align:center;margin:30px auto;}
+.calc-3d h2{color:#22c55e;font-size:32px;margin-bottom:20px;text-shadow:2px 2px 8px black;}
+.calc-card{
+    background: linear-gradient(145deg,#111827,#1f2937);
+    padding:30px;border-radius:20px;width:90%;max-width:400px;margin:auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 25px #22c55e inset;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.calc-card:hover{transform: translateY(-10px);box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 35px #22c55e inset;}
+.calc-card input{width:100%;padding:15px;margin-bottom:15px;border:none;border-radius:12px;font-size:18px;background:#1f2937;color:white;box-shadow: inset 0 3px 6px rgba(0,0,0,0.5);}
+.calc-card input:focus{outline:none;box-shadow: inset 0 3px 6px rgba(0,0,0,0.7), 0 0 8px #22c55e;}
+.calc-card button{width:100%;padding:15px;border:none;border-radius:12px;font-size:18px;font-weight:bold;color:white;background:linear-gradient(145deg,#22c55e,#16a34a);cursor:pointer;box-shadow: 0 5px 15px rgba(0,0,0,0.5);transition: transform 0.2s ease, box-shadow 0.2s ease;}
+.calc-card button:hover{transform: translateY(-3px);box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 10px #22c55e;}
+#calcResult{margin-top:15px;font-size:20px;color:#22c55e;text-shadow:1px 1px 3px black;}
+
+/* COMPUTER USERS ONLINE 3D */
+.computer-users{
+    background: linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;text-align:center;padding:25px;margin:20px auto;border-radius:15px;
+    max-width:400px;box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+.computer-users h2{font-size:28px;margin-bottom:15px;text-shadow:2px 2px 5px rgba(0,0,0,0.5);}
+.user-card{background: rgba(255,255,255,0.1);padding:20px;border-radius:10px;font-size:24px;font-weight:bold;text-shadow:1px 1px 3px black;}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
@@ -90,7 +106,21 @@ footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:2
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
 
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <script>
+// Firebase Setup
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 // LOGIN SYSTEM
 function loginUser(){
     var m=document.getElementById("mobile").value;
@@ -156,6 +186,25 @@ function ticker(){
         text+=name+" "+type+" "+amount+" PKR | ";
     }
     document.getElementById("liveTicker").innerHTML=text;
+}
+
+// COMPUTER USERS ONLINE (REAL)
+const userId = 'user_' + Math.floor(Math.random()*1000000);
+const userRef = db.ref('onlineUsers/' + userId);
+userRef.set(true);
+userRef.onDisconnect().remove();
+const onlineCountRef = db.ref('onlineUsers');
+onlineCountRef.on('value', (snapshot)=>{
+    document.getElementById("onlineUsers").innerText = snapshot.numChildren() + " Users Online";
+});
+
+// PROFIT CALCULATOR FUNCTION
+function calculateProfit(){
+    var invest = parseFloat(document.getElementById("investment").value) || 0;
+    var profit = invest * 0.25; // example: 25% profit
+    var total = invest + profit;
+    document.getElementById("calcResult").innerText = 
+        `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
 window.onload=function(){loadCoins();ticker();};
@@ -227,11 +276,22 @@ window.onload=function(){loadCoins();ticker();};
 </div>
 </section>
 
-<section class="calc">
-<h2>Profit Calculator</h2>
-<input type="number" placeholder="Enter Investment">
-<button>Calculate</button>
-<p>Profit: 0 PKR | Total: 0 PKR</p>
+<!-- PROFIT CALCULATOR -->
+<section class="calc-3d">
+  <h2>Profit Calculator</h2>
+  <div class="calc-card">
+    <input type="number" id="investment" placeholder="Enter Investment (PKR)">
+    <button onclick="calculateProfit()">Calculate</button>
+    <p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
+  </div>
+</section>
+
+<!-- COMPUTER USERS ONLINE -->
+<section class="computer-users">
+  <h2>Computer Users Online</h2>
+  <div class="user-card">
+    <p id="onlineUsers">0 Users</p>
+  </div>
 </section>
 
 <footer>© 2026 MR FOJI Investment</footer>
