@@ -6,22 +6,25 @@
 <title>MR FOJI Investment</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-html, body{height:100%;}
-
-/* BODY BACKGROUND */
-body.logged-in{
-    background-image:url('investment.jpg');
+body, html{
+    height:100%;
+    overflow-x:hidden;
+    color:white;
+    background-image:url('investment.jpg'); /* Website background */
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
-    color:white;
 }
+@media(max-width:768px){body{background-attachment:scroll;}}
 
-/* LOGIN SCREEN FULL */
+/* LOGIN FULL SCREEN WITH OWN BACKGROUND */
 #loginBox{
     position:fixed;
-    top:0;left:0;width:100%;height:100%;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     background:url('Login.jpg') no-repeat center center;
     background-size:cover;
     display:flex;
@@ -29,57 +32,32 @@ body.logged-in{
     align-items:center;
     z-index:9999;
 }
-
-/* LOGIN CARD */
 .login-box{
-    background:rgba(0,0,0,0.7);
-    padding:30px 25px;
-    border-radius:15px;
-    width:300px;
+    background:rgba(0,0,0,0.8); /* semi-transparent overlay */
+    padding:30px;
+    border-radius:12px;
+    width:320px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(34,197,94,0.5);
 }
-
-/* CARD TEXT */
-.login-box h1{color:#22c55e;font-size:28px;margin-bottom:15px;}
-.login-box h2{color:#fff;font-size:18px;margin-top:20px;opacity:0.9;}
-
-/* INPUTS */
-.login-box input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border:none;
-    border-radius:6px;
-}
-
-/* BUTTONS */
-.login-box button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
-}
-.login-box button.login-btn{background:#22c55e;color:white;}
-.login-box button.reset-btn{background:red;color:white;}
+.login-box h2{color:#22c55e;margin-bottom:20px;}
+.login-box input{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
+.login-box button{width:100%;padding:12px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
+.login-box button:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(34,197,94,0.5);}
+.login-box .reset-btn{background:red;margin-top:10px;}
 
 /* NAV 3D + BORDER + COIN ICON */
 nav{
-display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
-background:#111827;
-border-radius:10px;
-margin:10px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
+    display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
+    background:#111827;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
 }
 nav h1{color:#22c55e;font-size:28px;}
 .coins{
-font-weight:bold;font-size:18px;color:#fff;
-padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
-box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
+    font-weight:bold;font-size:18px;color:#fff;
+    padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 }
 .coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
 
@@ -87,6 +65,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
 .news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
 @keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+
+/* BANNER */
+.top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
 
 /* HERO */
 .hero{text-align:center;padding:40px;}
@@ -126,84 +107,36 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 .box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
 
 /* PROFIT CALCULATOR 3D ENHANCED */
-.calc-3d{
-text-align:center;
-margin:30px auto;
-perspective: 1000px;
-}
+.calc-3d{text-align:center;margin:30px auto;perspective:1000px;}
 .calc-card{
-    background: linear-gradient(145deg, #0f172a, #0f3c6a);
-    padding:35px;
-    border-radius:25px;
-    width:90%;
-    max-width:420px;
-    margin:auto;
-    box-shadow: 12px 12px 30px rgba(0,0,0,0.7), -12px -12px 30px rgba(0,120,255,0.3);
-    transform-style: preserve-3d;
-    transition: transform 0.4s, box-shadow 0.4s;
+    background: linear-gradient(145deg,#0f172a,#0f3c6a);
+    padding:35px;border-radius:25px;width:90%;max-width:420px;margin:auto;
+    box-shadow:12px 12px 30px rgba(0,0,0,0.7),-12px -12px 30px rgba(0,120,255,0.3);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
 }
 .calc-card:hover{
     transform: rotateX(8deg) rotateY(8deg);
-    box-shadow: 15px 15px 35px rgba(0,0,0,0.8), -15px -15px 35px rgba(0,150,255,0.5);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.8),-15px -15px 35px rgba(0,150,255,0.5);
 }
-.calc-card input{
-    background:#112244;
-    color:#00f3ff;
-    font-size:18px;
-    padding:16px;
-    border-radius:15px;
-    border:none;
-    margin-bottom:15px;
-}
-.calc-card button{
-    background:#00f3ff;
-    color:#0f172a;
-    font-weight:bold;
-    padding:16px;
-    border-radius:15px;
-    font-size:18px;
-    border:none;
-    cursor:pointer;
-}
-.calc-card button:hover{
-    transform: translateY(-4px) translateZ(6px);
-    box-shadow:0 12px 25px rgba(0,243,255,0.5);
-}
+.calc-card input{background:#112244;color:#00f3ff;font-size:18px;padding:16px;border-radius:15px;border:none;margin-bottom:15px;}
+.calc-card button{background:#00f3ff;color:#0f172a;font-weight:bold;padding:16px;border-radius:15px;font-size:18px;border:none;cursor:pointer;}
+.calc-card button:hover{transform: translateY(-4px) translateZ(6px);box-shadow:0 12px 25px rgba(0,243,255,0.5);}
 
 /* ONLINE USERS 3D REDESIGN */
 .computer-users{
     text-align:center;
-    background: linear-gradient(145deg, #111827, #0f1a2b);
-    padding:30px;
-    margin:25px auto;
-    border-radius:20px;
-    max-width:420px;
-    box-shadow: 10px 10px 25px rgba(0,0,0,0.6), -10px -10px 25px rgba(0,255,200,0.05);
-    transform-style: preserve-3d;
-    transition: transform 0.4s, box-shadow 0.4s;
+    background: linear-gradient(145deg,#111827,#0f1a2b);
+    padding:30px;margin:25px auto;border-radius:20px;
+    max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
 }
 .computer-users:hover{
     transform: rotateX(7deg) rotateY(-7deg);
-    box-shadow: 15px 15px 35px rgba(0,0,0,0.7), -15px -15px 35px rgba(0,255,200,0.2);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.7),-15px -15px 35px rgba(0,255,200,0.2);
 }
-.computer-users h2{
-    font-size:30px;
-    color:#00f3ff;
-    margin-bottom:15px;
-}
-.user-card{
-    background: rgba(0,243,255,0.05);
-    padding:25px;
-    border-radius:15px;
-    font-size:24px;
-    font-weight:bold;
-    color:#00f3ff;
-    box-shadow: inset 0 0 20px rgba(0,243,255,0.2);
-    transition: transform 0.3s;
-}
-.user-card:hover{
-    transform: translateY(-3px) translateZ(5px);
-}
+.computer-users h2{font-size:30px;color:#00f3ff;margin-bottom:15px;}
+.user-card{background: rgba(0,243,255,0.05);padding:25px;border-radius:15px;font-size:24px;font-weight:bold;color:#00f3ff;box-shadow: inset 0 0 20px rgba(0,243,255,0.2);transition: transform 0.3s;}
+.user-card:hover{transform: translateY(-3px) translateZ(5px);}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
@@ -227,7 +160,6 @@ function loginUser(){
     }else{
         if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
             document.getElementById("loginBox").style.display="none";
-            document.body.classList.add("logged-in");
         }else{alert("Wrong Details ❌");}
     }
 }
@@ -311,16 +243,17 @@ window.onload=function(){
 <!-- LOGIN -->
 <div id="loginBox">
 <div class="login-box">
-<h1>MR FOJI</h1>
+<h2>MR FOJI CARD</h2>
 <input id="mobile" placeholder="Mobile Number">
 <input id="pass" type="password" placeholder="Password">
-<button class="login-btn" onclick="loginUser()">Login</button>
+<button onclick="loginUser()">Login</button>
 <button class="reset-btn" onclick="resetPassword()">Reset Password</button>
-<h2>M HUSSAIN AGENT</h2>
+<p style="margin-top:10px;">HUSSAIN AGENT</p>
 </div>
 </div>
 
-<!-- WEBSITE CONTENT STARTS AFTER LOGIN -->
+<!-- WEBSITE CONTENT -->
+<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
 
 <nav>
 <h1>MR FOJI</h1>
@@ -377,6 +310,7 @@ window.onload=function(){
 </div>
 </section>
 
+<!-- 3D PROFIT CALCULATOR -->
 <section class="calc-3d">
 <h2>Profit Calculator</h2>
 <div class="calc-card">
@@ -386,10 +320,14 @@ window.onload=function(){
 </div>
 </section>
 
+<!-- 3D ONLINE USERS -->
 <div class="computer-users">
 <h2 id="onlineUsers">0 Users Online</h2>
 <div class="user-card">Current Online Users</div>
 </div>
 
 <footer>© MR FOJI Investment</footer>
-<a href="https://
+<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+
+</body>
+    </html>
