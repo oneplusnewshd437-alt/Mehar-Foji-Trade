@@ -9,30 +9,31 @@
 body, html{height:100%;overflow-x:hidden;color:white;
 background-image:url('./investment.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;}
 @media(max-width:768px){body{background-attachment:scroll;}}
-.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:-1;}
 
 /* LOGIN */
 #loginBox{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:9999;}
 .login-box{background:#111827;padding:25px;border-radius:10px;width:300px;text-align:center;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
-.login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;}
+.login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;transition:0.3s;}
+.login-box button:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(34,197,94,0.5);}
 
 /* NAV 3D + BORDER + COIN ICON */
 nav{
     display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
-    background:rgba(0,0,0,0.7);border-radius:10px;margin:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
-    border:2px solid #22c55e;
+    background:#111827;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
 }
-nav h1{
-    color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c55e;
-}
+nav h1{color:#22c55e;font-size:28px;}
 .coins{
-    font-weight:bold;font-size:18px;color:#fff;text-shadow:1px 1px 3px black,0 0 5px #22c55e;
-    padding:5px 15px;border:2px solid #22c55e;border-radius:8px;background: rgba(0,0,0,0.5);
+    font-weight:bold;font-size:18px;color:#fff;
+    padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
 }
+.coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
 
-/* NEWS / TICKER */
+/* NEWS TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
 .news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
 @keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
@@ -42,16 +43,19 @@ nav h1{
 
 /* HERO */
 .hero{text-align:center;padding:40px;}
-.hero h2{font-size:38px;} .hero p{color:#9ca3af;}
+.hero h2{font-size:38px;}
+.hero p{color:#9ca3af;}
 
-/* TASK / COINS */
-.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;}
-.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
+/* TASK / DAILY COINS */
+.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
+.task button:hover{transform:translateY(-3px) translateZ(5px);box-shadow:0 10px 20px rgba(34,197,94,0.5);}
 
 /* STATS */
 .stats{display:flex;justify-content:center;flex-wrap:wrap;padding:20px;}
-.stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:2px solid #22c55e;max-width:300px;box-shadow:0 10px 20px rgba(34,197,94,0.4);}
-.stat h3{color:#22c55e;font-size:28px;} .stat p{margin-top:5px;color:#9ca3af;}
+.stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:1px solid #22c55e;max-width:300px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.stat h3{color:#22c55e;font-size:28px;}
+.stat p{margin-top:5px;color:#9ca3af;}
 
 /* EVENT */
 .event{text-align:center;padding:30px;}
@@ -60,44 +64,32 @@ nav h1{
 
 /* PLANS */
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
-.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;}
-.plan:hover{transform:translateY(-10px);box-shadow:0 0 20px rgba(34,197,94,0.7);}
-.plan.basic{background:linear-gradient(135deg,#1e3c72,#2a5298);}
-.plan.silver{background:linear-gradient(135deg,#c0c0c0,#a9a9a9);color:black;}
-.plan.gold{background:linear-gradient(135deg,#ffd700,#ffa500);color:black;}
-.plan.vip{background:linear-gradient(135deg,#ff4d4d,#ff1a1a);border:2px solid #22c55e;}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.plan:hover{transform:translateY(-5px) translateZ(5px);box-shadow:0 15px 35px rgba(0,0,0,0.7);}
+.plan.basic{background:#1e3c72;}
+.plan.silver{background:#c0c0c0;color:black;}
+.plan.gold{background:#ffd700;color:black;}
+.plan.vip{background:#ff4d4d;}
 .plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
 /* BOXES (Deposit / Withdraw) */
-.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
-.box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
+.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#1f2937;color:white;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
-.box button:hover{background:#1ebe5d;transform:scale(1.03);}
+.box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
 
-/* 3D PROFIT CALCULATOR */
+/* PROFIT CALCULATOR */
 .calc-3d{text-align:center;margin:30px auto;}
-.calc-3d h2{color:#22c55e;font-size:32px;margin-bottom:20px;text-shadow:2px 2px 8px black;}
-.calc-card{
-    background: linear-gradient(145deg,#111827,#1f2937);
-    padding:30px;border-radius:20px;width:90%;max-width:400px;margin:auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 25px #22c55e inset;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.calc-card:hover{transform: translateY(-10px);box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 35px #22c55e inset;}
-.calc-card input{width:100%;padding:15px;margin-bottom:15px;border:none;border-radius:12px;font-size:18px;background:#1f2937;color:white;box-shadow: inset 0 3px 6px rgba(0,0,0,0.5);}
-.calc-card input:focus{outline:none;box-shadow: inset 0 3px 6px rgba(0,0,0,0.7), 0 0 8px #22c55e;}
-.calc-card button{width:100%;padding:15px;border:none;border-radius:12px;font-size:18px;font-weight:bold;color:white;background:linear-gradient(145deg,#22c55e,#16a34a);cursor:pointer;box-shadow: 0 5px 15px rgba(0,0,0,0.5);transition: transform 0.2s ease, box-shadow 0.2s ease;}
-.calc-card button:hover{transform: translateY(-3px);box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 10px #22c55e;}
-#calcResult{margin-top:15px;font-size:20px;color:#22c55e;text-shadow:1px 1px 3px black;}
+.calc-card{background:#111827;padding:30px;border-radius:20px;width:90%;max-width:400px;margin:auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.calc-card input{width:100%;padding:15px;margin-bottom:15px;border:none;border-radius:12px;font-size:18px;background:#1f2937;color:white;}
+.calc-card button{width:100%;padding:15px;border:none;border-radius:12px;font-size:18px;font-weight:bold;color:white;background:#22c55e;cursor:pointer;}
+.calc-card button:hover{transform:translateY(-3px) translateZ(5px);box-shadow:0 10px 20px rgba(34,197,94,0.5);}
+#calcResult{margin-top:15px;font-size:20px;color:#22c55e;}
 
-/* COMPUTER USERS ONLINE 3D */
-.computer-users{
-    background: linear-gradient(135deg,#6a11cb,#2575fc);
-    color:white;text-align:center;padding:25px;margin:20px auto;border-radius:15px;
-    max-width:400px;box-shadow:0 10px 25px rgba(0,0,0,0.5);
-}
-.computer-users h2{font-size:28px;margin-bottom:15px;text-shadow:2px 2px 5px rgba(0,0,0,0.5);}
-.user-card{background: rgba(255,255,255,0.1);padding:20px;border-radius:10px;font-size:24px;font-weight:bold;text-shadow:1px 1px 3px black;}
+/* ONLINE USERS */
+.computer-users{text-align:center;background:#111827;padding:25px;margin:20px auto;border-radius:15px;max-width:400px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.computer-users h2{font-size:28px;}
+.user-card{background: rgba(255,255,255,0.1);padding:20px;border-radius:10px;font-size:24px;font-weight:bold;}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
@@ -137,8 +129,7 @@ function resetPassword(){
 // LOAD COINS
 function loadCoins(){
     document.getElementById("coins").innerHTML = 
-        '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
-        (localStorage.getItem("coins")||0);
+        '<img src="Coine1.jpg">' + (localStorage.getItem("coins")||0);
 }
 
 // DAILY REWARD
@@ -176,7 +167,7 @@ function ticker(){
 // PROFIT CALCULATOR
 function calculateProfit(){
     var invest = parseFloat(document.getElementById("investment").value) || 0;
-    var profit = invest * 0.25; // example: 25% profit
+    var profit = invest * 0.25; 
     var total = invest + profit;
     document.getElementById("calcResult").innerText = 
         `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
@@ -216,8 +207,8 @@ window.onload=function(){
 <div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
 
 <nav>
-    <h1>MR FOJI</h1>
-    <div class="coins" id="coins">0</div>
+<h1>MR FOJI</h1>
+<div class="coins" id="coins">0</div>
 </nav>
 
 <div class="news"><span id="liveTicker"></span></div>
@@ -265,25 +256,22 @@ window.onload=function(){
 </div>
 </section>
 
-<!-- PROFIT CALCULATOR -->
 <section class="calc-3d">
-  <h2>Profit Calculator</h2>
-  <div class="calc-card">
-    <input type="number" id="investment" placeholder="Enter Investment (PKR)">
-    <button onclick="calculateProfit()">Calculate</button>
-    <p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
-  </div>
+<h2>Profit Calculator</h2>
+<div class="calc-card">
+<input id="investment" placeholder="Enter Investment">
+<button onclick="calculateProfit()">Calculate</button>
+<p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
+</div>
 </section>
 
-<!-- COMPUTER USERS ONLINE -->
-<section class="computer-users">
-  <h2>Computer Users Online</h2>
-  <div class="user-card">
-    <p id="onlineUsers">0 Users</p>
-  </div>
-</section>
+<div class="computer-users">
+<h2 id="onlineUsers">0 Users Online</h2>
+</div>
 
-<footer>© 2026 MR FOJI Investment</footer>
-<a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
+<footer>© MR FOJI Investment</footer>
+
+<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+
 </body>
     </html>
