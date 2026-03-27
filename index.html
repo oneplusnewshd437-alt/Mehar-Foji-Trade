@@ -18,7 +18,7 @@ body, html{
 }
 @media(max-width:768px){body{background-attachment:scroll;}}
 
-/* LOGIN FULL SCREEN WITH STYLISH 3D BORDER */
+/* LOGIN FULL SCREEN WITH OWN BACKGROUND */
 #loginBox{
     position:fixed;
     top:0;
@@ -33,44 +33,40 @@ body, html{
     z-index:9999;
 }
 .login-box{
-    background:rgba(0,0,0,0.85); /* Slightly darker overlay */
+    background:rgba(0,0,0,0.85); /* semi-transparent overlay */
     padding:35px;
     border-radius:20px;
-    width:340px;
+    width:350px;
     text-align:center;
-    border: 2px solid #22c55e;
-    box-shadow: 0 10px 25px rgba(34,197,94,0.5), inset 0 0 15px rgba(34,197,94,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border: 3px solid #22c55e;
+    box-shadow: 0 0 20px #22c55e, 0 10px 25px rgba(0,0,0,0.6);
 }
-.login-box:hover{
-    transform: translateY(-5px) translateZ(5px);
-    box-shadow: 0 15px 35px rgba(34,197,94,0.7), inset 0 0 25px rgba(34,197,94,0.3);
+.login-box h2{
+    color:#22c55e;
+    margin-bottom:25px;
+    font-size:24px;
+    text-shadow: 0 0 8px #22c55e, 0 0 15px #0f3c6a;
 }
 .login-box input{
     width:100%;
-    padding:14px;
+    padding:12px;
     margin:12px 0;
     border:none;
     border-radius:8px;
-    background:#1f2937;
-    color:white;
-    font-size:16px;
 }
 .login-box button{
     width:100%;
-    padding:14px;
+    padding:12px;
     background:#22c55e;
     border:none;
     color:white;
     border-radius:8px;
     cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
     transition:0.3s;
 }
 .login-box button:hover{
     transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(34,197,94,0.5);
+    box-shadow:0 5px 15px rgba(34,197,94,0.5);
 }
 .login-box .reset-btn{
     background:red;
@@ -275,6 +271,7 @@ window.onload=function(){
 <!-- LOGIN -->
 <div id="loginBox">
   <div class="login-box">
+    <h2>LOGIN REGISTERED ID</h2>
     <input id="mobile" placeholder="Mobile Number">
     <input id="pass" type="password" placeholder="Password">
     <button onclick="loginUser()">Login</button>
@@ -357,4 +354,7 @@ window.onload=function(){
 </div>
 
 <footer>© MR FOJI Investment</footer>
-<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a
+<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+
+</body>
+    </html>
