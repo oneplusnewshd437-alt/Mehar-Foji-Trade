@@ -18,37 +18,24 @@ background-repeat:no-repeat;background-attachment:fixed;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
 .login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;}
 
-/* NAV 3D + BORDER */
-nav {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 30px;
-    background:rgba(0,0,0,0.7);
-    border-radius:10px;
-    margin:10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
+/* NAV 3D + BORDER + COIN ICON */
+nav{
+    display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
+    background:rgba(0,0,0,0.7);border-radius:10px;margin:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
     border:2px solid #22c55e;
 }
-nav h1 {
-    color:#22c55e;
-    font-size:28px;
-    text-shadow:2px 2px 5px black, 0 0 10px #22c55e;
+nav h1{
+    color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c55e;
 }
-.coins {
-    font-weight:bold;
-    font-size:18px;
-    color:#fff;
-    text-shadow:1px 1px 3px black, 0 0 5px #22c55e;
-    padding:5px 15px;
-    border:2px solid #22c55e;
-    border-radius:8px;
-    background: rgba(0,0,0,0.5);
+.coins{
+    font-weight:bold;font-size:18px;color:#fff;text-shadow:1px 1px 3px black,0 0 5px #22c55e;
+    padding:5px 15px;border:2px solid #22c55e;border-radius:8px;background: rgba(0,0,0,0.5);
 }
 
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;} 
+.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
 @keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
@@ -93,15 +80,8 @@ nav h1 {
 
 /* STATIC USER INFO */
 .user-info{
-    background:#111827;
-    border:2px solid #22c55e;
-    padding:15px;
-    max-width:400px;
-    margin:20px auto;
-    border-radius:10px;
-    text-align:center;
-    color:#22c55e;
-    font-weight:bold;
+    background:#111827;border:2px solid #22c55e;padding:15px;max-width:400px;margin:20px auto;
+    border-radius:10px;text-align:center;color:#22c55e;font-weight:bold;display:none;
 }
 
 /* FOOTER */
@@ -120,7 +100,7 @@ function loginUser(){
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m); 
         localStorage.setItem("userPass",p);
-        localStorage.setItem("coins", 120);
+        localStorage.setItem("coins",120);
         alert("Account Created ✅"); 
         location.reload();
     }else{
@@ -140,10 +120,17 @@ function resetPassword(){
     }else{alert("Number Not Found ❌");}
 }
 
-// LOAD COINS
+// LOAD COINS + USER INFO
 function loadCoins(){
-    document.getElementById("coins").innerHTML = localStorage.getItem("coins")||0;
-    document.getElementById("userInfo").innerHTML = "Login ID: " + (localStorage.getItem("userMobile")||"N/A") + " | Coins: " + (localStorage.getItem("coins")||0);
+    // Top nav coins
+    document.getElementById("coins").innerHTML = 
+        '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
+        (localStorage.getItem("coins")||0);
+    // Niche user info (HTML only)
+    document.getElementById("userInfo").innerHTML = 
+        "Login ID: " + (localStorage.getItem("userMobile")||"N/A") + 
+        " | Coins: " + (localStorage.getItem("coins")||0);
+    document.getElementById("userInfo").style.display="block";
 }
 
 // DAILY REWARD
@@ -163,28 +150,22 @@ function claimReward(){
 var profit=210000;
 setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
 
-// LIVE TICKER / SLIDER WITH FIXED COMPUTER USERS
+// LIVE TICKER
 var names=["Zain","Usman","Bilal"];
-var fixedTicker = [
-    "Ali Invested 108000 PKR | ",
-    "M Hussain Invested 27500 PKR | "
-];
-
+var fixedTicker=["Ali Invested 108000 PKR | ","M Hussain Invested 27500 PKR | "];
 function ticker(){
-    var text = "";
-    for(var i=0;i<fixedTicker.length;i++){
-        text += fixedTicker[i];
-    }
+    var text="";
+    for(var i=0;i<fixedTicker.length;i++){text+=fixedTicker[i];}
     for(var i=0;i<30;i++){
-        var name = names[Math.floor(Math.random()*names.length)];
-        var amount = [2000,5000,8000,16000][Math.floor(Math.random()*4)];
-        var type = Math.random()>0.5?"Invested":"Withdraw";
-        text += name + " " + type + " " + amount + " PKR | ";
+        var name=names[Math.floor(Math.random()*names.length)];
+        var amount=[2000,5000,8000,16000][Math.floor(Math.random()*4)];
+        var type=Math.random()>0.5?"Invested":"Withdraw";
+        text+=name+" "+type+" "+amount+" PKR | ";
     }
-    document.getElementById("liveTicker").innerHTML = text;
+    document.getElementById("liveTicker").innerHTML=text;
 }
 
-window.onload=function(){loadCoins(); ticker();};
+window.onload=function(){loadCoins();ticker();};
 </script>
 </head>
 <body>
@@ -260,9 +241,8 @@ window.onload=function(){loadCoins(); ticker();};
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
 
-<div class="user-info" id="userInfo">
-Login ID: N/A | Coins: 0
-</div>
+<!-- HTML ONLY: User ID + Coins -->
+<div class="user-info" id="userInfo">Login ID: N/A | Coins: 0</div>
 
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
