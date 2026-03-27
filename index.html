@@ -48,7 +48,7 @@ nav h1 {
 
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;} 
+.news span{display:inline-block;padding-left:100%;animation:slide 20s linear infinite;} 
 @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
@@ -90,10 +90,6 @@ nav h1 {
 
 /* CALC */
 .calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
-
-/* COMPUTER / USER SECTION */
-.computer{background:#111827;padding:20px;border-radius:12px;text-align:center;margin:20px auto;max-width:400px;border:2px solid #22c55e;}
-.computer h3{color:#22c55e;}
 
 /* STATIC USER INFO */
 .user-info{
@@ -163,7 +159,34 @@ function claimReward(){
     }else{alert("Already claimed today ❌");}
 }
 
-window.onload=function(){loadCoins();}
+// LIVE PROFIT
+var profit=210000;
+setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
+
+// LIVE TICKER / SLIDER WITH FIXED COMPUTER USERS
+var names=["Zain","Usman","Bilal"];
+var fixedTicker = [
+    "Ali Invested 108000 PKR | ",
+    "M Hussain Invested 27500 PKR | "
+];
+
+function ticker(){
+    var text = "";
+    // Add fixed examples first
+    for(var i=0;i<fixedTicker.length;i++){
+        text += fixedTicker[i];
+    }
+    // Add random users for scrolling effect
+    for(var i=0;i<30;i++){
+        var name = names[Math.floor(Math.random()*names.length)];
+        var amount = [2000,5000,8000,16000][Math.floor(Math.random()*4)];
+        var type = Math.random()>0.5?"Invested":"Withdraw";
+        text += name + " " + type + " " + amount + " PKR | ";
+    }
+    document.getElementById("liveTicker").innerHTML = text;
+}
+
+window.onload=function(){loadCoins(); ticker();};
 </script>
 </head>
 <body>
@@ -188,8 +211,9 @@ window.onload=function(){loadCoins();}
     <div class="coins" id="coins">0</div>
 </nav>
 
-<!-- NEWS -->
-<div class="news"><span>Ali Invested 5000 PKR | Zain Withdraw 2000 PKR | …</span></div>
+<!-- NEWS / LIVE TICKER -->
+<div class="news"><span id="liveTicker"></span></div>
+
 <div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
 
 <!-- DAILY REWARD -->
@@ -199,7 +223,7 @@ window.onload=function(){loadCoins();}
 </div>
 
 <!-- STATS -->
-<div class="stats"><div class="stat"><h3>210000</h3><p>Live Profit</p></div></div>
+<div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
 
 <!-- EVENT -->
 <div class="event">
@@ -246,12 +270,6 @@ window.onload=function(){loadCoins();}
 <button>Calculate</button>
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
-
-<!-- COMPUTER / USER -->
-<div class="computer">
-<h3>Computer / User Section</h3>
-<p>Computer Active: 1 | User Online: 1</p>
-</div>
 
 <!-- STATIC USER INFO LAST -->
 <div class="user-info" id="userInfo">
