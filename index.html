@@ -18,25 +18,51 @@ background-repeat:no-repeat;background-attachment:fixed;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
 .login-box button{width:100%;padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;margin-top:10px;cursor:pointer;}
 
-/* NAV 3D + BORDER + COIN ICON */
-nav{
-    display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
-    background:rgba(0,0,0,0.7);border-radius:10px;margin:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
+/* NAV 3D + BORDER */
+nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    background:rgba(0,0,0,0.7);
+    border-radius:10px;
+    margin:10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.6);
     border:2px solid #22c55e;
 }
-nav h1{
-    color:#22c55e;font-size:28px;text-shadow:2px 2px 5px black,0 0 10px #22c55e;
+nav h1 {
+    color:#22c55e;
+    font-size:28px;
+    text-shadow:2px 2px 5px black, 0 0 10px #22c55e;
 }
-.coins{
-    font-weight:bold;font-size:18px;color:#fff;text-shadow:1px 1px 3px black,0 0 5px #22c55e;
-    padding:5px 15px;border:2px solid #22c55e;border-radius:8px;background: rgba(0,0,0,0.5);
+.coins {
+    font-weight:bold;
+    font-size:18px;
+    color:#fff;
+    text-shadow:1px 1px 3px black, 0 0 5px #22c55e;
+    padding:5px 15px;
+    border:2px solid #22c55e;
+    border-radius:8px;
+    background: rgba(0,0,0,0.5);
+}
+
+/* USER INFO HTML STATIC ONLY */
+.user-info{
+    text-align:center;
+    margin:15px auto;
+    font-size:18px;
+    color:#22c55e;
+    border:2px solid #22c55e;
+    border-radius:10px;
+    padding:10px;
+    max-width:400px;
+    background: rgba(0,0,0,0.5);
 }
 
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
-@keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+.news span{display:inline-block;padding-left:100%;animation:slide 60s linear infinite;}
+@keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
 .top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
@@ -78,11 +104,6 @@ nav h1{
 /* CALC */
 .calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
 
-/* STATIC USER INFO (HIDDEN HTML) */
-.user-info{
-    display:none;
-}
-
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
@@ -99,7 +120,6 @@ function loginUser(){
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m); 
         localStorage.setItem("userPass",p);
-        localStorage.setItem("coins",120);
         alert("Account Created ✅"); 
         location.reload();
     }else{
@@ -109,7 +129,6 @@ function loginUser(){
     }
 }
 
-// RESET PASSWORD
 function resetPassword(){
     var m=prompt("Enter Mobile Number"); 
     if(m===localStorage.getItem("userMobile")){
@@ -119,46 +138,32 @@ function resetPassword(){
     }else{alert("Number Not Found ❌");}
 }
 
+// DAILY REWARD SYSTEM
+function claimReward(){
+    let lastClaim = localStorage.getItem("lastClaim");
+    let now = new Date();
+    let today = now.toDateString();
+    if(lastClaim){
+        let lastDate = new Date(parseInt(lastClaim));
+        if(lastDate.toDateString() === today){
+            alert("Already claimed today ❌");
+            return;
+        }
+    }
+    // Add reward
+    let coins = parseInt(localStorage.getItem("coins") || 0) + 10;
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("lastClaim", now.getTime());
+    alert("10 Coins Added ✅");
+    document.getElementById("coins").innerHTML = coins;
+}
+
 // LOAD COINS
 function loadCoins(){
-    document.getElementById("coins").innerHTML = 
-        '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
-        (localStorage.getItem("coins")||0);
+    document.getElementById("coins").innerHTML = localStorage.getItem("coins")||0;
 }
 
-// DAILY REWARD
-function claimReward(){
-    var last = localStorage.getItem("lastClaim");
-    var now = new Date().getTime();
-    if(!last || now - last > 86400000){
-        localStorage.setItem("lastClaim", now);
-        var coins = parseInt(localStorage.getItem("coins")||0) + 10;
-        localStorage.setItem("coins", coins);
-        alert("10 Coins Added ✅");
-        loadCoins();
-    }else{alert("Already claimed today ❌");}
-}
-
-// LIVE PROFIT
-var profit=210000;
-setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
-
-// LIVE TICKER
-var names=["Zain","Usman","Bilal"];
-var fixedTicker=["Ali Invested 108000 PKR | ","M Hussain Invested 27500 PKR | "];
-function ticker(){
-    var text="";
-    for(var i=0;i<fixedTicker.length;i++){text+=fixedTicker[i];}
-    for(var i=0;i<30;i++){
-        var name=names[Math.floor(Math.random()*names.length)];
-        var amount=[2000,5000,8000,16000][Math.floor(Math.random()*4)];
-        var type=Math.random()>0.5?"Invested":"Withdraw";
-        text+=name+" "+type+" "+amount+" PKR | ";
-    }
-    document.getElementById("liveTicker").innerHTML=text;
-}
-
-window.onload=function(){loadCoins();ticker();};
+window.onload=function(){loadCoins();};
 </script>
 </head>
 <body>
@@ -175,15 +180,17 @@ window.onload=function(){loadCoins();ticker();};
 </div>
 
 <div class="overlay"></div>
-<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
+<div class="top-banner"><img src="Ali888.jpg"></div>
 
-<nav>
-    <h1>MR FOJI</h1>
-    <div class="coins" id="coins">0</div>
-</nav>
+<!-- NAV BAR -->
+<nav><h1>MR FOJI</h1><div class="coins" id="coins">0</div></nav>
 
-<div class="news"><span id="liveTicker"></span></div>
+<!-- STATIC USER INFO -->
+<div class="user-info">
+Login ID: 03491234567 | Coins: 120
+</div>
 
+<div class="news"><span>Ali Invested 5000 PKR | Zain Withdraw 2000 PKR | …</span></div>
 <div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
 
 <div class="task">
@@ -191,7 +198,7 @@ window.onload=function(){loadCoins();ticker();};
 <button onclick="claimReward()">Claim Reward</button>
 </div>
 
-<div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
+<div class="stats"><div class="stat"><h3>210000</h3><p>Live Profit</p></div></div>
 
 <div class="event">
 <h3>Special Event</h3>
@@ -201,10 +208,10 @@ window.onload=function(){loadCoins();ticker();};
 </div>
 
 <section class="plans">
-<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Basic 2000')">Invest</button></div>
-<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Silver 5000')">Invest</button></div>
-<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Gold 8000')">Invest</button></div>
-<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest VIP 16000')">Invest</button></div>
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button>Invest</button></div>
+<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
 </section>
 
 <section>
@@ -213,7 +220,7 @@ window.onload=function(){loadCoins();ticker();};
 <p>Send Payment To</p><h3>03220751486</h3>
 <input placeholder="Your Name">
 <input placeholder="Your Phone">
-<button onclick="window.open('https://wa.me/923491441853?text=Deposit Request')">Submit Deposit</button>
+<button>Submit Deposit</button>
 </div>
 </section>
 
@@ -223,7 +230,7 @@ window.onload=function(){loadCoins();ticker();};
 <input placeholder="Your Name">
 <input placeholder="Number">
 <input placeholder="Amount">
-<button onclick="window.open('https://wa.me/923491441853?text=Withdraw Request')">Submit Withdraw</button>
+<button>Submit Withdraw</button>
 </div>
 </section>
 
@@ -236,5 +243,6 @@ window.onload=function(){loadCoins();ticker();};
 
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
+
 </body>
-    </html>
+                          </html>
