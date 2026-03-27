@@ -46,22 +46,9 @@ nav h1 {
     background: rgba(0,0,0,0.5);
 }
 
-/* USER INFO HTML STATIC ONLY */
-.user-info{
-    text-align:center;
-    margin:15px auto;
-    font-size:18px;
-    color:#22c55e;
-    border:2px solid #22c55e;
-    border-radius:10px;
-    padding:10px;
-    max-width:400px;
-    background: rgba(0,0,0,0.5);
-}
-
 /* NEWS / TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 60s linear infinite;}
+.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;} 
 @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
@@ -104,6 +91,23 @@ nav h1 {
 /* CALC */
 .calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
 
+/* COMPUTER / USER SECTION */
+.computer{background:#111827;padding:20px;border-radius:12px;text-align:center;margin:20px auto;max-width:400px;border:2px solid #22c55e;}
+.computer h3{color:#22c55e;}
+
+/* STATIC USER INFO */
+.user-info{
+    background:#111827;
+    border:2px solid #22c55e;
+    padding:15px;
+    max-width:400px;
+    margin:20px auto;
+    border-radius:10px;
+    text-align:center;
+    color:#22c55e;
+    font-weight:bold;
+}
+
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
@@ -120,6 +124,7 @@ function loginUser(){
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m); 
         localStorage.setItem("userPass",p);
+        localStorage.setItem("coins", 120); // Default coins
         alert("Account Created ✅"); 
         location.reload();
     }else{
@@ -129,6 +134,7 @@ function loginUser(){
     }
 }
 
+// RESET PASSWORD
 function resetPassword(){
     var m=prompt("Enter Mobile Number"); 
     if(m===localStorage.getItem("userMobile")){
@@ -138,32 +144,26 @@ function resetPassword(){
     }else{alert("Number Not Found ❌");}
 }
 
-// DAILY REWARD SYSTEM
-function claimReward(){
-    let lastClaim = localStorage.getItem("lastClaim");
-    let now = new Date();
-    let today = now.toDateString();
-    if(lastClaim){
-        let lastDate = new Date(parseInt(lastClaim));
-        if(lastDate.toDateString() === today){
-            alert("Already claimed today ❌");
-            return;
-        }
-    }
-    // Add reward
-    let coins = parseInt(localStorage.getItem("coins") || 0) + 10;
-    localStorage.setItem("coins", coins);
-    localStorage.setItem("lastClaim", now.getTime());
-    alert("10 Coins Added ✅");
-    document.getElementById("coins").innerHTML = coins;
-}
-
 // LOAD COINS
 function loadCoins(){
     document.getElementById("coins").innerHTML = localStorage.getItem("coins")||0;
+    document.getElementById("userInfo").innerHTML = "Login ID: " + (localStorage.getItem("userMobile")||"N/A") + " | Coins: " + (localStorage.getItem("coins")||0);
 }
 
-window.onload=function(){loadCoins();};
+// DAILY REWARD
+function claimReward(){
+    var last = localStorage.getItem("lastClaim");
+    var now = new Date().getTime();
+    if(!last || now - last > 86400000){
+        localStorage.setItem("lastClaim", now);
+        var coins = parseInt(localStorage.getItem("coins")||0) + 10;
+        localStorage.setItem("coins", coins);
+        alert("10 Coins Added ✅");
+        loadCoins();
+    }else{alert("Already claimed today ❌");}
+}
+
+window.onload=function(){loadCoins();}
 </script>
 </head>
 <body>
@@ -183,23 +183,25 @@ window.onload=function(){loadCoins();};
 <div class="top-banner"><img src="Ali888.jpg"></div>
 
 <!-- NAV BAR -->
-<nav><h1>MR FOJI</h1><div class="coins" id="coins">0</div></nav>
+<nav>
+    <h1>MR FOJI</h1>
+    <div class="coins" id="coins">0</div>
+</nav>
 
-<!-- STATIC USER INFO -->
-<div class="user-info">
-Login ID: 03491234567 | Coins: 120
-</div>
-
+<!-- NEWS -->
 <div class="news"><span>Ali Invested 5000 PKR | Zain Withdraw 2000 PKR | …</span></div>
 <div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
 
+<!-- DAILY REWARD -->
 <div class="task">
 <h3>Daily Login Reward</h3>
 <button onclick="claimReward()">Claim Reward</button>
 </div>
 
+<!-- STATS -->
 <div class="stats"><div class="stat"><h3>210000</h3><p>Live Profit</p></div></div>
 
+<!-- EVENT -->
 <div class="event">
 <h3>Special Event</h3>
 <img src="Agent Hussain.jpg" class="event-img">
@@ -207,6 +209,7 @@ Login ID: 03491234567 | Coins: 120
 <a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a>
 </div>
 
+<!-- PLANS -->
 <section class="plans">
 <div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
 <div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
@@ -214,6 +217,7 @@ Login ID: 03491234567 | Coins: 120
 <div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
 </section>
 
+<!-- DEPOSIT -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Deposit (Easypaisa)</h2>
 <div class="box">
@@ -224,6 +228,7 @@ Login ID: 03491234567 | Coins: 120
 </div>
 </section>
 
+<!-- WITHDRAW -->
 <section>
 <h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
 <div class="box">
@@ -234,6 +239,7 @@ Login ID: 03491234567 | Coins: 120
 </div>
 </section>
 
+<!-- CALCULATOR -->
 <section class="calc">
 <h2>Profit Calculator</h2>
 <input type="number" placeholder="Enter Investment">
@@ -241,8 +247,18 @@ Login ID: 03491234567 | Coins: 120
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
 
+<!-- COMPUTER / USER -->
+<div class="computer">
+<h3>Computer / User Section</h3>
+<p>Computer Active: 1 | User Online: 1</p>
+</div>
+
+<!-- STATIC USER INFO LAST -->
+<div class="user-info" id="userInfo">
+Login ID: N/A | Coins: 0
+</div>
+
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
-
 </body>
     </html>
