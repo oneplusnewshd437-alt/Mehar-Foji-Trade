@@ -78,10 +78,9 @@ nav h1{
 /* CALC */
 .calc{background:#111827;margin:20px auto;padding:25px;border-radius:10px;text-align:center;max-width:400px;}
 
-/* STATIC USER INFO */
+/* STATIC USER INFO (HIDDEN HTML) */
 .user-info{
-    background:#111827;border:2px solid #22c55e;padding:15px;max-width:400px;margin:20px auto;
-    border-radius:10px;text-align:center;color:#22c55e;font-weight:bold;display:none;
+    display:none;
 }
 
 /* FOOTER */
@@ -120,17 +119,11 @@ function resetPassword(){
     }else{alert("Number Not Found ❌");}
 }
 
-// LOAD COINS + USER INFO
+// LOAD COINS
 function loadCoins(){
-    // Top nav coins
     document.getElementById("coins").innerHTML = 
         '<img src="coin-icon.png" style="width:20px;height:20px;margin-right:5px;vertical-align:middle;">' + 
         (localStorage.getItem("coins")||0);
-    // Niche user info (HTML only)
-    document.getElementById("userInfo").innerHTML = 
-        "Login ID: " + (localStorage.getItem("userMobile")||"N/A") + 
-        " | Coins: " + (localStorage.getItem("coins")||0);
-    document.getElementById("userInfo").style.display="block";
 }
 
 // DAILY REWARD
@@ -182,7 +175,7 @@ window.onload=function(){loadCoins();ticker();};
 </div>
 
 <div class="overlay"></div>
-<div class="top-banner"><img src="Ali888.jpg"></div>
+<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
 
 <nav>
     <h1>MR FOJI</h1>
@@ -208,10 +201,10 @@ window.onload=function(){loadCoins();ticker();};
 </div>
 
 <section class="plans">
-<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button>Invest</button></div>
-<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button>Invest</button></div>
-<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button>Invest</button></div>
-<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button>Invest</button></div>
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Basic 2000')">Invest</button></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Silver 5000')">Invest</button></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Gold 8000')">Invest</button></div>
+<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest VIP 16000')">Invest</button></div>
 </section>
 
 <section>
@@ -220,7 +213,7 @@ window.onload=function(){loadCoins();ticker();};
 <p>Send Payment To</p><h3>03220751486</h3>
 <input placeholder="Your Name">
 <input placeholder="Your Phone">
-<button>Submit Deposit</button>
+<button onclick="window.open('https://wa.me/923491441853?text=Deposit Request')">Submit Deposit</button>
 </div>
 </section>
 
@@ -230,7 +223,7 @@ window.onload=function(){loadCoins();ticker();};
 <input placeholder="Your Name">
 <input placeholder="Number">
 <input placeholder="Amount">
-<button>Submit Withdraw</button>
+<button onclick="window.open('https://wa.me/923491441853?text=Withdraw Request')">Submit Withdraw</button>
 </div>
 </section>
 
@@ -240,9 +233,6 @@ window.onload=function(){loadCoins();ticker();};
 <button>Calculate</button>
 <p>Profit: 0 PKR | Total: 0 PKR</p>
 </section>
-
-<!-- HTML ONLY: User ID + Coins -->
-<div class="user-info" id="userInfo">Login ID: N/A | Coins: 0</div>
 
 <footer>© 2026 MR FOJI Investment</footer>
 <a class="whatsapp" href="https://wa.me/923491441853">WhatsApp</a>
