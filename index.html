@@ -135,6 +135,7 @@ function loginUser(){
     }else{
         if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
             document.getElementById("loginBox").style.display="none";
+            registerOnlineUser(m); // Register as online
         }else{alert("Wrong Details ❌");}
     }
 }
@@ -147,6 +148,14 @@ function resetPassword(){
         localStorage.setItem("userPass",np); 
         alert("Password Reset ✅");
     }else{alert("Number Not Found ❌");}
+}
+
+// REGISTER LOGGED-IN USER ONLINE
+function registerOnlineUser(mobile){
+    const userId = 'user_' + mobile;
+    const userRef = firebase.database().ref('onlineUsers/' + userId);
+    userRef.set({ timestamp: Date.now() });
+    userRef.onDisconnect().remove();
 }
 
 // LOAD COINS
@@ -188,11 +197,7 @@ function ticker(){
     document.getElementById("liveTicker").innerHTML=text;
 }
 
-// COMPUTER USERS ONLINE (REAL)
-const userId = 'user_' + Math.floor(Math.random()*1000000);
-const userRef = db.ref('onlineUsers/' + userId);
-userRef.set(true);
-userRef.onDisconnect().remove();
+// COMPUTER USERS ONLINE (REAL LOGGED-IN USERS)
 const onlineCountRef = db.ref('onlineUsers');
 onlineCountRef.on('value', (snapshot)=>{
     document.getElementById("onlineUsers").innerText = snapshot.numChildren() + " Users Online";
