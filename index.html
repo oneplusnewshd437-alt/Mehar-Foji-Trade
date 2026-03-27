@@ -105,22 +105,7 @@ footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:2
 /* WHATSAPP FLOAT */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
-
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 <script>
-// Firebase Setup
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
 // LOGIN SYSTEM
 function loginUser(){
     var m=document.getElementById("mobile").value;
@@ -135,7 +120,6 @@ function loginUser(){
     }else{
         if(m===localStorage.getItem("userMobile") && p===localStorage.getItem("userPass")){
             document.getElementById("loginBox").style.display="none";
-            registerOnlineUser(m); // Register as online
         }else{alert("Wrong Details ❌");}
     }
 }
@@ -148,14 +132,6 @@ function resetPassword(){
         localStorage.setItem("userPass",np); 
         alert("Password Reset ✅");
     }else{alert("Number Not Found ❌");}
-}
-
-// REGISTER LOGGED-IN USER ONLINE
-function registerOnlineUser(mobile){
-    const userId = 'user_' + mobile;
-    const userRef = firebase.database().ref('onlineUsers/' + userId);
-    userRef.set({ timestamp: Date.now() });
-    userRef.onDisconnect().remove();
 }
 
 // LOAD COINS
@@ -197,13 +173,7 @@ function ticker(){
     document.getElementById("liveTicker").innerHTML=text;
 }
 
-// COMPUTER USERS ONLINE (REAL LOGGED-IN USERS)
-const onlineCountRef = db.ref('onlineUsers');
-onlineCountRef.on('value', (snapshot)=>{
-    document.getElementById("onlineUsers").innerText = snapshot.numChildren() + " Users Online";
-});
-
-// PROFIT CALCULATOR FUNCTION
+// PROFIT CALCULATOR
 function calculateProfit(){
     var invest = parseFloat(document.getElementById("investment").value) || 0;
     var profit = invest * 0.25; // example: 25% profit
@@ -212,7 +182,21 @@ function calculateProfit(){
         `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
-window.onload=function(){loadCoins();ticker();};
+// SIMULATED ONLINE USERS
+function simulateOnlineUsers(){
+    const minUsers = 20;
+    const maxUsers = 45;
+    setInterval(()=>{
+        const online = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
+        document.getElementById("onlineUsers").innerText = online + " Users Online";
+    }, 3000);
+}
+
+window.onload=function(){
+    loadCoins();
+    ticker();
+    simulateOnlineUsers();
+};
 </script>
 </head>
 <body>
