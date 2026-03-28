@@ -206,21 +206,19 @@ function loadCoins(){
 
     if(mobile === "03175482087"){
         coins = 12500; // first special user
-        localStorage.setItem("coins", coins);
-
     } else if(mobile === "03491441853"){
         coins = 215660; // second special user
-        localStorage.setItem("coins", coins);
-
     } else if(mobile === "03291928299"){
         coins = 1000; // third special user
-        localStorage.setItem("coins", coins);
-
     } else {
         coins = parseInt(localStorage.getItem("coins") || 0);
     }
 
-    document.getElementById("coins").innerHTML = coins;
+    // coins ke sath image show karna
+    document.getElementById("coins").innerHTML =
+        '<img src="coins.jpg" alt="Coins" style="width:20px; height:20px; vertical-align:middle; margin-right:5px;">' + coins;
+
+    localStorage.setItem("coins", coins);
     }
 
 // DAILY REWARD
