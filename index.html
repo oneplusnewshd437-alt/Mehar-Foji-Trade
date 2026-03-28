@@ -69,7 +69,7 @@ body, html{
 .login-btn{background:#22c55e;}
 .reset-btn{background:red;margin-top:0;}
 
-/* NAV + COINS */
+/* NAV 3D + BORDER + COIN ICON */
 nav{
     display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
     background:#111827;
@@ -124,11 +124,43 @@ nav h1{color:#22c55e;font-size:28px;}
 .plan.vip{background:#ff4d4d;}
 .plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 
-/* BOXES (Deposit / Withdraw + ADMIN COINS TRANSFER) */
+/* BOXES (Deposit / Withdraw) */
 .box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#1f2937;color:white;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
 .box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
+
+/* PROFIT CALCULATOR 3D ENHANCED */
+.calc-3d{text-align:center;margin:30px auto;perspective:1000px;}
+.calc-card{
+    background: linear-gradient(145deg,#0f172a,#0f3c6a);
+    padding:35px;border-radius:25px;width:90%;max-width:420px;margin:auto;
+    box-shadow:12px 12px 30px rgba(0,0,0,0.7),-12px -12px 30px rgba(0,120,255,0.3);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
+}
+.calc-card:hover{
+    transform: rotateX(8deg) rotateY(8deg);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.8),-15px -15px 35px rgba(0,150,255,0.5);
+}
+.calc-card input{background:#112244;color:#00f3ff;font-size:18px;padding:16px;border-radius:15px;border:none;margin-bottom:15px;}
+.calc-card button{background:#00f3ff;color:#0f172a;font-weight:bold;padding:16px;border-radius:15px;font-size:18px;border:none;cursor:pointer;}
+.calc-card button:hover{transform: translateY(-4px) translateZ(6px);box-shadow:0 12px 25px rgba(0,243,255,0.5);}
+
+/* ONLINE USERS 3D REDESIGN */
+.computer-users{
+    text-align:center;
+    background: linear-gradient(145deg,#111827,#0f1a2b);
+    padding:30px;margin:25px auto;border-radius:20px;
+    max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
+}
+.computer-users:hover{
+    transform: rotateX(7deg) rotateY(-7deg);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.7),-15px -15px 35px rgba(0,255,200,0.2);
+}
+.computer-users h2{font-size:30px;color:#00f3ff;margin-bottom:15px;}
+.user-card{background: rgba(0,243,255,0.05);padding:25px;border-radius:15px;font-size:24px;font-weight:bold;color:#00f3ff;box-shadow: inset 0 0 20px rgba(0,243,255,0.2);transition: transform 0.3s;}
+.user-card:hover{transform: translateY(-3px) translateZ(5px);}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
@@ -138,19 +170,23 @@ footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:2
 </style>
 
 <script>
-// LOGIN SYSTEM
+// ------------------ LOGIN SYSTEM ------------------
 function loginUser(){
     var m=document.getElementById("mobile").value;
     var p=document.getElementById("pass").value;
 
-    // ADMIN CHECK
+    if(!m||!p){alert("Fill all fields");return;}
+
+    // Admin login
     if(m==="03491441853" && p==="Alig0014"){
+        localStorage.setItem("admin","true");
         document.getElementById("loginBox").style.display="none";
-        document.getElementById("adminPanel").style.display="block";
+        alert("Admin Logged In ✅");
+        loadCoins(); // show coins for admin
         return;
     }
 
-    if(!m||!p){alert("Fill all fields");return;}
+    // Normal user login
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m);
         localStorage.setItem("userPass",p);
@@ -164,7 +200,7 @@ function loginUser(){
     }
 }
 
-// RESET PASSWORD
+// ------------------ RESET PASSWORD ------------------
 function resetPassword(){
     var m=prompt("Enter Mobile Number");
     if(m===localStorage.getItem("userMobile")){
@@ -174,13 +210,19 @@ function resetPassword(){
     }else{alert("Number Not Found ❌");}
 }
 
-// LOAD COINS
+// ------------------ LOAD COINS ------------------
 function loadCoins(){
+    var coins = parseInt(localStorage.getItem("coins")||0);
     document.getElementById("coins").innerHTML =
-        '<img src="Coine1.jpg">' + (localStorage.getItem("coins")||0);
+        '<img src="Coine1.jpg">' + coins;
+
+    // Show admin coin transfer option if admin
+    if(localStorage.getItem("admin")){
+        document.getElementById("adminPanel").style.display="block";
+    }
 }
 
-// DAILY REWARD
+// ------------------ DAILY REWARD ------------------
 function claimReward(){
     var last = localStorage.getItem("lastClaim");
     var now = new Date().getTime();
@@ -193,11 +235,14 @@ function claimReward(){
     }else{alert("Already claimed today ❌");}
 }
 
-// LIVE PROFIT
+// ------------------ LIVE PROFIT ------------------
 var profit=310000;
-setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
+setInterval(()=>{
+    profit+=Math.floor(Math.random()*200);
+    document.getElementById("profit").innerHTML=profit+" PKR";
+},3000);
 
-// LIVE TICKER
+// ------------------ LIVE TICKER ------------------
 var names=["Zain","Usman","Bilal"];
 var fixedTicker=["Ali Invested 108000 PKR | ","M Hussain Invested 27500 PKR | "];
 function ticker(){
@@ -212,7 +257,7 @@ function ticker(){
     document.getElementById("liveTicker").innerHTML=text;
 }
 
-// PROFIT CALCULATOR
+// ------------------ PROFIT CALCULATOR ------------------
 function calculateProfit(){
     var invest = parseFloat(document.getElementById("investment").value) || 0;
     var profit = invest * 0.25;
@@ -221,7 +266,7 @@ function calculateProfit(){
         `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
-// SIMULATED ONLINE USERS
+// ------------------ SIMULATED ONLINE USERS ------------------
 function simulateOnlineUsers(){
     const minUsers = 95;
     const maxUsers = 200;
@@ -231,22 +276,21 @@ function simulateOnlineUsers(){
     }, 3000);
 }
 
-// ADMIN COINS TRANSFER
-function sendCoins(){
-    var userMobile = document.getElementById("adminUserMobile").value;
-    var amount = parseInt(document.getElementById("adminCoinsAmount").value) || 0;
-    if(userMobile === localStorage.getItem("userMobile")){
+// ------------------ ADMIN COIN TRANSFER ------------------
+function transferCoins(){
+    var target = prompt("Enter User Mobile Number to Transfer Coins");
+    if(target===localStorage.getItem("userMobile")){
+        var amount = parseInt(prompt("Enter Coin Amount"))||0;
         var current = parseInt(localStorage.getItem("coins")||0);
-        localStorage.setItem("coins", current + amount);
-        alert(amount + " Coins Added To " + userMobile + " ✅");
+        localStorage.setItem("coins",current+amount);
+        alert(amount+" Coins Added to "+target+" ✅");
         loadCoins();
-        document.getElementById("adminCoinsAmount").value="";
-        document.getElementById("adminUserMobile").value="";
     }else{
         alert("User Not Found ❌");
     }
 }
 
+// ------------------ ON PAGE LOAD ------------------
 window.onload=function(){
     loadCoins();
     ticker();
@@ -262,6 +306,7 @@ window.onload=function(){
 <h2>LOGIN REGISTERED ID</h2>
 <input id="mobile" placeholder="Mobile Number">
 <input id="pass" type="password" placeholder="Password">
+
 <div class="btn-row">
 <button class="login-btn" onclick="loginUser()">Login</button>
 <button class="reset-btn" onclick="resetPassword()">Reset Password</button>
@@ -318,27 +363,4 @@ window.onload=function(){
 </section>
 
 <section>
-<h2 style="text-align:center;color:#22c55e;">Withdraw Request</h2>
-<div class="box">
-<input placeholder="Your Name">
-<input placeholder="Number">
-<input placeholder="Amount">
-<button onclick="window.open('https://wa.me/923491441853?text=Withdraw Request')">Submit Withdraw</button>
-</div>
-</section>
-
-<!-- ADMIN PANEL -->
-<div id="adminPanel" style="display:none;">
-<h2 style="text-align:center;color:#22c55e;margin-top:20px;">Admin Coins Transfer</h2>
-<div class="box">
-<input id="adminUserMobile" placeholder="User Mobile Number">
-<input id="adminCoinsAmount" placeholder="Coins Amount">
-<button onclick="sendCoins()">Send Coins</button>
-</div>
-</div>
-
-<footer>© MR FOJI Investment</footer>
-<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
-
-</body>
-    </html>
+<h2 style="text-align:center;color:#22c55
