@@ -6,29 +6,90 @@
 <title>MR FOJI Investment</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-body, html{height:100%;overflow-x:hidden;color:white;background-image:url('investment.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;}
+body, html{
+    height:100%;
+    overflow-x:hidden;
+    color:white;
+    background-image:url('investment.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
 @media(max-width:768px){body{background-attachment:scroll;}}
 
-/* LOGIN CARD */
-#loginBox{position:fixed;top:0;left:0;width:100%;height:100vh;background:url("login 888.jpg") center/cover no-repeat;display:flex;justify-content:center;align-items:flex-start;padding-top:250px;z-index:9999;}
-.login-box{background:rgba(0,0,0,0.85);padding:25px;border-radius:15px;width:300px;text-align:center;border:2px solid #22c55e;box-shadow:0 0 15px #22c55e,0 8px 20px rgba(0,0,0,0.6);}
-.login-box h2{color:#22c55e;margin-bottom:20px;font-size:20px;}
-.login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
-.login-box .btn-row{display:flex;gap:10px;margin-top:10px;}
-.login-box button{flex:1;padding:10px;border:none;color:white;border-radius:6px;cursor:pointer;}
+/* LOGIN CARD WITH BACKGROUND */
+#loginBox{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:url("login 888.jpg") center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:250px;
+    z-index:9999;
+}
+.login-box{
+    background:rgba(0,0,0,0.85);
+    padding:25px;
+    border-radius:15px;
+    width:300px;
+    text-align:center;
+    border: 2px solid #22c55e;
+    box-shadow: 0 0 15px #22c55e, 0 8px 20px rgba(0,0,0,0.6);
+}
+.login-box h2{
+    color:#22c55e;
+    margin-bottom:20px;
+    font-size:20px;
+}
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+}
+/* Buttons in one line */
+.login-box .btn-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+.login-box button{
+    flex:1;
+    padding:10px;
+    border:none;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
 .login-btn{background:#22c55e;}
 .reset-btn{background:red;margin-top:0;}
 
-/* NAV + COINS */
-nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#111827;border-radius:10px;margin:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 15px #22c55e inset;}
+/* NAV 3D + BORDER + COIN ICON */
+nav{
+    display:flex;justify-content:space-between;align-items:center;padding:15px 30px;
+    background:#111827;
+    border-radius:10px;
+    margin:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;
+}
 nav h1{color:#22c55e;font-size:28px;}
-.coins{font-weight:bold;font-size:18px;color:#fff;padding:8px 18px;border-radius:50px;background:rgba(0,0,0,0.6);box-shadow:0 5px 15px rgba(0,0,0,0.6),inset 0 0 10px rgba(34,197,94,0.5);}
+.coins{
+    font-weight:bold;font-size:18px;color:#fff;
+    padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);
+}
 .coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
 
-/* NEWS */
+/* NEWS TICKER */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
 .news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
-@keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+@keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
 /* BANNER */
 .top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
@@ -38,7 +99,7 @@ nav h1{color:#22c55e;font-size:28px;}
 .hero h2{font-size:38px;}
 .hero p{color:#9ca3af;}
 
-/* TASK */
+/* TASK / DAILY COINS */
 .task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 .task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
 .task button:hover{transform:translateY(-3px) translateZ(5px);box-shadow:0 10px 20px rgba(34,197,94,0.5);}
@@ -62,25 +123,42 @@ nav h1{color:#22c55e;font-size:28px;}
 .plan.silver{background:#c0c0c0;color:black;}
 .plan.gold{background:#ffd700;color:black;}
 .plan.vip{background:#ff4d4d;}
-.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
+.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;}
 
-/* BOXES */
+/* BOXES (Deposit / Withdraw) */
 .box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#1f2937;color:white;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
 .box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
 
-/* PROFIT CALCULATOR */
+/* PROFIT CALCULATOR 3D ENHANCED */
 .calc-3d{text-align:center;margin:30px auto;perspective:1000px;}
-.calc-card{background:linear-gradient(145deg,#0f172a,#0f3c6a);padding:35px;border-radius:25px;width:90%;max-width:420px;margin:auto;box-shadow:12px 12px 30px rgba(0,0,0,0.7),-12px -12px 30px rgba(0,120,255,0.3);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
-.calc-card:hover{transform:rotateX(8deg) rotateY(8deg);box-shadow:15px 15px 35px rgba(0,0,0,0.8),-15px -15px 35px rgba(0,150,255,0.5);}
+.calc-card{
+    background: linear-gradient(145deg,#0f172a,#0f3c6a);
+    padding:35px;border-radius:25px;width:90%;max-width:420px;margin:auto;
+    box-shadow:12px 12px 30px rgba(0,0,0,0.7),-12px -12px 30px rgba(0,120,255,0.3);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
+}
+.calc-card:hover{
+    transform: rotateX(8deg) rotateY(8deg);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.8),-15px -15px 35px rgba(0,150,255,0.5);
+}
 .calc-card input{background:#112244;color:#00f3ff;font-size:18px;padding:16px;border-radius:15px;border:none;margin-bottom:15px;}
 .calc-card button{background:#00f3ff;color:#0f172a;font-weight:bold;padding:16px;border-radius:15px;font-size:18px;border:none;cursor:pointer;}
 .calc-card button:hover{transform: translateY(-4px) translateZ(6px);box-shadow:0 12px 25px rgba(0,243,255,0.5);}
 
-/* ONLINE USERS */
-.computer-users{text-align:center;background:linear-gradient(145deg,#111827,#0f1a2b);padding:30px;margin:25px auto;border-radius:20px;max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
-.computer-users:hover{transform: rotateX(7deg) rotateY(-7deg);box-shadow:15px 15px 35px rgba(0,0,0,0.7),-15px -15px 35px rgba(0,255,200,0.2);}
+/* ONLINE USERS 3D REDESIGN */
+.computer-users{
+    text-align:center;
+    background: linear-gradient(145deg,#111827,#0f1a2b);
+    padding:30px;margin:25px auto;border-radius:20px;
+    max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);
+    transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;
+}
+.computer-users:hover{
+    transform: rotateX(7deg) rotateY(-7deg);
+    box-shadow:15px 15px 35px rgba(0,0,0,0.7),-15px -15px 35px rgba(0,255,200,0.2);
+}
 .computer-users h2{font-size:30px;color:#00f3ff;margin-bottom:15px;}
 .user-card{background: rgba(0,243,255,0.05);padding:25px;border-radius:15px;font-size:24px;font-weight:bold;color:#00f3ff;box-shadow: inset 0 0 20px rgba(0,243,255,0.2);transition: transform 0.3s;}
 .user-card:hover{transform: translateY(-3px) translateZ(5px);}
@@ -88,7 +166,7 @@ nav h1{color:#22c55e;font-size:28px;}
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
 
-/* WHATSAPP BUTTON */
+/* WHATSAPP FLOAT */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
 </style>
 
@@ -98,16 +176,6 @@ function loginUser(){
     var m=document.getElementById("mobile").value;
     var p=document.getElementById("pass").value;
     if(!m||!p){alert("Fill all fields");return;}
-    
-    // Admin login
-    if(m==="03491441853" && p==="Alig0014"){
-        alert("Admin Login ✅");
-        document.getElementById("loginBox").style.display="none";
-        localStorage.setItem("isAdmin","true");
-        return;
-    }
-
-    // User login / register
     if(!localStorage.getItem("userMobile")){
         localStorage.setItem("userMobile",m);
         localStorage.setItem("userPass",p);
@@ -133,14 +201,16 @@ function resetPassword(){
 
 // LOAD COINS
 function loadCoins(){
-    var isAdmin = localStorage.getItem("isAdmin");
-    if(isAdmin){
-        document.getElementById("coins").innerHTML =
-        '<img src="Coine1.jpg">Unlimited';
-    }else{
-        document.getElementById("coins").innerHTML =
-        '<img src="Coine1.jpg">' + (localStorage.getItem("coins")||0);
+    var mobile = localStorage.getItem("userMobile");
+    var coins;
+    if(mobile === "03175482087"){
+        coins = 12500; // special user coins
+        localStorage.setItem("coins", coins);
+    } else {
+        coins = parseInt(localStorage.getItem("coins") || 0);
     }
+    document.getElementById("coins").innerHTML =
+        '<img src="Coine1.jpg">' + coins;
 }
 
 // DAILY REWARD
@@ -154,20 +224,6 @@ function claimReward(){
         alert("20 Coins Added ✅");
         loadCoins();
     }else{alert("Already claimed today ❌");}
-}
-
-// COIN TRANSFER (Admin Only)
-function transferCoins(){
-    var isAdmin = localStorage.getItem("isAdmin");
-    if(!isAdmin){alert("Only Admin can transfer!"); return;}
-    var userMobile = prompt("Enter User Mobile to transfer coins:");
-    if(userMobile === localStorage.getItem("userMobile")){
-        var coins = parseInt(prompt("Enter coins to transfer:")) || 0;
-        var current = parseInt(localStorage.getItem("coins")||0);
-        localStorage.setItem("coins", current + coins);
-        alert(coins+" Coins Transferred ✅");
-        loadCoins();
-    }else{alert("User not found!");}
 }
 
 // LIVE PROFIT
@@ -192,13 +248,13 @@ function ticker(){
 // PROFIT CALCULATOR
 function calculateProfit(){
     var invest = parseFloat(document.getElementById("investment").value) || 0;
-    var prof = invest * 0.25;
-    var total = invest + prof;
+    var profit = invest * 0.25;
+    var total = invest + profit;
     document.getElementById("calcResult").innerText =
-        `Profit: ${prof.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
+        `Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
-// ONLINE USERS
+// SIMULATED ONLINE USERS
 function simulateOnlineUsers(){
     const minUsers = 95;
     const maxUsers = 200;
@@ -290,12 +346,24 @@ window.onload=function(){
 </div>
 </section>
 
-<!-- Admin Coin Transfer -->
-<section style="text-align:center;margin:20px;">
-<h2>Admin Coin Transfer</h2>
-<button style="padding:12px 25px;background:#22c55e;border:none;color:white;border-radius:8px;cursor:pointer;" onclick="transferCoins()">Transfer Coins</button>
-</section>
-
 <!-- 3D PROFIT CALCULATOR -->
 <section class="calc-3d">
-<h2>Profit Calculator</h
+<h2>Profit Calculator</h2>
+<div class="calc-card">
+<input id="investment" placeholder="Enter Investment">
+<button onclick="calculateProfit()">Calculate</button>
+<p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
+</div>
+</section>
+
+<!-- 3D ONLINE USERS -->
+<div class="computer-users">
+<h2 id="onlineUsers">0 Users Online</h2>
+<div class="user-card">Current Online Users</div>
+</div>
+
+<footer>© MR FOJI Investment</footer>
+<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+
+</body>
+    </html>
