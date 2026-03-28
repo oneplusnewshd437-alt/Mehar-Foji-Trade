@@ -4,266 +4,179 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MR FOJI Investment</title>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
-body, html{height:100%;overflow-x:hidden;color:white;background-image:url('investment.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;}
-@media(max-width:768px){body{background-attachment:scroll;}}
-
-/* LOGIN CARD */
-#loginBox{position:fixed;top:0;left:0;width:100%;height:100vh;background:url("login 888.jpg") center/cover no-repeat;display:flex;justify-content:center;align-items:flex-start;padding-top:250px;z-index:9999;}
-.login-box{background:rgba(0,0,0,0.85);padding:25px;border-radius:15px;width:300px;text-align:center;border: 2px solid #22c55e;box-shadow: 0 0 15px #22c55e, 0 8px 20px rgba(0,0,0,0.6);}
+body{background:url('investment.jpg') center/cover fixed;color:white;overflow-x:hidden;}
+#loginBox{position:fixed;top:0;left:0;width:100%;height:100vh;background:url('login 888.jpg') center/cover;display:flex;justify-content:center;align-items:flex-start;padding-top:250px;z-index:999;}
+.login-box{background:rgba(0,0,0,0.85);padding:25px;border-radius:15px;width:300px;text-align:center;border:2px solid #22c55e;box-shadow:0 0 15px #22c55e,0 8px 20px rgba(0,0,0,0.6);}
 .login-box h2{color:#22c55e;margin-bottom:20px;font-size:20px;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
-.login-box .btn-row{display:flex;gap:10px;margin-top:10px;}
-.login-box button{flex:1;padding:10px;border:none;color:white;border-radius:6px;cursor:pointer;}
+.login-box button{padding:10px;border:none;color:white;border-radius:6px;cursor:pointer;}
 .login-btn{background:#22c55e;}
 .reset-btn{background:red;margin-top:0;}
-
-/* NAV & COINS */
-nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#111827;border-radius:10px;margin:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 15px #22c55e inset;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#111827;border-radius:10px;margin:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 15px #22c55e inset;}
 nav h1{color:#22c55e;font-size:28px;}
 .coins{font-weight:bold;font-size:18px;color:#fff;padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);}
 .coins img{width:25px;height:25px;vertical-align:middle;margin-right:5px;border-radius:50%;}
-
-/* USER NAME EDIT */
-#userName{border:none;background:none;color:#22c55e;font-weight:bold;width:100px;text-align:center;font-size:16px;outline:none;}
-
-/* NEWS TICKER */
-.news{background:red;padding:10px;overflow:hidden;white-space:nowrap;border-radius:8px;margin:10px;}
-.news span{display:inline-block;padding-left:100%;animation:slide 30s linear infinite;}
-@keyframes slide {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
-
-/* BANNER */
-.top-banner img{width:100%;max-height:350px;object-fit:contain;border-radius:10px;display:block;margin:auto;}
-
-/* HERO */
-.hero{text-align:center;padding:40px;}
-.hero h2{font-size:38px;}
-.hero p{color:#9ca3af;}
-
-/* TASK / DAILY COINS */
-.task{background:#111827;margin:20px auto;padding:20px;border-radius:12px;text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
-.task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;transition:0.3s;}
-.task button:hover{transform:translateY(-3px) translateZ(5px);box-shadow:0 10px 20px rgba(34,197,94,0.5);}
-
-/* STATS */
-.stats{display:flex;justify-content:center;flex-wrap:wrap;padding:20px;}
-.stat{text-align:center;margin:10px auto;background:#111827;padding:20px;border-radius:12px;border:1px solid #22c55e;max-width:300px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
-.stat h3{color:#22c55e;font-size:28px;}
-.stat p{margin-top:5px;color:#9ca3af;}
-
-/* EVENT */
-.event{text-align:center;padding:30px;}
-.event-img{width:100%;max-width:350px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
-.event-button{display:inline-block;background:#22c55e;color:white;padding:12px 25px;border-radius:8px;text-decoration:none;margin-top:10px;}
-
-/* PLANS */
+.task,.box,.stat,.calc-card,.computer-users{background:#111827;border-radius:12px;margin:20px auto;text-align:center;max-width:400px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,0.5);border:1px solid #22c55e;}
+button{padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
-.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;box-shadow:0 10px 25px rgba(0,0,0,0.5);text-align:center;}
 .plan:hover{transform:translateY(-5px) translateZ(5px);box-shadow:0 15px 35px rgba(0,0,0,0.7);}
 .plan.basic{background:#1e3c72;}
 .plan.silver{background:#c0c0c0;color:black;}
 .plan.gold{background:#ffd700;color:black;}
 .plan.vip{background:#ff4d4d;}
-.plan button{padding:10px;background:#22c55e;border:none;color:white;border-radius:6px;cursor:pointer;}
-
-/* BOXES (Deposit / Withdraw) */
-.box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#1f2937;color:white;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
-.box button:hover{background:#1ebe5d;transform:translateY(-2px) translateZ(3px);}
-
-/* PROFIT CALCULATOR */
+.box button:hover{background:#1ebe5d;}
 .calc-3d{text-align:center;margin:30px auto;perspective:1000px;}
 .calc-card{background: linear-gradient(145deg,#0f172a,#0f3c6a);padding:35px;border-radius:25px;width:90%;max-width:420px;margin:auto;box-shadow:12px 12px 30px rgba(0,0,0,0.7),-12px -12px 30px rgba(0,120,255,0.3);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
 .calc-card:hover{transform: rotateX(8deg) rotateY(8deg);box-shadow:15px 15px 35px rgba(0,0,0,0.8),-15px -15px 35px rgba(0,150,255,0.5);}
 .calc-card input{background:#112244;color:#00f3ff;font-size:18px;padding:16px;border-radius:15px;border:none;margin-bottom:15px;}
 .calc-card button{background:#00f3ff;color:#0f172a;font-weight:bold;padding:16px;border-radius:15px;font-size:18px;border:none;cursor:pointer;}
 .calc-card button:hover{transform: translateY(-4px) translateZ(6px);box-shadow:0 12px 25px rgba(0,243,255,0.5);}
-
-/* ONLINE USERS */
-.computer-users{text-align:center;background: linear-gradient(145deg,#111827,#0f1a2b);padding:30px;margin:25px auto;border-radius:20px;max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
+.computer-users{background: linear-gradient(145deg,#111827,#0f1a2b);padding:30px;margin:25px auto;border-radius:20px;max-width:420px;box-shadow:10px 10px 25px rgba(0,0,0,0.6),-10px -10px 25px rgba(0,255,200,0.05);transform-style: preserve-3d;transition: transform 0.4s, box-shadow 0.4s;}
 .computer-users:hover{transform: rotateX(7deg) rotateY(-7deg);box-shadow:15px 15px 35px rgba(0,0,0,0.7),-15px -15px 35px rgba(0,255,200,0.2);}
 .computer-users h2{font-size:30px;color:#00f3ff;margin-bottom:15px;}
 .user-card{background: rgba(0,243,255,0.05);padding:25px;border-radius:15px;font-size:24px;font-weight:bold;color:#00f3ff;box-shadow: inset 0 0 20px rgba(0,243,255,0.2);transition: transform 0.3s;}
 .user-card:hover{transform: translateY(-3px) translateZ(5px);}
-
-/* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;margin-top:20px;border-radius:10px;}
-
-/* WHATSAPP FLOAT */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;color:white;text-decoration:none;}
-
-/* ADMIN PANEL BOX */
-#adminBox{display:none;position:fixed;top:10%;left:50%;transform:translateX(-50%);background:#111827;padding:25px;border-radius:15px;width:350px;z-index:99999;border:2px solid #22c55e;box-shadow:0 0 20px #22c55e;}
-#adminBox input, #adminBox button{width:100%;margin:5px 0;padding:10px;border-radius:6px;border:none;}
-#adminBox button{background:#22c55e;color:white;font-weight:bold;cursor:pointer;}
+#adminPanel{display:none;position:fixed;top:10%;left:50%;transform:translateX(-50%);background:#111827;padding:25px;border-radius:15px;width:350px;border:2px solid #22c55e;z-index:999;}
+#adminPanel input{width:100%;padding:10px;margin:5px 0;}
 </style>
 
 <script>
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// GLOBAL VARIABLES
 let currentUser=null;
 const adminNum="03491441853";
 const adminPass="Alig0014";
 
-// LOGIN FUNCTION
-async function loginUser(){
-  const phone=document.getElementById("mobile").value;
-  const pass=document.getElementById("pass").value;
-
-  // ADMIN LOGIN
-  if(phone===adminNum && pass===adminPass){
-    document.getElementById("loginBox").style.display="none";
-    document.getElementById("adminBox").style.display="block";
-    loadUsersAdmin();
-    return;
-  }
-
-  // USER LOGIN
-  const ref=db.collection("users").doc(phone);
-  const doc=await ref.get();
-  if(!doc.exists){
-    await ref.set({phone, password:pass, coins:60, name:"MR FOJI", role:"user"});
-    alert("Account Created ✅");location.reload(); return;
-  }
-  if(doc.data().password===pass){
-    currentUser=phone;
-    document.getElementById("loginBox").style.display="none";
-    loadCoins();
-  } else alert("Wrong Password ❌");
+/* LOGIN */
+function loginUser(){
+ let m=mobile.value;
+ let p=pass.value;
+ if(m===adminNum && p===adminPass){loginBox.style.display="none";adminPanel.style.display="block";return;}
+ if(!localStorage.getItem(m)){localStorage.setItem(m,JSON.stringify({pass:p,coins:60,name:"MR FOJI"}));alert("Account Created ✅");}
+ let data=JSON.parse(localStorage.getItem(m));
+ if(data.pass===p){currentUser=m;loginBox.style.display="none";loadUser();} else{alert("Wrong Password ❌");}
 }
 
-// LOAD USER COINS AND NAME
-async function loadCoins(){
-  const doc=await db.collection("users").doc(currentUser).get();
-  document.getElementById("coins").innerHTML='<img src="Coine1.jpg"> <input id="userName" value="'+doc.data().name+'" onchange="updateName()">';
+/* LOAD USER */
+function loadUser(){
+ let data=JSON.parse(localStorage.getItem(currentUser));
+ coins.innerHTML='<img src="Coine1.jpg" width=25> <input id="userName" value="'+data.name+'" onchange="saveName()">';
 }
 
-// UPDATE USER NAME
-async function updateName(){
-  const name=document.getElementById("userName").value;
-  await db.collection("users").doc(currentUser).update({name});
+/* SAVE NAME */
+function saveName(){
+ let data=JSON.parse(localStorage.getItem(currentUser));
+ data.name=userName.value;
+ localStorage.setItem(currentUser,JSON.stringify(data));
 }
 
-// DAILY REWARD
-async function claimReward(){
-  const doc=await db.collection("users").doc(currentUser).get();
-  let coins=doc.data().coins+20;
-  await db.collection("users").doc(currentUser).update({coins});
-  alert("20 Coins Added ✅"); loadCoins();
+/* DAILY REWARD */
+function reward(){
+ let data=JSON.parse(localStorage.getItem(currentUser));
+ data.coins+=20;
+ localStorage.setItem(currentUser,JSON.stringify(data));
+ alert("20 Coins Added ✅");
 }
 
-// ADMIN FUNCTIONS
-async function loadUsersAdmin(){
-  const snapshot=await db.collection("users").get();
-  const list=document.getElementById("adminUserList");
-  list.innerHTML="";
-  snapshot.forEach(doc=>{
-    const data=doc.data();
-    if(data.role==="user"){
-      const div=document.createElement("div");
-      div.innerHTML=`${data.name} (${data.phone}) - Coins: <span id="adm-${data.phone}">${data.coins}</span><br>
-      <input type="number" id="adm-input-${data.phone}" placeholder="Coins to Add">
-      <button onclick="addCoins('${data.phone}')">Add Coins</button>`;
-      list.appendChild(div);
-    }
-  });
+/* ADMIN COIN TRANSFER */
+function transferCoins(){
+ let num=admNumber.value;
+ let amount=parseInt(admCoins.value);
+ if(!localStorage.getItem(num)){alert("User not found ❌");return;}
+ let data=JSON.parse(localStorage.getItem(num));
+ data.coins+=amount;
+ localStorage.setItem(num,JSON.stringify(data));
+ alert("Coins Sent Successfully ✅");
 }
 
-async function addCoins(phone){
-  const val=parseInt(document.getElementById("adm-input-"+phone).value);
-  if(isNaN(val)||val<=0){alert("Enter valid number"); return;}
-  const ref=db.collection("users").doc(phone);
-  const doc=await ref.get();
-  await ref.update({coins:doc.data().coins+val});
-  document.getElementById("adm-"+phone).innerText=doc.data().coins+val;
-  alert(val+" Coins Added ✅");
-  document.getElementById("adm-input-"+phone).value="";
+/* CALCULATOR */
+function calculateProfit(){
+ let invest=parseFloat(document.getElementById("investment").value)||0;
+ let profit=invest*0.25;
+ let total=invest+profit;
+ document.getElementById("calcResult").innerText=`Profit: ${profit.toLocaleString()} PKR | Total: ${total.toLocaleString()} PKR`;
 }
 
-// LIVE PROFIT
-let profit=310000;
-setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
-
-// LIVE TICKER
-const names=["Zain","Usman","Bilal"];
-const fixedTicker=["Ali Invested 108000 PKR | ","M Hussain Invested 27500 PKR | "];
-function ticker(){
-  let text="";
-  for(let i=0;i<fixedTicker.length;i++){text+=fixedTicker[i];}
-  for(let i=0;i<30;i++){
-    const name=names[Math.floor(Math.random()*names.length)];
-    const amount=[2000,5000,8000,16000][Math.floor(Math.random()*4)];
-    const type=Math.random()>0.5?"Invested":"Withdraw";
-    text+=name+" "+type+" "+amount+" PKR | ";
-  }
-  document.getElementById("liveTicker").innerText=text;
-}
-
-// ONLINE USERS SIMULATE
+/* ONLINE USERS SIMULATE */
 function simulateOnlineUsers(){
-  const min=95,max=200;
-  setInterval(()=>{document.getElementById("onlineUsers").innerText=Math.floor(Math.random()*(max-min+1))+min+" Users Online";},3000);
+ const min=95,max=200;
+ setInterval(()=>{
+  document.getElementById("onlineUsers").innerText=(Math.floor(Math.random()*(max-min+1))+min)+" Users Online";
+ },3000);
 }
 
-window.onload=function(){ticker(); simulateOnlineUsers();}
+window.onload=function(){if(currentUser){loadUser();}simulateOnlineUsers();}
 </script>
 </head>
+
 <body>
 
 <!-- LOGIN -->
 <div id="loginBox">
 <div class="login-box">
-<h2>LOGIN REGISTERED ID</h2>
+<h2>LOGIN</h2>
 <input id="mobile" placeholder="Mobile Number">
 <input id="pass" type="password" placeholder="Password">
-<div class="btn-row">
 <button class="login-btn" onclick="loginUser()">Login</button>
-<button class="reset-btn" onclick="alert('Reset via admin')">Reset Password</button>
-</div>
 </div>
 </div>
 
 <!-- ADMIN PANEL -->
-<div id="adminBox">
-<h2>Admin Panel</h2>
-<div id="adminUserList"></div>
+<div id="adminPanel">
+<h2>Admin Coin Transfer</h2>
+<input id="admNumber" placeholder="User Mobile Number">
+<input id="admCoins" placeholder="Coins Amount">
+<button onclick="transferCoins()">Transfer Coins</button>
 </div>
 
-<!-- WEBSITE CONTENT -->
-<div class="top-banner"><img src="Ali888.jpg" alt="Banner"></div>
 <nav>
 <h1>MR FOJI</h1>
 <div class="coins" id="coins">0</div>
 </nav>
 
-<div class="news"><span id="liveTicker"></span></div>
-
-<div class="hero"><h2>Professional Investment Platform</h2><p>Fast • Secure • Professional</p></div>
-
-<div class="task"><h3>Daily Login Reward</h3><button onclick="claimReward()">Claim Reward</button></div>
-
-<div class="stats"><div class="stat"><h3 id="profit">210000</h3><p>Live Profit</p></div></div>
-
-<div class="event"><h3>Special Event</h3><img src="Agent Hussain.jpg" class="event-img"><br>
-<a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a></div>
+<div class="task">
+<h3>Daily Reward</h3>
+<button onclick="reward()">Claim Reward</button>
+</div>
 
 <section class="plans">
-<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Basic 2000')">Invest</button></div>
-<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Silver 5000')">Invest</button></div>
-<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p><button onclick="window.open('https://wa.me/923491441853?text=Invest Gold 8000')">Invest</button></div>
-<div class="plan vip"><h3>VIP 🔥</h3><p>16000 → 20000</p><button onclick="window.open('https://wa.me/
+<div class="plan basic">Basic Plan<br>2000 → 2500</div>
+<div class="plan silver">Silver Plan<br>5000 → 6250</div>
+<div class="plan gold">Gold Plan<br>8000 → 10000</div>
+<div class="plan vip">VIP 🔥<br>16000 → 20000</div>
+</section>
+
+<div class="box">
+<h3>Deposit</h3>
+<button onclick="window.open('https://wa.me/923491441853')">Send Screenshot</button>
+</div>
+
+<div class="box">
+<h3>Withdraw</h3>
+<button onclick="window.open('https://wa.me/923491441853')">Request Withdraw</button>
+</div>
+
+<section class="calc-3d">
+<h2>Profit Calculator</h2>
+<div class="calc-card">
+<input id="investment" placeholder="Enter Investment">
+<button onclick="calculateProfit()">Calculate</button>
+<p id="calcResult">Profit: 0 PKR | Total: 0 PKR</p>
+</div>
+</section>
+
+<div class="computer-users">
+<h2 id="onlineUsers">0 Users Online</h2>
+<div class="user-card">Current Online Users</div>
+</div>
+
+<footer>© MR FOJI Investment</footer>
+<a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
+
+</body>
+  </html>
