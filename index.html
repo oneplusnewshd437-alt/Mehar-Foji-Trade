@@ -7,12 +7,20 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial;}
 body{background:url('images/investment.jpg') center/cover fixed;color:white;overflow-x:hidden;}
-#loginBox{position:fixed;top:0;left:0;width:100%;height:100vh;background:url('images/login 888.jpg') center/cover;display:flex;justify-content:center;align-items:flex-start;padding-top:250px;z-index:999;}
-.login-box{background:rgba(0,0,0,0.85);padding:25px;border-radius:15px;width:300px;text-align:center;border:2px solid #22c55e;box-shadow:0 0 15px #22c55e,0 8px 20px rgba(0,0,0,0.6);}
+#loginBox{
+    position:fixed;top:0;left:0;width:100%;height:100vh;
+    background:url('images/login 888.jpg') center/cover no-repeat; background-size:cover;
+    display:flex;justify-content:center;align-items:flex-start;padding-top:250px;z-index:999;
+}
+.login-box{
+    background:rgba(0,0,0,0.85);padding:25px;border-radius:15px;width:300px;text-align:center;
+    border:2px solid #22c55e;box-shadow:0 0 15px #22c55e,0 8px 20px rgba(0,0,0,0.6);
+}
 .login-box h2{color:#22c55e;margin-bottom:20px;font-size:20px;}
 .login-box input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:6px;}
 .login-box button{padding:10px;border:none;color:white;border-radius:6px;cursor:pointer;}
 .login-btn{background:#22c55e;}
+.reset-btn{background:red;}
 nav{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#111827;border-radius:10px;margin:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 15px #22c55e inset;}
 nav h1{color:#22c55e;font-size:28px;}
 .coins{font-weight:bold;font-size:18px;color:#fff;padding:8px 18px;border-radius:50px;background: rgba(0,0,0,0.6);box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(34,197,94,0.5);}
@@ -202,4 +210,4 @@ window.onload=function(){simulateOnlineUsers();}
 <a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
 
 </body>
-            </html>
+ </html>
