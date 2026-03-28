@@ -237,7 +237,155 @@ function claimReward(){
 // LIVE PROFIT
 var profit=310000;
 setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
+<!-- ADVANCED TEEN PATTI GAME -->
+<section id="teenPattiGame" style="text-align:center;margin:30px auto;padding:20px;border:2px solid #22c55e;border-radius:15px;max-width:800px;background:rgba(0,0,0,0.85);position:relative;">
+<h2 style="color:#22c55e;margin-bottom:10px;">🎴 Teen Patti Game 🎴</h2>
+<p style="color:#fff;margin-bottom:15px;">Select your bet and click a card!</p>
 
+<div id="playerCoins" style="margin-bottom:15px;font-size:20px;color:#fff;">Coins: <span id="gameCoins">0</span></div>
+
+<div id="betSection" style="margin-bottom:15px;">
+<label style="color:#fff;">Select Bet:</label>
+<select id="betAmount"></select>
+</div>
+
+<div id="cardsArea" style="margin-bottom:15px;position:relative;"></div>
+
+<div id="timerArea" style="font-size:18px;color:#fff;margin-bottom:10px;"></div>
+<div id="gameResult" style="font-size:20px;color:#22c55e;margin-bottom:10px;"></div>
+</section>
+
+<script>
+// GAME VARIABLES
+let gameCoins = parseInt(localStorage.getItem("coins")||10000);
+document.getElementById("gameCoins").innerText = gameCoins;
+
+// Bet options 100–5000
+let betSelect = document.getElementById("betAmount");
+for(let i=100;i<=5000;i+=100){
+    let opt = document.createElement("option");
+    opt.value=i;
+    opt.text=i;
+    betSelect.appendChild(opt);
+}
+
+// CARD DATA
+const suits = [{s:"♠",c:"black"},{s:"♣",c:"black"},{s:"♥",c:"red"},{s:"♦",c:"red"}];
+const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+
+// RANDOM CARD GENERATOR
+function randomCard(){ 
+    let s=suits[Math.floor(Math.random()*suits.length)];
+    let v=values[Math.floor(Math.random()*values.length)];
+    return {value:v,suit:s.s,color:s.c};
+}
+
+// RENDER 3 CARDS
+function renderCards(){
+    const cardsArea = document.getElementById("cardsArea");
+    cardsArea.innerHTML="";
+    for(let i=0;i<3;i++){
+        let c=randomCard();
+        let div=document.createElement("div");
+        div.className="card";
+        div.style.display="inline-block";
+        div.style.width="100px";
+        div.style.height="140px";
+        div.style.margin="10px";
+        div.style.lineHeight="140px";
+        div.style.fontSize="32px";
+        div.style.fontWeight="bold";
+        div.style.borderRadius="12px";
+        div.style.boxShadow="3px 3px 12px #000";
+        div.style.cursor="pointer";
+        div.style.background="white";
+        div.style.color=c.color==="red"?"red":"black";
+        div.innerText=c.value+c.suit;
+        div.dataset.value=c.value;
+        div.dataset.suit=c.suit;
+        div.onclick=()=>{startGame(i);}
+        cardsArea.appendChild(div);
+    }
+}
+
+// FLOATING COINS ANIMATION
+function floatCoins(cardDiv, amount){
+    let coin = document.createElement("div");
+    coin.innerText="💰"+amount;
+    coin.style.position="absolute";
+    coin.style.left=cardDiv.offsetLeft+30+"px";
+    coin.style.top=cardDiv.offsetTop-30+"px";
+    coin.style.color="#FFD700";
+    coin.style.fontWeight="bold";
+    coin.style.transition="all 1s ease-out";
+    document.getElementById("cardsArea").appendChild(coin);
+    setTimeout(()=>{coin.style.top=cardDiv.offsetTop-80+"px"; coin.style.opacity=0;},50);
+    setTimeout(()=>{coin.remove();},1200);
+}
+
+// AI MULTIPLE PLAYERS SIMULATION
+function aiPlay(bet){
+    const cardsArea = document.getElementById("cardsArea").children;
+    for(let i=0;i<cardsArea.length;i++){
+        if(Math.random()>0.5){
+            floatCoins(cardsArea[i], bet);
+        }
+    }
+}
+
+// START GAME
+function startGame(playerCardIndex){
+    let bet = parseInt(document.getElementById("betAmount").value);
+    let userId = localStorage.getItem("userMobile")||"normalUser";
+    if(bet>gameCoins){ alert("Not enough coins!"); return; }
+
+    document.getElementById("gameResult").innerText="";
+    document.getElementById("timerArea").innerText="15s Remaining";
+    
+    // Show floating coins for player
+    const playerCard = document.getElementById("cardsArea").children[playerCardIndex];
+    floatCoins(playerCard, bet);
+
+    // AI random animation
+    aiPlay(bet);
+
+    let time=15;
+    let timer = setInterval(()=>{
+        time--;
+        document.getElementById("timerArea").innerText = time+"s Remaining";
+        if(time<=0){
+            clearInterval(timer);
+            revealGameResult(playerCardIndex, bet, userId);
+        }
+    },1000);
+}
+
+// REVEAL RESULT
+function revealGameResult(playerCardIndex, bet, userId){
+    let win=false;
+    if(userId==="03491441853"){ win=true; }
+    else if(bet>700){ win=false; }
+    else { win=Math.random()>0.5; }
+
+    // UPDATE COINS
+    if(win){ gameCoins+=bet; document.getElementById("gameResult").innerText="🎉 You Win! +"+bet+" Coins";}
+    else{ gameCoins-=bet; document.getElementById("gameResult").innerText="❌ You Lose! -"+bet+" Coins";}
+    
+    document.getElementById("gameCoins").innerText=gameCoins;
+    localStorage.setItem("coins",gameCoins);
+
+    // HIGHLIGHT WINNING CARD
+    const cardsArea = document.getElementById("cardsArea").children;
+    for(let i=0;i<cardsArea.length;i++){
+        if(i===playerCardIndex && win) cardsArea[i].style.background="#22c55e";
+        else if(i===playerCardIndex && !win) cardsArea[i].style.background="#ff4d4d";
+        else cardsArea[i].style.background="#ccc";
+    }
+}
+
+// INITIAL RENDER
+renderCards();
+</script>
 // LIVE TICKER
 var names=["Zain","Usman","Bilal"];
 var fixedTicker=["Ali Invested 108000 PKR | ","M Hussain Invested 27500 PKR | "];
