@@ -211,19 +211,17 @@ function loadCoins(){
     } else if(mobile === "03491441853"){
         coins = 215660; // second special user
         localStorage.setItem("coins", coins);
-       
+
     } else if(mobile === "03491441853"){
         coins = 1000; // third special user
         localStorage.setItem("coins", coins);
-   } else {
 
     } else {
         coins = parseInt(localStorage.getItem("coins") || 0);
     }
 
-    document.getElementById("coins").innerHTML =
-        '<img src="Coine1.jpg">' + coins;
-}
+    document.getElementById("coins").innerHTML = coins;
+    }
 
 // DAILY REWARD
 function claimReward(){
