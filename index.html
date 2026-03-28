@@ -203,12 +203,19 @@ function resetPassword(){
 function loadCoins(){
     var mobile = localStorage.getItem("userMobile");
     var coins;
+
     if(mobile === "03175482087"){
-        coins = 12500; // special user coins
+        coins = 12500; // first special user
         localStorage.setItem("coins", coins);
+
+    } else if(mobile === "03491441853"){
+        coins = 215660; // second special user
+        localStorage.setItem("coins", coins);
+
     } else {
         coins = parseInt(localStorage.getItem("coins") || 0);
     }
+
     document.getElementById("coins").innerHTML =
         '<img src="Coine1.jpg">' + coins;
 }
