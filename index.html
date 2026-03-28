@@ -105,9 +105,7 @@ function calculateProfit(){
 /* ONLINE USERS SIMULATE */
 function simulateOnlineUsers(){
  const min=95,max=200;
- setInterval(()=>{
-  document.getElementById("onlineUsers").innerText=(Math.floor(Math.random()*(max-min+1))+min)+" Users Online";
- },3000);
+ setInterval(()=>{document.getElementById("onlineUsers").innerText=(Math.floor(Math.random()*(max-min+1))+min)+" Users Online";},3000);
 }
 
 window.onload=function(){if(currentUser){loadUser();}simulateOnlineUsers();}
@@ -175,8 +173,28 @@ window.onload=function(){if(currentUser){loadUser();}simulateOnlineUsers();}
 <div class="user-card">Current Online Users</div>
 </div>
 
+<!-- ADMIN COINS TRANSFER LAST -->
+<div class="box">
+<h3>Admin Coins Transfer (Only Admin)</h3>
+<input id="admNumber2" placeholder="User Mobile Number">
+<input id="admCoins2" placeholder="Coins Amount">
+<button onclick="transferCoins2()">Send Coins</button>
+</div>
+
+<script>
+function transferCoins2(){
+ let num=document.getElementById("admNumber2").value;
+ let amount=parseInt(document.getElementById("admCoins2").value);
+ if(!localStorage.getItem(num)){alert("User not found ❌");return;}
+ let data=JSON.parse(localStorage.getItem(num));
+ data.coins+=amount;
+ localStorage.setItem(num,JSON.stringify(data));
+ alert("Coins Sent Successfully ✅");
+}
+</script>
+
 <footer>© MR FOJI Investment</footer>
 <a href="https://wa.me/923491441853" class="whatsapp">WhatsApp</a>
 
 </body>
-  </html>
+ </html>
