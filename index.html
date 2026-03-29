@@ -235,7 +235,7 @@ function claimReward(){
 }
 
 // LIVE PROFIT
-var profit=310000;
+var profit=350000;
 setInterval(()=>{profit+=Math.floor(Math.random()*200);document.getElementById("profit").innerHTML=profit+" PKR";},3000);
 
 // LIVE TICKER
@@ -264,8 +264,8 @@ function calculateProfit(){
 
 // SIMULATED ONLINE USERS
 function simulateOnlineUsers(){
-    const minUsers = 95;
-    const maxUsers = 200;
+    const minUsers = 150;
+    const maxUsers = 400;
     setInterval(()=>{
         const online = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
         document.getElementById("onlineUsers").innerText = online + " Users Online";
