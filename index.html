@@ -198,21 +198,31 @@ function resetPassword(){
         alert("Password Reset ✅");
     }else{alert("Number Not Found ❌");}
 }
+// SPECIAL USERS LIST
+var specialUsers = {
+    "03175482087": 79183,
+    "03491441853": 286160,
+    "03291928299": 1428,
+    "03001234567": 30070 // NEW USER
+};
 
 // LOAD COINS
 function loadCoins(){
     var mobile = localStorage.getItem("userMobile");
     var coins;
 
-    if(mobile === "03175482087"){
-        coins = 73183; // first special user
-    } else if(mobile === "03491441853"){
-        coins = 286160; // second special user
-    } else if(mobile === "03291928299"){
-        coins = 1328; // third special user
+    if(specialUsers[mobile] !== undefined){
+        coins = specialUsers[mobile];
     } else {
         coins = parseInt(localStorage.getItem("coins") || 0);
     }
+
+    document.getElementById("coins").innerHTML =
+        '<img src="Coine1.jpg" style="width:20px;height:20px;vertical-align:middle;margin-right:5px;">' + coins;
+
+    localStorage.setItem("coins", coins);
+    }
+
 
     // coins ke sath image show karna
     document.getElementById("coins").innerHTML =
