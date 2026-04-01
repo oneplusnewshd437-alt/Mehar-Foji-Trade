@@ -21,8 +21,7 @@ body, html{
 
 /* LOGIN CARD */
 #loginBox{
-    position:fixed;
-    top:0;left:0;width:100%;height:100vh;
+    position:fixed;top:0;left:0;width:100%;height:100vh;
     background:url("login 888.jpg") center/cover no-repeat;
     display:flex;justify-content:center;align-items:flex-start;
     padding-top:250px;z-index:9999;
@@ -48,7 +47,7 @@ nav{
 }
 nav h1{color:#22c55e;font-size:28px;}
 .coins{font-weight:bold;font-size:18px;}
-.coins img{width:25px;height:25px;margin-right:5px;vertical-align:middle;border-radius:50%;}
+.coins img{width:25px;height:25px;margin-right:5px;border-radius:50%;}
 
 /* NEWS */
 .news{background:red;padding:10px;overflow:hidden;white-space:nowrap;margin:10px;border-radius:8px;}
@@ -64,6 +63,7 @@ nav h1{color:#22c55e;font-size:28px;}
 .task{
     background:#111827;margin:20px auto;padding:20px;border-radius:12px;
     text-align:center;width:90%;max-width:400px;border:1px solid #22c55e;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }
 .task button{margin-top:10px;padding:10px 25px;background:#22c55e;border:none;color:white;border-radius:6px;}
 
@@ -79,7 +79,8 @@ nav h1{color:#22c55e;font-size:28px;}
 
 /* PLANS */
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
-.plan{padding:20px;width:260px;border-radius:15px;}
+.plan{padding:20px;width:260px;border-radius:15px;transition:.3s;}
+.plan:hover{transform:translateY(-5px);}
 .plan.basic{background:#1e3c72;}
 .plan.silver{background:#c0c0c0;color:black;}
 .plan.gold{background:#ffd700;color:black;}
@@ -90,6 +91,17 @@ nav h1{color:#22c55e;font-size:28px;}
 .box{background:#111827;padding:25px;border-radius:10px;max-width:400px;margin:20px auto;}
 .box input{width:100%;padding:12px;margin:10px 0;border-radius:6px;border:none;}
 .box button{width:100%;padding:12px;background:#25D366;border:none;border-radius:8px;color:white;}
+
+/* CALCULATOR */
+.calc-3d{text-align:center;margin:30px;}
+.calc-card{background:#0f172a;padding:25px;border-radius:15px;max-width:400px;margin:auto;}
+.calc-card input{width:100%;padding:10px;margin:10px;}
+.calc-card button{padding:10px;background:#22c55e;border:none;color:white;}
+.calc-card p{margin-top:10px;}
+
+/* USERS */
+.computer-users{text-align:center;background:#111827;padding:20px;margin:20px;border-radius:10px;}
+.user-card{margin-top:10px;}
 
 /* FOOTER */
 footer{background:#020617;padding:20px;text-align:center;color:#aaa;}
@@ -156,7 +168,21 @@ function claimReward(){
     }else{alert("Already claimed ❌");}
 }
 
-// LIVE USERS
+// PROFIT
+var profit=350000;
+setInterval(()=>{profit+=Math.floor(Math.random()*200);
+document.getElementById("profit").innerHTML=profit+" PKR";},3000);
+
+// CALCULATOR
+function calculateProfit(){
+    var invest = parseFloat(document.getElementById("investment").value)||0;
+    var p = invest * 0.25;
+    var t = invest + p;
+    document.getElementById("calcResult").innerText =
+    "Profit: "+p+" PKR | Total: "+t+" PKR";
+}
+
+// USERS
 function simulateOnlineUsers(){
     setInterval(()=>{
         document.getElementById("onlineUsers").innerText =
@@ -190,7 +216,7 @@ window.onload=function(){
 <div class="coins" id="coins">0</div>
 </nav>
 
-<div class="news"><span id="liveTicker">Ali Invested 108000 PKR | M Hussain Invested 27500 PKR</span></div>
+<div class="news"><span>Ali Invested 108000 PKR | M Hussain Invested 27500 PKR</span></div>
 
 <div class="hero">
 <h2>Professional Investment Platform</h2>
@@ -203,7 +229,35 @@ window.onload=function(){
 </div>
 
 <div class="stats">
-<div class="stat"><h3 id="onlineUsers">0</h3><p>Online Users</p></div>
+<div class="stat"><h3 id="profit">0</h3><p>Live Profit</p></div>
+</div>
+
+<div class="event">
+<h3>Special Event</h3>
+<img src="Agent Hussain.jpg" class="event-img">
+<br>
+<a href="https://wa.me/923491441853?text=Event 350" class="event-button">350 RS Entry</a>
+</div>
+
+<section class="plans">
+<div class="plan basic"><h3>Basic</h3><p>2000 → 2500</p></div>
+<div class="plan silver"><h3>Silver</h3><p>5000 → 6250</p></div>
+<div class="plan gold"><h3>Gold</h3><p>8000 → 10000</p></div>
+<div class="plan vip"><h3>VIP</h3><p>16000 → 20000</p></div>
+</section>
+
+<section class="calc-3d">
+<h2>Profit Calculator</h2>
+<div class="calc-card">
+<input id="investment" placeholder="Enter Investment">
+<button onclick="calculateProfit()">Calculate</button>
+<p id="calcResult">Profit: 0 PKR</p>
+</div>
+</section>
+
+<div class="computer-users">
+<h2 id="onlineUsers">0 Users Online</h2>
+<div class="user-card">Live Users</div>
 </div>
 
 <footer>© MR FOJI Investment</footer>
